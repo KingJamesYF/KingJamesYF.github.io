@@ -3,46 +3,51 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: KingJames
-subtitle: 无所畏惧
-description:
-author: YF
-language:
+title: King James #填写网站名，会在标签页上显示
+subtitle: 无所畏惧 #副标题，网站名下面
+description: 知识 时间 自我 管理 阅读 思维 导图 #网站描述，便于搜索引擎用关键词检索
+author: Mr.YF
+language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://github.com/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
 # Directory
-source_dir: source
-public_dir: public
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-code_dir: downloads/code
-i18n_dir: :lang
+source_dir: source  #资源文件夹，放在里面的文件会上传到github中
+public_dir: public   #公共文件夹，存放生成的静态文件
+tag_dir: tags   #标签文件夹，默认是tags。实际存放在source/tags中
+archive_dir: archives  #档案文件夹，默认是archives
+category_dir: categories  #分类文件夹，默认是categories。实际存放在source/categories中
+code_dir: downloads/code  #代码文件夹，默认是downloads/code
+i18n_dir: :lang  #国际化文件夹，默认跟language相同
 skip_render:
- - README.md
- - README.cn.md
+  - README.md
+  - README.cn.md
+  
+#不需要渲染的文件夹或文件夹,放在[]中
+# 这两个文件是百度和google的站长验证文件，不能渲染，否则会改变内容，不能验证过
 
 # Writing
+# 写作选项
+# 新建博文（帖子）的默认名称
 new_post_name: :title.md # File name of new posts
-default_layout: post
-titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
+default_layout: post  #默认布局模板是post，而不是draft和page
+titlecase: false # Transform title into titlecase  #是否将标题转换成标题形式（首字母大写）
+external_link: true # Open external links in new tab  #在新标签页面中打开网页
 filename_case: 0
-render_drafts: false
+render_drafts: false  #是否渲染草稿
 post_asset_folder: false
 relative_link: false
 future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace:
 
 # Home page setting
@@ -76,7 +81,7 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: hiker
 
- 
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
@@ -84,6 +89,3 @@ deploy:
   repo: https://github.com/KingJamesYF/KingJamesYF.github.io.git
   branch: master
   message: blog
-  
-  
-  

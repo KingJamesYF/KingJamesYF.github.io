@@ -5,7 +5,7 @@
 
 An attractive, exquisite theme for [Hexo]. named "Hiker", short for "HikerNews".  
 
-[**☞ Live Preview**](https://itimetraveler.github.io/hexo-theme-hiker/)  |  [**✎ Hiker 中文版使用文档**](https://github.com/iTimeTraveler/hexo-theme-hiker/blob/master/README.cn.md)
+[**☞ Live Preview**](https://kingjamesyf.github.io/)  |  [**✎ Hiker 中文版使用文档**](https://github.com/KingJamesYF/KingJamesYF.github.io/blob/master/README.cn.md)
 
 
 ![Desktop Preview](https://itimetraveler.github.io/hexo-theme-hiker/2016/10/24/Hiker%E4%B8%BB%E9%A2%98%E9%A2%84%E8%A7%88/homepage-index.png)
@@ -42,7 +42,7 @@ An attractive, exquisite theme for [Hexo]. named "Hiker", short for "HikerNews".
 
 ### Homepage background
 
-You could place the image file in `YOUR_HEXO_SITE\themes\hiker\source\css\images` directory. and modify `home_background_image` in hiker/_config.yml. 
+You could place the image file in `YOUR_HEXO_SITE\themes\hiker\source\css\images` directory. and modify `home_background_image` in hiker/_config.yml.
 
 ```yml
 # Homepage
@@ -55,7 +55,7 @@ home_background_image:
   url: [css/images/home-bg.jpg, css/images/sample.jpg, https://source.unsplash.com/collection/954550/1920x1080]
 ```
 
-There are 3 modes to select: 
+There are 3 modes to select:
 
 - `image`
 - `polyline`
@@ -168,11 +168,11 @@ Hiker has native support for DuoShuo & Disqus comment systems. Modify the follow
 ```yml
 # comment ShortName, you can choose only ONE to display.
 gentie_productKey: #your-gentie-product-key
-duoshuo_shortname: 
-disqus_shortname: 
+duoshuo_shortname:
+disqus_shortname:
 livere_shortname: MTAyMC8yOTQ4MS82MDQ5
-uyan_uid: 
-wumii: 
+uyan_uid:
+wumii:
 ```
 
 ## Browser support

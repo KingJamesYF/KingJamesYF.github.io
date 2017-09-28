@@ -5,7 +5,7 @@
 
 An attractive, exquisite theme for [Hexo]. named "Hiker", short for "HikerNews".  
 
-[**☞ 在线预览**](https://itimetraveler.github.io/hexo-theme-hiker/)  |  [**✎ Hiker English Documentation**](https://github.com/iTimeTraveler/hexo-theme-hiker/blob/master/README.md)
+[**☞ 在线预览**](https://kingjamesyf.github.io/)  |  [**✎ Hiker English Documentation**](https://github.com/KingJamesYF/KingJamesYF.github.io/blob/master/README.cn.md)
 
 
 ![Desktop Preview](https://itimetraveler.github.io/hexo-theme-hiker/2016/10/24/Hiker%E4%B8%BB%E9%A2%98%E9%A2%84%E8%A7%88/homepage-index.png)
@@ -14,7 +14,6 @@ An attractive, exquisite theme for [Hexo]. named "Hiker", short for "HikerNews".
 
 <!--more-->
 
-以上Demo站点的源文件在这里，大家有需要的可以参考：https://github.com/iTimeTraveler/hexo-theme-hiero/tree/site-source
 
 ## 安装步骤
 
@@ -44,7 +43,7 @@ An attractive, exquisite theme for [Hexo]. named "Hiker", short for "HikerNews".
 
 ### 自定义首页背景
 
-您可以将选择的大图放到 `YOUR_HEXO_SITE\themes\hiker\source\css\images` 文件夹下. 然后更改 hiker/_config.yml文件里的`home_background_image`字段. 
+您可以将选择的大图放到 `YOUR_HEXO_SITE\themes\hiker\source\css\images` 文件夹下. 然后更改 hiker/_config.yml文件里的`home_background_image`字段.
 
 ```yml
 # Homepage
@@ -191,11 +190,11 @@ donate:
 ```yml
 # comment ShortName, you can choose only ONE to display.
 gentie_productKey: #网易云跟帖your-gentie-product-key
-duoshuo_shortname: 
-disqus_shortname: 
+duoshuo_shortname:
+disqus_shortname:
 livere_shortname: MTAyMC8yOTQ4MS82MDQ5
-uyan_uid: 
-wumii: 
+uyan_uid:
+wumii:
 ```
 
 - #### 网易云跟帖说明（已停止服务）
@@ -214,7 +213,7 @@ wumii:
 
 ## Contributing
 
-欢迎大家有各种问题和改进建议的，直接提issue或者评论，或者pull request都行。我会尽量抽时间和大家交流。刚接触Hexo不久，疏忽不足之处，还望大家海涵！
+欢迎大家有各种问题和改进建议的，直接提issue或者评论，或者pull request都行。刚接触Hexo不久，疏忽不足之处，还望大家海涵！
 
 
 [Hexo]: https://hexo.io/
