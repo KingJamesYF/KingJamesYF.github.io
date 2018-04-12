@@ -303,51 +303,13 @@
 <h2 id="中标题"><a href="#中标题" class="headerlink" title="中标题"></a>中标题</h2><p>  中标题一般显示重点项，类似html的h2<br><br>  你只要在标题下面输入—–即可（超过3个-即可，长度不限）<br><br>  或者你可以在标题前面加两个 # 来实现（## 中标题）</p>
 <h3 id="小标题"><a href="#小标题" class="headerlink" title="小标题"></a>小标题</h3><p>  小标题类似html的h3<br><br>  你只要在标题前面加三个 # 即可（### 小标题）<br><br>  <strong>注意，下面所有语法的提示我都先用小标题提醒了！</strong></p>
 <h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><p>  四、五、六级标题类似html的h4、h5、h6<br><br>  由前面类推，你只要在标题前面加四个、五个、六个 # 来实现<br></p>
-<h3 id="水平标尺"><a href="#水平标尺" class="headerlink" title="水平标尺"></a>水平标尺</h3><hr>
-<p>  你只要在一个空行画上—–即可（超过3个-即可，长度不限）<br><br>  但注意，前一行不能有纯文字，否者会当作中标题处理！</p>
-<h3 id="文本框"><a href="#文本框" class="headerlink" title="文本框"></a>文本框</h3><pre><code>这是一个有多行的文本框
-常用来在这里写入代码
-只要每行文字前面输入一个Tab（或四个空格）
-再输入文字，即可实现效果
-</code></pre><p>  比如我们可以在多行文本框里输入一段代码,来一个C++版本的HelloWorld吧</p>
-<pre><code>#include &lt;iostream&gt;
-using namespace std;
-
-int main(){
-    cout&lt;&lt;&quot;HelloWorld!&quot;&lt;&lt;endl;
-    return 0;
-}
-</code></pre><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>1.<a href="http://www.google.com" target="_blank" rel="external">点击这里你可以链接到Google</a><br><br>2.<a href="https://github.com/KingJamesYF">点击这里我你可以链接到我的GitHub</a><br><br>链接插入的格式是：[链接的显示文字](链接URL)</p>
-<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p><img src="https://avatars0.githubusercontent.com/u/9555093?v=3&amp;s=256" alt="github" title="我的GitHub头像"><br><br>图片插入的格式是：![图像替代文本](图片URL “图片说明文字”)</p>
-<h3 id="图片链接"><a href="#图片链接" class="headerlink" title="图片链接"></a>图片链接</h3><p>比如我想点击GitHub的图片，然后再进入GitHub首页<br><br><a href="http://www.github.com/" target="_blank" rel="external"><img src="https://github.com/images/modules/dashboard/bootcamp/octocat_setup.png" alt="image" title="GitHub"></a><br><br>图片链接插入的格式是：![[图像替代文本](图片URL “图片说明文字”)](链接URL)</p>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
-<p>段落前面用竖线来框定要引用的文字<br><br>只要再文字前面加上&gt; 即可<br><br>但&gt; 只能放在行首才有效<br></p>
-</blockquote>
-<h3 id="多重引用"><a href="#多重引用" class="headerlink" title="多重引用"></a>多重引用</h3><blockquote>
-<p>段落前面用竖线来框定要引用的文字<br></p>
-<blockquote>
-<p>只要再文字前面加上&gt; 即可<br></p>
-<blockquote>
-<p>但&gt; 只能放在行首才有效<br></p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><ul>
-<li>在行首加点</li>
-<li>行首输入*</li>
-<li>再空格，输入内容即可</li>
-</ul>
-<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><ol>
-<li>在行首加数字标号</li>
-<li>行首输入数字和一个点（2.）</li>
-<li>再空格，输入内容即可</li>
-</ol>
-<h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><ul>
-<li><em>斜体</em>只需要在要加斜体的文字前后各加上一个*号即可（*要加斜体的文字*）</li>
-<li><strong>粗体</strong>只需要在要加粗体的文字前后各加上两个*号即可（**要加粗体的文字**）</li>
-</ul>
-<h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><p>有一些特殊字符如&lt;,#等,只要在特殊字符前面加上转义字符\即可<br><br>你想换行的话其实可以直接用html标签\<br \=""></p>
-
+        <!-- 针对中文,演示Markdown的语法
+大标题  大标题一般显示工程名，类似html的h1  你只要在标题下面跟上=====即可（超过3个=即可，长度不限）  或者你可以在标题前面加一个 # 来实现（# 大标题）
+中标题  中标题一般显示重点项，类似html的h2  你只要在标题下面输入—–即可（超过3个-即可，长度不限）  或者你可以在标题前面加两个 # 来实现（## 中标题）
+小标题  小......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/12/Markdown语法/#more">阅读全文</a>
+        </p>
       
     </div>
     <footer class="article-footer">
