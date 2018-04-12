@@ -18,8 +18,8 @@
 <meta property="og:url" content="http://github.com/2018/04/12/Convolutional-Neural-Networks-Week-4/index.html">
 <meta property="og:site_name" content="KingJames’s blog">
 <meta property="og:description" content="What is Face Recognition这里区分两个概念，Face verification和Face recognition，  Verification 输入：图像 + 名字/ID 输出：输入的图像上是否有名字/ID表示的那个人   Recognition 数据库中有$K$个人 输入：图像 输出：图像上有的数据库中的人的名字/ID    很明显，Recognition比Verifica">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T13:57:30.531Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-12T15:06:09.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Convolutional Neural Networks &#x2F; Week 4">
 <meta name="twitter:description" content="What is Face Recognition这里区分两个概念，Face verification和Face recognition，  Verification 输入：图像 + 名字/ID 输出：输入的图像上是否有名字/ID表示的那个人   Recognition 数据库中有$K$个人 输入：图像 输出：图像上有的数据库中的人的名字/ID    很明显，Recognition比Verifica">
@@ -103,13 +103,13 @@
                 
                   <li> <a class="main-nav-link" href="/">首页</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                  <li> <a class="main-nav-link" href="/archives">Archive</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                  <li> <a class="main-nav-link" href="/categories">Kategorien</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -121,7 +121,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <input type="text" class="ins-search-input" placeholder="Schreib etwas..." />
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -133,11 +133,11 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(无标题)',
+            POSTS: 'Beiträge',
+            PAGES: 'Seiten',
+            CATEGORIES: 'Kategorien',
+            TAGS: 'Tags',
+            UNTITLED: '(Unbenannt)',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
@@ -188,7 +188,7 @@
       
 	<a class="article-views">
 	<span id="busuanzi_container_page_pv">
-		阅读量<span id="busuanzi_value_page_pv"></span>
+		PV:<span id="busuanzi_value_page_pv"></span>
 	</span>
 	</a>
 
@@ -242,8 +242,8 @@
 <p>Repeat for other units.</p>
 </blockquote>
 <p>可以看到，每个unit’s activation针对的方向不同，有的是颜色，有的是不同方向的边。随着网络深度的增加，每个unit’s activation可以看到的图像的范围越来越大。</p>
-<h3 id="Neural-Style-Transfer-Cost-Function"><a href="#Neural-Style-Transfer-Cost-Function" class="headerlink" title="Neural Style Transfer Cost Function"></a>Neural Style Transfer Cost Function</h3><p>原始内容图片为C，风格图片为S，目标图片为G，那么，<br>$$<br>J(G) = \alpha Jcontent(C, G) + \beta Jstyle(S, G)<br>$$</p>
-<p>下面介绍Style matrix,<br>$$<br>\begin{split}<br>&amp; Let~a_{i,j,k}^{[l]} &amp;= activation~at~(i,j,k). G^{[l]}~is~n_c^{[l]} \times n<em>c^{[l]} \\<br>\rightarrow &amp; G</em>{kk’}^{[l]} &amp;= \sum_{i=1}^{n<em>H^{[l]}} \sum</em>{j=1}^{[n<em>W]^{[l]}} a</em>{ijk}^{[l]} a_{ijk’}^{[l]}<br>\end{split}<br>$$<br>其中，$G^{[l]}$为Style matrix。</p>
+<h3 id="Neural-Style-Transfer-Cost-Function"><a href="#Neural-Style-Transfer-Cost-Function" class="headerlink" title="Neural Style Transfer Cost Function"></a>Neural Style Transfer Cost Function</h3><p>原始内容图片为C，风格图片为S，目标图片为G，那么，$G_{kk’}^{[l]}$<br>$$<br>J(G) = \alpha J_{content}(C, G) + \beta J_{style}(S, G)<br>$$</p>
+<p>下面介绍Style matrix,<br>$$<br>\begin{split}<br>&amp; Let~a_{i,j,k}^{[l]} &amp;= activation~at~(i,j,k). G^{[l]}~is~n_c^{[l]} \times n_c^{[l]} \\<br>\rightarrow &amp; G_{kk’}^{[l]} &amp;= \sum_{i=1}^{n_H^{[l]}} \sum_{j=1}^{[n_W]^{[l]}} a_{ijk}^{[l]} a_{ijk’}^{[l]}<br>\end{split}<br>$$<br>其中，$G^{[l]}$为Style matrix。</p>
 
       
     </div>
@@ -255,7 +255,7 @@
 <script>
 var a = new Donate({
   title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
-  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  btnText: 'Donate', // 可选参数，打赏按钮文字
   el: document.getElementById('donation_div'),
   wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
   alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
@@ -295,19 +295,19 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
-          Convolutional Neural Networks / Week 2
+          Convolutional Neural Networks / Week 3
         
       </div>
     </a>
   
   
-    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Convolutional Neural Networks / Week 1</div>
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Convolutional Neural Networks / Week 2</div>
     </a>
   
 </nav>
@@ -319,7 +319,7 @@ var a = new Donate({
 
   <aside id="toc-sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
+    <strong class="toc-title">Inhalt</strong>
     
         <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-is-Face-Recognition"><span class="nav-number">1.</span> <span class="nav-text">What is Face Recognition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#One-Shot-Learning"><span class="nav-number">2.</span> <span class="nav-text">One Shot Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Siamese-Network"><span class="nav-number">3.</span> <span class="nav-text">Siamese Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Triple-Loss"><span class="nav-number">4.</span> <span class="nav-text">Triple Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Face-Verification-and-Binary-Classification"><span class="nav-number">5.</span> <span class="nav-text">Face Verification and Binary Classification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-are-deep-ConvNets-Learning"><span class="nav-number">6.</span> <span class="nav-text">What are deep ConvNets Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Neural-Style-Transfer-Cost-Function"><span class="nav-number">7.</span> <span class="nav-text">Neural Style Transfer Cost Function</span></a></li></ol>
     
@@ -339,8 +339,8 @@ var a = new Donate({
 	      
 	      
     		<p class="busuanzi_uv">
-				访客数 : <span id="busuanzi_value_site_uv"></span> |  
-				访问量 : <span id="busuanzi_value_site_pv"></span>
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
 		    </p>
   		   
 		</div>

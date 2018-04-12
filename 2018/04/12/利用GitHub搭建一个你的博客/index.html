@@ -18,7 +18,7 @@
 <meta property="og:url" content="http://github.com/2018/04/12/利用GitHub搭建一个你的博客/index.html">
 <meta property="og:site_name" content="KingJames’s blog">
 <meta property="og:description" content="为什么要写博客作为一只程序猿，踩到坑是一件非常正常的事，当我们踩到坑的时候就会花心思去研究它，可能我们能够在当时把问题弄懂并把问题给解决掉。可是过一段时间我们又遇到了同样的坑的时候，难道还要再去 百毒 Google 重新搜索一遍吗？这样做效率难免太低了，倒不如在第一次解决问题的时候就把解决方法写到我们的博客了，当我们再一次遇到相同的坑的时候翻一翻我们之前写的博客就能快速的把问题给解决掉，何乐而">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1917079-bbc62e5e352027e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1917079-d279f8f09a9d0587.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1917079-2c0ae66c2886eedb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/840">
@@ -128,13 +128,13 @@
                 
                   <li> <a class="main-nav-link" href="/">首页</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                  <li> <a class="main-nav-link" href="/archives">Archive</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                  <li> <a class="main-nav-link" href="/categories">Kategorien</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -146,7 +146,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <input type="text" class="ins-search-input" placeholder="Schreib etwas..." />
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -158,11 +158,11 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(无标题)',
+            POSTS: 'Beiträge',
+            PAGES: 'Seiten',
+            CATEGORIES: 'Kategorien',
+            TAGS: 'Tags',
+            UNTITLED: '(Unbenannt)',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
@@ -213,7 +213,7 @@
       
 	<a class="article-views">
 	<span id="busuanzi_container_page_pv">
-		阅读量<span id="busuanzi_value_page_pv"></span>
+		PV:<span id="busuanzi_value_page_pv"></span>
 	</span>
 	</a>
 
@@ -268,7 +268,7 @@
 <script>
 var a = new Donate({
   title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
-  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  btnText: 'Donate', // 可选参数，打赏按钮文字
   el: document.getElementById('donation_div'),
   wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
   alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
@@ -310,18 +310,18 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
-          Convolutional Neural Networks / Week 3
+          Convolutional Neural Networks / Week 2
         
       </div>
     </a>
   
   
     <a href="/2018/04/12/Git--命令/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">Git--命令</div>
     </a>
   
@@ -334,7 +334,7 @@ var a = new Donate({
 
   <aside id="toc-sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
+    <strong class="toc-title">Inhalt</strong>
     
         <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-环境搭建"><span class="nav-number">1.</span> <span class="nav-text">1.环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1有问题看这里"><span class="nav-number">1.1.</span> <span class="nav-text">1.1有问题看这里</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-配置-GitHub"><span class="nav-number">2.</span> <span class="nav-text">2.配置 GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1注册-GitHub"><span class="nav-number">2.1.</span> <span class="nav-text">2.1注册 GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2SSH授权"><span class="nav-number">2.2.</span> <span class="nav-text">2.2SSH授权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1生成SSH-key"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1生成SSH key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2在GitHub上添加SSH-Key"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2在GitHub上添加SSH Key</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-创建-GitHub-仓库"><span class="nav-number">3.</span> <span class="nav-text">3.创建 GitHub 仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-设置本地博客的配置"><span class="nav-number">4.</span> <span class="nav-text">4.设置本地博客的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1安装Hexo"><span class="nav-number">4.1.</span> <span class="nav-text">4.1安装Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2初始化Hexo"><span class="nav-number">4.2.</span> <span class="nav-text">4.2初始化Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3发布博客"><span class="nav-number">4.3.</span> <span class="nav-text">4.3发布博客</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-个性化设置（更换主题）"><span class="nav-number">5.</span> <span class="nav-text">5.个性化设置（更换主题）</span></a></li></ol>
     
@@ -354,8 +354,8 @@ var a = new Donate({
 	      
 	      
     		<p class="busuanzi_uv">
-				访客数 : <span id="busuanzi_value_site_uv"></span> |  
-				访问量 : <span id="busuanzi_value_site_pv"></span>
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
 		    </p>
   		   
 		</div>
