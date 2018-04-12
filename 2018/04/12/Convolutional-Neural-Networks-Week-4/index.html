@@ -3,28 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的第一篇文章 | KingJames’s blog</title>
+  <title>convolutional neural networks / week 4 | KingJames’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="前端后端" />
+    <meta name="keywords" content="deep-learning,cnn" />
   
   
   
   
-  <meta name="description" content="我的第一次博客">
-<meta name="keywords" content="前端,后端">
+  <meta name="description" content="What is Face Recognition这里区分两个概念，Face verification和Face recognition，  Verification 输入：图像 + 名字/ID 输出：输入的图像上是否有名字/ID表示的那个人   Recognition 数据库中有$K$个人 输入：图像 输出：图像上有的数据库中的人的名字/ID    很明显，Recognition比Verifica">
+<meta name="keywords" content="deep-learning,cnn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇文章">
-<meta property="og:url" content="http://github.com/2017/09/22/我的第一篇文章/index.html">
+<meta property="og:title" content="Convolutional Neural Networks &#x2F; Week 4">
+<meta property="og:url" content="http://github.com/2018/04/12/Convolutional-Neural-Networks-Week-4/index.html">
 <meta property="og:site_name" content="KingJames’s blog">
-<meta property="og:description" content="我的第一次博客">
+<meta property="og:description" content="What is Face Recognition这里区分两个概念，Face verification和Face recognition，  Verification 输入：图像 + 名字/ID 输出：输入的图像上是否有名字/ID表示的那个人   Recognition 数据库中有$K$个人 输入：图像 输出：图像上有的数据库中的人的名字/ID    很明显，Recognition比Verifica">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg">
-<meta property="og:updated_time" content="2017-09-24T14:49:41.629Z">
+<meta property="og:updated_time" content="2018-04-12T13:45:05.002Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的第一篇文章">
-<meta name="twitter:description" content="我的第一次博客">
-<meta name="twitter:image" content="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg">
+<meta name="twitter:title" content="Convolutional Neural Networks &#x2F; Week 4">
+<meta name="twitter:description" content="What is Face Recognition这里区分两个概念，Face verification和Face recognition，  Verification 输入：图像 + 名字/ID 输出：输入的图像上是否有名字/ID表示的那个人   Recognition 数据库中有$K$个人 输入：图像 输出：图像上有的数据库中的人的名字/ID    很明显，Recognition比Verifica">
   
     <link rel="alternate" href="/atom.xml" title="KingJames’s blog" type="application/atom+xml">
   
@@ -164,7 +162,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-我的第一篇文章" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Convolutional-Neural-Networks-Week-4" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -172,7 +170,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      我的第一篇文章
+      Convolutional Neural Networks / Week 4
     </h1>
   
 
@@ -180,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/22/我的第一篇文章/" class="article-date">
-	  <time datetime="2017-09-22T12:14:15.000Z" itemprop="datePublished">2017-09-22</time>
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-4/" class="article-date">
+	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/技术/">技术</a><a class="article-category-link" href="/categories/技术/javascript/">javascript</a>
+    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
 
       
 	<a class="article-views">
@@ -197,7 +195,56 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="我的第一次博客"><a href="#我的第一次博客" class="headerlink" title="我的第一次博客"></a>我的第一次博客</h1><p><img src="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg" alt=""></p>
+        <h3 id="What-is-Face-Recognition"><a href="#What-is-Face-Recognition" class="headerlink" title="What is Face Recognition"></a>What is Face Recognition</h3><p>这里区分两个概念，<code>Face verification</code>和<code>Face recognition</code>，</p>
+<ul>
+<li>Verification<ul>
+<li>输入：图像 + 名字/ID</li>
+<li>输出：输入的图像上是否有名字/ID表示的那个人</li>
+</ul>
+</li>
+<li>Recognition<ul>
+<li>数据库中有$K$个人</li>
+<li>输入：图像</li>
+<li>输出：图像上有的数据库中的人的名字/ID</li>
+</ul>
+</li>
+</ul>
+<p>很明显，Recognition比Verification的难度要大得多。<br><a id="more"></a></p>
+<h3 id="One-Shot-Learning"><a href="#One-Shot-Learning" class="headerlink" title="One Shot Learning"></a>One Shot Learning</h3><p>什么是One-shot learning，</p>
+<blockquote>
+<p>Learning from one example to recognize the person again.</p>
+</blockquote>
+<p>很多时候公司的数据库中只有一张员工的照片，那么我们在做人脸识别系统的时候怎么根据这一张照片来再次识别相同的人的影像？如果用传统的卷积神经网络来做的话，因为训练数据很小，所以通常效果并不理想。</p>
+<p>在这种情况下，我们应该学习”similarity” function,<br>$$<br>d(img1, img2) = degree~of~difference~between~images<br>$$<br>然后可以根据Similarity function完成verification,<br>$$<br>\begin{split}<br>If~d(img1, img2) &amp;\le \tau~same\\<br>&amp;&gt; \tau~different<br>\end{split}<br>$$</p>
+<h3 id="Siamese-Network"><a href="#Siamese-Network" class="headerlink" title="Siamese Network"></a>Siamese Network</h3><p>Parameters of NN define an encoding $f(x^{(i)})$</p>
+<p>Learn parameters so that:</p>
+<ul>
+<li>If $x^{(i)}, x^{(j)}$ are the same person, $| f(x^{(i)}) - f(x^{(j)}) |^2$ is small</li>
+<li>If $x^{(i)}, x^{(j)}$ are the different person, $| f(x^{(i)}) - f(x^{(j)}) |^2$ is large</li>
+</ul>
+<p>那么，该网络学习的目标函数应该怎么定义呢？</p>
+<h3 id="Triple-Loss"><a href="#Triple-Loss" class="headerlink" title="Triple Loss"></a>Triple Loss</h3><p>在Triple loss中，基准人脸图像称为Anchor image，正样本为Positive image，负样本为Negative image，那么我们希望得到的是，<br>$$<br>|f(A) - f(P) | ^2 \le | f(A) - f(N) | ^2<br>$$<br>也就是，<br>$$<br>|f(A) - f(P) | ^2 - | f(A) - f(N) | ^2 \le 0<br>$$<br>这里有个问题，如果$f$始终预测0，那么上述条件始终满足。为了防止这种情况发生，所以需要增加一个超参$\alpha$，也称为margin，<br>$$<br>|f(A) - f(P) | ^2 - | f(A) - f(N) | ^2 + \alpha \le 0<br>$$<br>下面对Loss function进行形式化定义，给定3个图像 A, P, N，<br>$$<br>\mathcal{L}(A, P, N) = max(|f(A) - f(P)|^2 -|f(A) - f(N)|^2  + \alpha, 0)<br>$$<br>在整体样本上的损失为，<br>$$<br>J = \sum_{i=1}^{M} \mathcal{L}(A^{(i)}, P^{(i)}, N^{(i)})<br>$$<br>很明显，在训练样本中，一个人需要有多张照片才能组合出这样的三元组。</p>
+<p>那么，应该怎么选择三元组呢，</p>
+<ul>
+<li>During training, if A, P, N are chsen randomly, $d(A, P) + \alpha \le d(A, N)$ is easily satisfied.<ul>
+<li>这种方法容易选择，但是训练出来的模型效果一般</li>
+</ul>
+</li>
+<li>Choose triplets that’re “hard” to train on.<ul>
+<li>这种方法不容易选择，但是模型能学习到更多的信息。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Face-Verification-and-Binary-Classification"><a href="#Face-Verification-and-Binary-Classification" class="headerlink" title="Face Verification and Binary Classification"></a>Face Verification and Binary Classification</h3><p>另一种similarity function，以一对图像作为输入，<br>$$<br>\hat{y} = \delta ( \sum_{k=1}^{128} w_i | f(x^{(i)})_k - f(x^{(j)})_k   | + b  )<br>$$<br>其中，$f(x^{(i)})$表示对第i张图像的128维的embedding表达。</p>
+<h3 id="What-are-deep-ConvNets-Learning"><a href="#What-are-deep-ConvNets-Learning" class="headerlink" title="What are deep ConvNets Learning"></a>What are deep ConvNets Learning</h3><p>这里介绍了怎么将卷积神经网络的hidden layer可视化。以第一层为例，</p>
+<blockquote>
+<p>Pick a unit in layer 1. Find the nine image patches that maximize the unit’s activation.</p>
+<p>Repeat for other units.</p>
+</blockquote>
+<p>可以看到，每个unit’s activation针对的方向不同，有的是颜色，有的是不同方向的边。随着网络深度的增加，每个unit’s activation可以看到的图像的范围越来越大。</p>
+<h3 id="Neural-Style-Transfer-Cost-Function"><a href="#Neural-Style-Transfer-Cost-Function" class="headerlink" title="Neural Style Transfer Cost Function"></a>Neural Style Transfer Cost Function</h3><p>原始内容图片为C，风格图片为S，目标图片为G，那么，<br>$$<br>J(G) = \alpha Jcontent(C, G) + \beta Jstyle(S, G)<br>$$</p>
+<p>下面介绍Style matrix,</p>
+<p>$$<br>\begin{split}<br>&amp; Let~a_i^{[l]} &amp;= activation~at~(i,j,k). G^{[l]}~is~n_c^{[l]} \times n_c^{[l]} \\<br>\rightarrow &amp; G<em>k^{[l]} &amp;= \sum</em>{i=1}^{n<em>H^{[l]}} \sum</em>{j=1}^{[n_W]^{[l]}} a_i^{[l]} a_i^{[l]}<br>\end{split}<br>$$<br>其中，$G^{[l]}$为Style matrix。</p>
 
       
     </div>
@@ -243,27 +290,25 @@ var a = new Donate({
 
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后端/">后端</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2017/10/11/【Machine Learning】机器学习：简明入门指南/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【Machine Learning】机器学习：简明入门指南
+          Convolutional Neural Networks / Week 3
         
       </div>
     </a>
   
   
-    <a href="/2017/09/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/12/利用GitHub搭建一个你的博客/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">利用GitHub搭建一个你的博客</div>
     </a>
   
 </nav>
@@ -277,7 +322,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我的第一次博客"><span class="nav-number">1.</span> <span class="nav-text">我的第一次博客</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-is-Face-Recognition"><span class="nav-number">1.</span> <span class="nav-text">What is Face Recognition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#One-Shot-Learning"><span class="nav-number">2.</span> <span class="nav-text">One Shot Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Siamese-Network"><span class="nav-number">3.</span> <span class="nav-text">Siamese Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Triple-Loss"><span class="nav-number">4.</span> <span class="nav-text">Triple Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Face-Verification-and-Binary-Classification"><span class="nav-number">5.</span> <span class="nav-text">Face Verification and Binary Classification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-are-deep-ConvNets-Learning"><span class="nav-number">6.</span> <span class="nav-text">What are deep ConvNets Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Neural-Style-Transfer-Cost-Function"><span class="nav-number">7.</span> <span class="nav-text">Neural Style Transfer Cost Function</span></a></li></ol>
     
     </div>
   </aside>

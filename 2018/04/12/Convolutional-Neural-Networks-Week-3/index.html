@@ -3,28 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的第一篇文章 | KingJames’s blog</title>
+  <title>convolutional neural networks / week 3 | KingJames’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="前端后端" />
+    <meta name="keywords" content="deep-learning,cnn" />
   
   
   
   
-  <meta name="description" content="我的第一次博客">
-<meta name="keywords" content="前端,后端">
+  <meta name="description" content="Object LocalizationObject localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。 定义目标变量$y$ (同时也是神经网络的输出层)，$$y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T\tag{1">
+<meta name="keywords" content="deep-learning,cnn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇文章">
-<meta property="og:url" content="http://github.com/2017/09/22/我的第一篇文章/index.html">
+<meta property="og:title" content="Convolutional Neural Networks &#x2F; Week 3">
+<meta property="og:url" content="http://github.com/2018/04/12/Convolutional-Neural-Networks-Week-3/index.html">
 <meta property="og:site_name" content="KingJames’s blog">
-<meta property="og:description" content="我的第一次博客">
+<meta property="og:description" content="Object LocalizationObject localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。 定义目标变量$y$ (同时也是神经网络的输出层)，$$y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T\tag{1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg">
-<meta property="og:updated_time" content="2017-09-24T14:49:41.629Z">
+<meta property="og:updated_time" content="2018-04-12T12:51:06.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的第一篇文章">
-<meta name="twitter:description" content="我的第一次博客">
-<meta name="twitter:image" content="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg">
+<meta name="twitter:title" content="Convolutional Neural Networks &#x2F; Week 3">
+<meta name="twitter:description" content="Object LocalizationObject localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。 定义目标变量$y$ (同时也是神经网络的输出层)，$$y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T\tag{1">
   
     <link rel="alternate" href="/atom.xml" title="KingJames’s blog" type="application/atom+xml">
   
@@ -164,7 +162,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-我的第一篇文章" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Convolutional-Neural-Networks-Week-3" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -172,7 +170,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      我的第一篇文章
+      Convolutional Neural Networks / Week 3
     </h1>
   
 
@@ -180,12 +178,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/22/我的第一篇文章/" class="article-date">
-	  <time datetime="2017-09-22T12:14:15.000Z" itemprop="datePublished">2017-09-22</time>
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" class="article-date">
+	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/技术/">技术</a><a class="article-category-link" href="/categories/技术/javascript/">javascript</a>
+    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
 
       
 	<a class="article-views">
@@ -197,7 +195,29 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="我的第一次博客"><a href="#我的第一次博客" class="headerlink" title="我的第一次博客"></a>我的第一次博客</h1><p><img src="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg" alt=""></p>
+        <h3 id="Object-Localization"><a href="#Object-Localization" class="headerlink" title="Object Localization"></a>Object Localization</h3><p>Object localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。</p>
+<p>定义目标变量$y$ (同时也是神经网络的输出层)，<br>$$<br>y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T<br>\tag{1}<br>$$<br><a id="more"></a></p>
+<p>其中，$P_c$表示图像中是否包含特定对象，$(b_x, b_y)$表示特定对象的中心位置在图像中的坐标（图像左上角坐标为$(0,0)$，右下角坐标为$(1,1)$），$b_h,b_w$分别表示特定对象的高度和宽度，$C_1-C_3$表示特定对象的类型（行人，汽车，摩托车）。</p>
+<p>定义损失函数$\mathcal{L(\hat{y}, y)}$，<br>$$<br>\mathcal{L}(\hat{y}, y) =<br>\begin{split}<br>\begin{cases}<br>\sum_{i=1}^{i=8} (\hat{y}_i - y_i)^2,&amp;~if~y_1=1 \\<br>(\hat{y}_1 - y_1)^2,&amp;~if~y_1=0<br>\end{cases}<br>\end{split}<br>$$<br>这里针对不同的维度都使用了平方差损失函数，可以针对不同的维度使用不同的损失函数。</p>
+<h3 id="Landmark-Detection"><a href="#Landmark-Detection" class="headerlink" title="Landmark Detection"></a>Landmark Detection</h3><p>有时我们需要识别图中的一些关键点的坐标，这些坐标称为Landmarks。这时候，我们可以定义如下的目标变量$y$<br>$$<br>y = [P~l_x1~l_y1~\dots~l_xn~l_yn]^T<br>$$<br>以识别人面部眼角嘴角为例，其中$P$代表是否包含人脸，$(l_xi, l_yi)$代表关键点的坐标。</p>
+<h3 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h3><p> Object Detction的其中一种办法叫做Sliding windows detection，采用不同尺寸的矩形框，从左至右、从上到下遍历枚举图像的子图，判断子图中是否包含需要的目标对象。很明显，这种办法比较笨，需要消耗大量的计算量。</p>
+<h3 id="Convolutional-Implementation-of-Sliding-Windows"><a href="#Convolutional-Implementation-of-Sliding-Windows" class="headerlink" title="Convolutional Implementation of Sliding Windows"></a>Convolutional Implementation of Sliding Windows</h3><p>全连接是可以通过卷积来实现的，并且两者直接是等价的。例如，如果$5\times 5 \times 16$的卷积层之后接的是一个$400$个神经元的全连接层，那么它等价于$5 \times 5 \times 16$的卷积层之后采用400个$5 \times 5 \times 16$的filters得到的$1 \times 1 \times 400$的卷积层。</p>
+<p>得益于卷积的存在，Sliding windows detection可以做到同时预测同一张图像不同子图中是否包含特定对象。但是这样做的不利条件是预测出来的对象的边界（bounding box）会相对不准确。因为这种办法采用的是子图的边界来作为待预测对象的边界。</p>
+<h3 id="Bounding-Box-Predictions"><a href="#Bounding-Box-Predictions" class="headerlink" title="Bounding Box Predictions"></a>Bounding Box Predictions</h3><p>这里介绍了YOLO algorithm (You Only Look Once)，该算法用来识别同一张图像上的多个目标简单。它将图像切分为了$M \times N$的网格并在此基础上构造了卷积神经网络。该网络的输入依然为整张图片，切分并不影响输入，而是决定了网络的输出尺寸为$M \times N \times 8$。这样，每个子图就拥有了一个$1 \times 1 \times 8$的预测结果，用来表示图像中是否包含特定的对象，如果包含的话，该特定对象的中心位置、长宽以及类别分别是什么。</p>
+<p>该算法利用了卷积操作提高了对同一张图像上不同子图的模型训练预测的效率，使得一次训练就可以完成对多个子图的建模（这里有个假设，就是每个子图上只包含最多一个特定对象）。</p>
+<h3 id="Intersection-Over-Union"><a href="#Intersection-Over-Union" class="headerlink" title="Intersection Over Union"></a>Intersection Over Union</h3><p>$$<br>Intersection over Union (loU) = \frac{size~of~intersection}{size~of~union}<br>$$</p>
+<p>通过loU，我们可以知道两个矩形在大小和位置上的相像程度。这样，我们就可以用它来评价object detection算法的优劣。</p>
+<h3 id="Non-max-Suppression"><a href="#Non-max-Suppression" class="headerlink" title="Non-max Suppression"></a>Non-max Suppression</h3><p>有时候，我们的算法会将相同的对象识别多次，non-max suppression算法用来解决这个问题。举例，</p>
+<p>假设卷积神经网络最后的输出为$19 \times 19 \times 5$，也就是说图像被切分为了$19 \times 19$的子图，每个子图的预测结果为一个5维的向量，该向量如下，<br>$$<br>y = [p_c~b_x~b_y~b_h~b_w]^T<br>$$<br>那么，在训练结束之后，non-max suppression算法会执行如下步骤，</p>
+<ol>
+<li>扔掉所有$p_c \le 0.6$的bounding boxes</li>
+<li>取出剩余bounding boxes中$p_c$最大的那个bounding box，作为新检测到的目标</li>
+<li>删除剩余所有与该box的loU值$\ge 0.5$的bounding boxes</li>
+<li>重复(2-3)步，直到没有bounding boxes剩余</li>
+</ol>
+<p>从上可以看出，non-max suppression其实是个简单的贪心算法。</p>
+<h3 id="Anchor-Boxes"><a href="#Anchor-Boxes" class="headerlink" title="Anchor Boxes"></a>Anchor Boxes</h3><p>在Object detection问题中，还有一个难点就是图像划分出网格后，每个网格中只能最多识别一个对象。为了让单个网格识别多个对象，可以采用Anchor boxes方法。</p>
+<p>Anchor boxes方法的思想很简单，将式(1)改为如下形式，<br>$$<br>y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3~P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T<br>\tag{2}<br>$$<br>式(2)表示在识别的过程中采用了两个Anchor box。每个Anchor box都负责识别所有类别的对象。</p>
 
       
     </div>
@@ -243,27 +263,25 @@ var a = new Donate({
 
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后端/">后端</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2017/10/11/【Machine Learning】机器学习：简明入门指南/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【Machine Learning】机器学习：简明入门指南
+          Convolutional Neural Networks / Week 2
         
       </div>
     </a>
   
   
-    <a href="/2017/09/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-4/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">Convolutional Neural Networks / Week 4</div>
     </a>
   
 </nav>
@@ -277,7 +295,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我的第一次博客"><span class="nav-number">1.</span> <span class="nav-text">我的第一次博客</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-Localization"><span class="nav-number">1.</span> <span class="nav-text">Object Localization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Landmark-Detection"><span class="nav-number">2.</span> <span class="nav-text">Landmark Detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-Detection"><span class="nav-number">3.</span> <span class="nav-text">Object Detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolutional-Implementation-of-Sliding-Windows"><span class="nav-number">4.</span> <span class="nav-text">Convolutional Implementation of Sliding Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bounding-Box-Predictions"><span class="nav-number">5.</span> <span class="nav-text">Bounding Box Predictions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intersection-Over-Union"><span class="nav-number">6.</span> <span class="nav-text">Intersection Over Union</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-max-Suppression"><span class="nav-number">7.</span> <span class="nav-text">Non-max Suppression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anchor-Boxes"><span class="nav-number">8.</span> <span class="nav-text">Anchor Boxes</span></a></li></ol>
     
     </div>
   </aside>

@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>King James</title>
+  <title>KingJames’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="知识 时间 自我 管理 阅读 思维 导图">
+  <meta name="description" content="Just stay hungry,stay foolish,stay curious. 求知若饥，虚心若愚，保持好奇">
 <meta property="og:type" content="website">
-<meta property="og:title" content="King James">
+<meta property="og:title" content="KingJames’s blog">
 <meta property="og:url" content="http://github.com/index.html">
-<meta property="og:site_name" content="King James">
-<meta property="og:description" content="知识 时间 自我 管理 阅读 思维 导图">
+<meta property="og:site_name" content="KingJames’s blog">
+<meta property="og:description" content="Just stay hungry,stay foolish,stay curious. 求知若饥，虚心若愚，保持好奇">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="King James">
-<meta name="twitter:description" content="知识 时间 自我 管理 阅读 思维 导图">
+<meta name="twitter:title" content="KingJames’s blog">
+<meta name="twitter:description" content="Just stay hungry,stay foolish,stay curious. 求知若饥，虚心若愚，保持好奇">
   
-    <link rel="alternate" href="/atom.xml" title="King James" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="KingJames’s blog" type="application/atom+xml">
   
 
   
@@ -218,9 +218,9 @@
 
         
           <div class="homelogoback"  style="border: 1px solid #404040;" >
-            <h1><a href="#content" id="logo">King James</a></h1>
-            <h3>知识 时间 自我 管理 阅读 思维 导图</h3>
-            <h5>Mr.YFan</h5>
+            <h1><a href="#content" id="logo">KingJames’s blog</a></h1>
+            <h3>Just stay hungry,stay foolish,stay curious. 求知若饥，虚心若愚，保持好奇</h3>
+            <h5>Mr.Yi</h5>
             <!-- <p><a href="https://github.com/iTimeTraveler" target="_blank">Github</a></p> -->
           </div>
         
@@ -270,6 +270,299 @@
       <div id="content" class="outer">
         
           <section id="main" style="float:none;">
+  
+    <article id="post-Convolutional-Neural-Networks-Week-1"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-1/">Convolutional Neural Networks / Week 1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-1/" class="article-date">
+	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Computer-Vision"><a href="#Computer-Vision" class="headerlink" title="Computer Vision"></a>Computer Vision</h3><p>Computer Vision Problems include:</p>
+<ul>
+<li>Image Classication</li>
+<li>Object Detection</li>
+<li>… …</li>
+</ul>
+<p>One of the challenges of computer vision problems is that the input can be very big. For example, a 1000 by 1000 image can have $1000 \times  64 \times 3 = 12288$ dimensions because there are three color channels. If the size of hidden layer is 1000, the number of parameters from input layer to hidden layer could be 3 billion. This will cause these problems:</p>
+<ol>
+<li>data size requirements;</li>
+<li>computational requirements;</li>
+<li>memory requirements.</li>
+</ol>
+        <!-- Computer VisionComputer Vision Problems include:
+
+Image Classication
+Object Detection
+… …
+
+One of the challenges of computer vision problems is that the input can be very big. For example, a 1000 b......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-1/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Convolutional-Neural-Networks-Week-2"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-2/">Convolutional Neural Networks / Week 2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" class="article-date">
+	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Classic-Networks"><a href="#Classic-Networks" class="headerlink" title="Classic Networks"></a>Classic Networks</h3><p>LeNet-5的网络结构如下，</p>
+<p><img src="/img/cnn-w2/lenet-5.jpeg" width="80%" align="center"></p>
+        <!-- Classic NetworksLeNet-5的网络结构如下，
+
+
+AlexNet的网络结构如下，
+
+VGG-16的网络结构如下，
+
+ResNets在一般的神经网络中，两层神经网络的数学表达如下，$$\begin{split}&amp; z^{[l+1]} = W^{[l+1]}a^{[l]} + b^{[l+1]} \\&amp; a^{[l+1]} = g(z^{[l+1]}) \\&a......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Convolutional-Neural-Networks-Week-3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-3/">Convolutional Neural Networks / Week 3</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" class="article-date">
+	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Object-Localization"><a href="#Object-Localization" class="headerlink" title="Object Localization"></a>Object Localization</h3><p>Object localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。</p>
+<p>定义目标变量$y$ (同时也是神经网络的输出层)，<br>$$<br>y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T<br>\tag{1}<br>$$<br>
+        <!-- Object LocalizationObject localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。
+定义目标变量$y$ (同时也是神经网络的输出层)，$$y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T\ta......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Convolutional-Neural-Networks-Week-4"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-4/">Convolutional Neural Networks / Week 4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-4/" class="article-date">
+	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="What-is-Face-Recognition"><a href="#What-is-Face-Recognition" class="headerlink" title="What is Face Recognition"></a>What is Face Recognition</h3><p>这里区分两个概念，<code>Face verification</code>和<code>Face recognition</code>，</p>
+<ul>
+<li>Verification<ul>
+<li>输入：图像 + 名字/ID</li>
+<li>输出：输入的图像上是否有名字/ID表示的那个人</li>
+</ul>
+</li>
+<li>Recognition<ul>
+<li>数据库中有$K$个人</li>
+<li>输入：图像</li>
+<li>输出：图像上有的数据库中的人的名字/ID</li>
+</ul>
+</li>
+</ul>
+<p>很明显，Recognition比Verification的难度要大得多。<br>
+        <!-- What is Face Recognition这里区分两个概念，Face verification和Face recognition，
+
+Verification
+输入：图像 + 名字/ID
+输出：输入的图像上是否有名字/ID表示的那个人
+
+
+Recognition
+数据库中有$K$个人
+输入：图像
+输出：图像上有的数据库中的人的名字/ID
+
+
+
+很明显，Recognition比Verif......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-4/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-利用GitHub搭建一个你的博客"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/12/利用GitHub搭建一个你的博客/">利用GitHub搭建一个你的博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/12/利用GitHub搭建一个你的博客/" class="article-date">
+	  <time datetime="2018-04-12T08:04:26.000Z" itemprop="datePublished">2018-04-12</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1917079-bbc62e5e352027e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Photo From Google"></p>
+<blockquote>
+<p><em>为什么要写博客</em><br>作为一只程序猿，踩到坑是一件非常正常的事，当我们踩到坑的时候就会花心思去研究它，可能我们能够在当时把问题弄懂并把问题给解决掉。可是过一段时间我们又遇到了同样的坑的时候，难道还要再去 百毒 Google 重新搜索一遍吗？这样做效率难免太低了，倒不如在第一次解决问题的时候就把解决方法写到我们的博客了，当我们再一次遇到相同的坑的时候翻一翻我们之前写的博客就能快速的把问题给解决掉，何乐而不为。而且我们学习新技术的时候也可以将当时学到的内容写到我们的博客，再次遇到的时候我们就可以找回当时学习的思路，继续学习。废话不多说，马上开始行动起来，搭建博客！</p>
+</blockquote>
+<p><em>声明：本文在Windows下进行操作的，Mac以及其它操作系统请做参考</em> <strong>多图警告！</strong><br>
+        <!-- 
+
+为什么要写博客作为一只程序猿，踩到坑是一件非常正常的事，当我们踩到坑的时候就会花心思去研究它，可能我们能够在当时把问题弄懂并把问题给解决掉。可是过一段时间我们又遇到了同样的坑的时候，难道还要再去 百毒 Google 重新搜索一遍吗？这样做效率难免太低了，倒不如在第一次解决问题的时候就把解决方法写到我们的博客了，当我们再一次遇到相同的坑的时候翻一翻我们之前写的博客就能快速的把问题给解决掉，......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/12/利用GitHub搭建一个你的博客/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git笔记/">Git笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
   
     <article id="post-Git--命令"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
@@ -561,7 +854,7 @@ Q......  -->
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2018 King James All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2018 KingJames’s blog All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -712,10 +1005,10 @@ Q......  -->
         </div>
          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
           <div class="panel-body">
-            King James
+            KingJames’s blog
           </div>
           <div class="panel-body">
-            Copyright © 2018 Mr.YFan All Rights Reserved.
+            Copyright © 2018 Mr.Yi All Rights Reserved.
           </div>
         </div>
       </div>

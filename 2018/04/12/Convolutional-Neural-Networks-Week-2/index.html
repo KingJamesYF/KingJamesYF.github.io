@@ -3,28 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的第一篇文章 | KingJames’s blog</title>
+  <title>convolutional neural networks / week 2 | KingJames’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="前端后端" />
+    <meta name="keywords" content="deep-learning,cnn" />
   
   
   
   
-  <meta name="description" content="我的第一次博客">
-<meta name="keywords" content="前端,后端">
+  <meta name="description" content="Classic NetworksLeNet-5的网络结构如下，">
+<meta name="keywords" content="deep-learning,cnn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇文章">
-<meta property="og:url" content="http://github.com/2017/09/22/我的第一篇文章/index.html">
+<meta property="og:title" content="Convolutional Neural Networks &#x2F; Week 2">
+<meta property="og:url" content="http://github.com/2018/04/12/Convolutional-Neural-Networks-Week-2/index.html">
 <meta property="og:site_name" content="KingJames’s blog">
-<meta property="og:description" content="我的第一次博客">
+<meta property="og:description" content="Classic NetworksLeNet-5的网络结构如下，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg">
-<meta property="og:updated_time" content="2017-09-24T14:49:41.629Z">
+<meta property="og:image" content="http://github.com/img/cnn-w2/lenet-5.jpeg">
+<meta property="og:image" content="http://github.com/img/cnn-w2/alexnet.jpeg">
+<meta property="og:image" content="http://github.com/img/cnn-w2/vgg-16.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/inception-2-layer.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/inception-3-layer.jpeg">
+<meta property="og:updated_time" content="2018-04-12T12:42:45.754Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的第一篇文章">
-<meta name="twitter:description" content="我的第一次博客">
-<meta name="twitter:image" content="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg">
+<meta name="twitter:title" content="Convolutional Neural Networks &#x2F; Week 2">
+<meta name="twitter:description" content="Classic NetworksLeNet-5的网络结构如下，">
+<meta name="twitter:image" content="http://github.com/img/cnn-w2/lenet-5.jpeg">
   
     <link rel="alternate" href="/atom.xml" title="KingJames’s blog" type="application/atom+xml">
   
@@ -164,7 +168,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-我的第一篇文章" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Convolutional-Neural-Networks-Week-2" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -172,7 +176,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      我的第一篇文章
+      Convolutional Neural Networks / Week 2
     </h1>
   
 
@@ -180,12 +184,12 @@
     
     <div class="article-meta">
       
-	<a href="/2017/09/22/我的第一篇文章/" class="article-date">
-	  <time datetime="2017-09-22T12:14:15.000Z" itemprop="datePublished">2017-09-22</time>
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" class="article-date">
+	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/技术/">技术</a><a class="article-category-link" href="/categories/技术/javascript/">javascript</a>
+    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
 
       
 	<a class="article-views">
@@ -197,7 +201,47 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="我的第一次博客"><a href="#我的第一次博客" class="headerlink" title="我的第一次博客"></a>我的第一次博客</h1><p><img src="https://itimetraveler.github.io/hexo-theme-hiker/gallery/shoes.jpg" alt=""></p>
+        <h3 id="Classic-Networks"><a href="#Classic-Networks" class="headerlink" title="Classic Networks"></a>Classic Networks</h3><p>LeNet-5的网络结构如下，</p>
+<p><img src="/img/cnn-w2/lenet-5.jpeg" width="80%" align="center"></p>
+<a id="more"></a>
+<p>AlexNet的网络结构如下，</p>
+<p><img src="/img/cnn-w2/alexnet.jpeg" width="80%" align="center"></p>
+<p>VGG-16的网络结构如下，</p>
+<p><img src="/img/cnn-w2/vgg-16.jpeg" width="80%" align="center"></p>
+<h3 id="ResNets"><a href="#ResNets" class="headerlink" title="ResNets"></a>ResNets</h3><p>在一般的神经网络中，两层神经网络的数学表达如下，<br>$$<br>\begin{split}<br>&amp; z^{[l+1]} = W^{[l+1]}a^{[l]} + b^{[l+1]} \\<br>&amp; a^{[l+1]} = g(z^{[l+1]}) \\<br>&amp; z^{[l+2]} = W^{[l+2]}a^{[l + 1]} + b^{[l+2]} \\<br>&amp; a^{[l+2]} = g(z^{[l+2]})<br>\end{split}<br>$$<br>而在ResNets中，修改了$a^{[l+2]}$的生成方式，变成了，<br>$$<br>a^{[l+2]} = g(z^{[l + 2]} + a^{[l]})<br>\tag{1}<br>$$<br>这样的两层神经网络称为Residual block，将这样的Residual block串联起来就构成了ResNets。</p>
+<p>ResNets解决了传统神经网络中存在的层数不能过深的问题。在传统的神经网络中，随着深度的增加，训练误差会先降后升，而对于ResNets，随着网络层数达到一百甚至一千层，训练误差也可以平缓的下降（也可能出现收敛的现象）。</p>
+<h3 id="Why-ResNets-Work"><a href="#Why-ResNets-Work" class="headerlink" title="Why ResNets Work"></a>Why ResNets Work</h3><p>首先来解释一下为什么在传统的网络后面加一个Residual block不会降低原有网络的性能，<br>$$<br>\begin{split}<br>a^{[l+2]} &amp;= g(z^{[l + 2]} + a^{[l]}) \\<br>    &amp;= g((w^{[l+2]}a^{[l + 1]} + b^{[l + 2]}) + a^{[l]})<br>\end{split}<br>$$<br>假设我们采用的激活函数为RELU，同时$w^{[l+2]}$和$b^{[l+2]}$为0，那么，<br>$$<br>a^{[l+2]} = g(a^{[l]}) = a^{[l]}<br>$$<br>所以由于Residual block的存在，网络在第$l+2$层的时候，很容易退回到$l$层去。这样可以达到一个效果，在最差情况下，后边加上的Residual block仿佛不存在一样，这样就不会影响原先的效果。</p>
+<p>Residual block中还有一点值得注意，对于式(1)来说，$z^{[l+2]}$和$a^{[l]}$的维度需要一致，那如果出现维度不一致的情况怎么办呢？增加一个$W_s$矩阵，<br>$$<br>a^{[l+2]} = g(z^{[l + 2]} + W_s a^{[l]})<br>$$<br>$W_s$有两种方式生成，</p>
+<ol>
+<li>随机生成的参数矩阵，跟随其他参数一起训练学习。</li>
+<li>$a^{[l]}$的基础上采用padding操作生成，比如补0。</li>
+</ol>
+<h3 id="Networks-in-Networks-and-1x1-Convolutions"><a href="#Networks-in-Networks-and-1x1-Convolutions" class="headerlink" title="Networks in Networks and 1x1 Convolutions"></a>Networks in Networks and 1x1 Convolutions</h3><p>1x1 Convolutons也称为Networks in networks，它是一个1x1的filters并使用了Relu非线性变换。</p>
+<h3 id="Inception-Network-Motivation"><a href="#Inception-Network-Motivation" class="headerlink" title="Inception Network Motivation"></a>Inception Network Motivation</h3><p>在构造神经网络的时候，我们有时候会很困惑，用$1\times1$的卷积效果好，还是$f^{[l]}\times f^{[l]}$的卷积效果好，或者用Max-pooling效果会更好呢？Inception Network的思想是，那就把他们在同一层中都用一遍，这样就会得到若干tensor的输出，然后再把这些tensor在channel的纬度上拼在一起，组合一个大的tensor。最后，用数据去训练学习，决定这些filters的参数。</p>
+<p>这样会有如下问题，</p>
+<ol>
+<li>如何让这些tensor在除了channel之外的其他维度上保持尺寸一致？</li>
+<li>会不会造成计算量的显著增加？</li>
+</ol>
+<p>对于问题(1)其实很好解决，采用padding的方式就可以让这些tensor的$n_H$和$n_W$保持一致。</p>
+<p>对于问题(2)可以通过在两层网络中间增加一层$1\times1$ filter来解决。下面详细描述原理。</p>
+<p>假设我们有这样两层网络，</p>
+<p><img src="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/inception-2-layer.jpeg" width="50%" title="图 1" align="center"></p>
+<p>那么从左到右需要的乘法运算的数量为，<br>$$<br>(28 \times 28 \times 32) \times (5 \times 5 \times 192) \approx 120~million<br>$$<br>如果我们在图(1)两层网络中间加入一层使用了$1\times1$ filter的卷积层，如图(2)所示，</p>
+<p><img src="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/inception-3-layer.jpeg" width="50%" title="图 2" align="center"></p>
+<p>那么从左到右所需要的乘法运算的数量为，<br>$$<br>\begin{split}<br>&amp;1st~layer \rightarrow 2nd~layer：&amp;(28 \times 28 \times 16) \times (1 \times 1 \times 192) \approx 2.4~million \\<br>&amp;2nd~layer \rightarrow 3rd~layer：&amp;(28 \times 28 \times 32) \times (5 \times 5 \times 16) \approx 10~million<br>\end{split}<br>$$<br>也就是共需要$12.4~million$的乘法运算。从中可以看到，加入”bottleneck layer”之后，所需要的计算量减少为了原来的十分之一。</p>
+<h3 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h3><p>当我们有一个比较小的训练数据集的时候，我们可以在别人训练好的模型的基础上来达到我们的目的：删除最后的softmax layers，保留之前的layers的模型结构和权重，并在之后增加我们自己的softmax layers。然后用较小的训练数据集来训练我们新增加的layers的参数。这样就可以用较少的数据来得到不错的预测效果。</p>
+<p>其中，我们可以预先存储训练数据集中的样本经过之前的layers (删除原先的softmax layers)之后得到的activations，这样就不用在之后训练新的softmax layers参数的时候反复计算，从而节省计算量并提高效率。</p>
+<p>随着我们拥有的训练数据的增加，我们可以保留较少层数的参数不发生改变，其余网络层以原先权重为初始参数，然后在新的训练数据集上进行训练调整。如果我们的训练数据足够大，那么原先所有层的参数都可以只作为初始参数，让它们在新的数据集上进行训练调整。</p>
+<h3 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h3><p>通常在机器学习中，我们需要大量的训练数据，因此有一些常用的有效的增加数据集的方法，</p>
+<ul>
+<li>Mirroring: 镜像处理</li>
+<li>Random Cropping: 随机图像裁剪</li>
+<li>Rotation: 图像旋转</li>
+<li>Shearing:</li>
+<li>Local warping: 局部变形</li>
+<li>Color Shifting: 在不同的颜色通道上增减一定的数值，例如$R+20, G-20, B+20$</li>
+</ul>
 
       
     </div>
@@ -243,27 +287,25 @@ var a = new Donate({
 
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后端/">后端</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2017/10/11/【Machine Learning】机器学习：简明入门指南/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-1/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【Machine Learning】机器学习：简明入门指南
+          Convolutional Neural Networks / Week 1
         
       </div>
     </a>
   
   
-    <a href="/2017/09/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">Convolutional Neural Networks / Week 3</div>
     </a>
   
 </nav>
@@ -277,7 +319,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我的第一次博客"><span class="nav-number">1.</span> <span class="nav-text">我的第一次博客</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Classic-Networks"><span class="nav-number">1.</span> <span class="nav-text">Classic Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNets"><span class="nav-number">2.</span> <span class="nav-text">ResNets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-ResNets-Work"><span class="nav-number">3.</span> <span class="nav-text">Why ResNets Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Networks-in-Networks-and-1x1-Convolutions"><span class="nav-number">4.</span> <span class="nav-text">Networks in Networks and 1x1 Convolutions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception-Network-Motivation"><span class="nav-number">5.</span> <span class="nav-text">Inception Network Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transfer-Learning"><span class="nav-number">6.</span> <span class="nav-text">Transfer Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Augmentation"><span class="nav-number">7.</span> <span class="nav-text">Data Augmentation</span></a></li></ol>
     
     </div>
   </aside>
