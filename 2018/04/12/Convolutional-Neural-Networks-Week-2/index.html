@@ -19,16 +19,16 @@
 <meta property="og:site_name" content="KingJames’s blog">
 <meta property="og:description" content="Classic NetworksLeNet-5的网络结构如下，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://github.com/img/cnn-w2/lenet-5.jpeg">
-<meta property="og:image" content="http://github.com/img/cnn-w2/alexnet.jpeg">
-<meta property="og:image" content="http://github.com/img/cnn-w2/vgg-16.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/lenet-5.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/alexnet.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/vgg-16.jpeg">
 <meta property="og:image" content="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/inception-2-layer.jpeg">
 <meta property="og:image" content="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/inception-3-layer.jpeg">
-<meta property="og:updated_time" content="2018-04-12T12:42:45.754Z">
+<meta property="og:updated_time" content="2018-04-12T13:57:00.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Convolutional Neural Networks &#x2F; Week 2">
 <meta name="twitter:description" content="Classic NetworksLeNet-5的网络结构如下，">
-<meta name="twitter:image" content="http://github.com/img/cnn-w2/lenet-5.jpeg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/lenet-5.jpeg">
   
     <link rel="alternate" href="/atom.xml" title="KingJames’s blog" type="application/atom+xml">
   
@@ -202,12 +202,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Classic-Networks"><a href="#Classic-Networks" class="headerlink" title="Classic Networks"></a>Classic Networks</h3><p>LeNet-5的网络结构如下，</p>
-<p><img src="/img/cnn-w2/lenet-5.jpeg" width="80%" align="center"></p>
+<p><img src="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/lenet-5.jpeg" width="80%" align="center"></p>
 <a id="more"></a>
 <p>AlexNet的网络结构如下，</p>
-<p><img src="/img/cnn-w2/alexnet.jpeg" width="80%" align="center"></p>
+<p><img src="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/alexnet.jpeg" width="80%" align="center"></p>
 <p>VGG-16的网络结构如下，</p>
-<p><img src="/img/cnn-w2/vgg-16.jpeg" width="80%" align="center"></p>
+<p><img src="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/vgg-16.jpeg" width="80%" align="center"></p>
 <h3 id="ResNets"><a href="#ResNets" class="headerlink" title="ResNets"></a>ResNets</h3><p>在一般的神经网络中，两层神经网络的数学表达如下，<br>$$<br>\begin{split}<br>&amp; z^{[l+1]} = W^{[l+1]}a^{[l]} + b^{[l+1]} \\<br>&amp; a^{[l+1]} = g(z^{[l+1]}) \\<br>&amp; z^{[l+2]} = W^{[l+2]}a^{[l + 1]} + b^{[l+2]} \\<br>&amp; a^{[l+2]} = g(z^{[l+2]})<br>\end{split}<br>$$<br>而在ResNets中，修改了$a^{[l+2]}$的生成方式，变成了，<br>$$<br>a^{[l+2]} = g(z^{[l + 2]} + a^{[l]})<br>\tag{1}<br>$$<br>这样的两层神经网络称为Residual block，将这样的Residual block串联起来就构成了ResNets。</p>
 <p>ResNets解决了传统神经网络中存在的层数不能过深的问题。在传统的神经网络中，随着深度的增加，训练误差会先降后升，而对于ResNets，随着网络层数达到一百甚至一千层，训练误差也可以平缓的下降（也可能出现收敛的现象）。</p>
 <h3 id="Why-ResNets-Work"><a href="#Why-ResNets-Work" class="headerlink" title="Why ResNets Work"></a>Why ResNets Work</h3><p>首先来解释一下为什么在传统的网络后面加一个Residual block不会降低原有网络的性能，<br>$$<br>\begin{split}<br>a^{[l+2]} &amp;= g(z^{[l + 2]} + a^{[l]}) \\<br>    &amp;= g((w^{[l+2]}a^{[l + 1]} + b^{[l + 2]}) + a^{[l]})<br>\end{split}<br>$$<br>假设我们采用的激活函数为RELU，同时$w^{[l+2]}$和$b^{[l+2]}$为0，那么，<br>$$<br>a^{[l+2]} = g(a^{[l]}) = a^{[l]}<br>$$<br>所以由于Residual block的存在，网络在第$l+2$层的时候，很容易退回到$l$层去。这样可以达到一个效果，在最差情况下，后边加上的Residual block仿佛不存在一样，这样就不会影响原先的效果。</p>
@@ -293,19 +293,10 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          Convolutional Neural Networks / Week 1
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-4/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Convolutional Neural Networks / Week 3</div>
+      <div class="article-nav-title">Convolutional Neural Networks / Week 4</div>
     </a>
   
 </nav>
