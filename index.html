@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>KingJames’s blog</title>
+  <title>King   James</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
+    <meta name="baidu-site-verification" content="a936eb4d4dfc73dd81ea6d7860454bc8" />
   
-  <meta name="description" content="Just stay hungry,stay foolish,stay curious. 求知若饥，虚心若愚，保持好奇">
+  
+  <meta name="description" content="stay hungry foolish and curious">
 <meta property="og:type" content="website">
-<meta property="og:title" content="KingJames’s blog">
+<meta property="og:title" content="King   James">
 <meta property="og:url" content="http://github.com/index.html">
-<meta property="og:site_name" content="KingJames’s blog">
-<meta property="og:description" content="Just stay hungry,stay foolish,stay curious. 求知若饥，虚心若愚，保持好奇">
+<meta property="og:site_name" content="King   James">
+<meta property="og:description" content="stay hungry foolish and curious">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KingJames’s blog">
-<meta name="twitter:description" content="Just stay hungry,stay foolish,stay curious. 求知若饥，虚心若愚，保持好奇">
-  
-    <link rel="alternate" href="/atom.xml" title="KingJames’s blog" type="application/atom+xml">
+<meta name="twitter:title" content="King   James">
+<meta name="twitter:description" content="stay hungry foolish and curious">
   
 
   
@@ -198,17 +198,6 @@
 
       <!-- 折线Polyline背景 -->
       
-		 function redraw(){
-		 	var pattern = Trianglify({
-				width: window.innerWidth,
-				height: window.innerHeight
-			});
-            pattern.canvas(c)
-        }
-        document.getElementById("intrologo").onclick = redraw
-        document.getElementById("intrologo").ontouchstart = redraw
-		redraw()
-      
     </script>
     
 
@@ -218,8 +207,8 @@
 
         
           <div class="homelogoback"  style="border: 1px solid #404040;" >
-            <h1><a href="#content" id="logo">KingJames’s blog</a></h1>
-            <h3>Just stay hungry,stay foolish,stay curious. 求知若饥，虚心若愚，保持好奇</h3>
+            <h1><a href="#content" id="logo">King   James</a></h1>
+            <h3>stay hungry foolish and curious</h3>
             <h5>Mr.Yi</h5>
             <!-- <p><a href="https://github.com/iTimeTraveler" target="_blank">Github</a></p> -->
           </div>
@@ -270,6 +259,123 @@
       <div id="content" class="outer">
         
           <section id="main" style="float:none;">
+  
+    <article id="post-Hexo + GitHub Pages 搭建个人博客"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/13/Hexo + GitHub Pages 搭建个人博客/">Hexo + GitHub Pages 搭建个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/Hexo + GitHub Pages 搭建个人博客/" class="article-date">
+	  <time datetime="2018-04-13T14:08:49.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><p>Hexo is a fast, simple and powerful blog framework. You write posts in Markdown (or other languages) and Hexo generates static files with a beautiful theme in seconds.</p>
+<footer><strong>Documentation</strong><cite><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">hexo.io</a></cite></footer></blockquote>
+<p>这一篇 note 讲解如何使用 <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> + <a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a> 搭建个人博客，并用 GitHub 进行版本控制。其中源文件位于 hexo 分支，静态文件位于 master 分支。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><p>安装最新版的 <a href="https://git-scm.com/" target="_blank" rel="external">Git</a>。在命令行输入 <code>git version</code> 检查 git 是否安装成功。</p>
+</li>
+<li><p>安装 LTS 版的 <a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>。同样在命令行输入 <code>node -v</code> 和 <code>npm -v</code>以检查 node.js 是否安装成功。</p>
+</li>
+<li><p>注册 GitHub 账号，新建一个 repository，一般命名为 <code>username.github.io</code>，这样 GitHub 会自动开启 GitHub Pages 功能。勾选 <code>Initialize this repository with a README</code> 的话即可访问个人主页，否则需要添加内容才能访问，建议暂时不要勾选。</p>
+</li>
+<li><p>GitHub 添加 SSH（推荐），可参考 <a href="https://help.github.com/articles/connecting-to-github-with-ssh/" target="_blank" rel="external">Connecting to GitHub with SSH</a>。</p>
+</li>
+</ul>
+        <!-- Hexo is a fast, simple and powerful blog framework. You write posts in Markdown (or other languages) and Hexo generates static files with a beautiful theme in seconds.
+Documentationhexo.io
+这一篇 note......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/13/Hexo + GitHub Pages 搭建个人博客/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git笔记/">Git笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Git--命令(二)"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/13/Git--命令(二)/">Git--命令(二)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/Git--命令(二)/" class="article-date">
+	  <time datetime="2018-04-13T14:04:29.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/工具/">工具</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><p>Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</p>
+<footer><strong>Documentation</strong><cite><a href="https://git-scm.com/" target="_blank" rel="external">git-scm.com</a></cite></footer></blockquote>
+<p>Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。它是由 Linux 之父 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。本文介绍了 Git 的常用命令。</p>
+<h2 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h2><p>在学习 Git 命令之前，首先要理解它的三种状态：已提交（committed）、已修改（modified）和已暂存（staged）。已提交表示数据已经安全的保存在本地数据库中；已修改表示修改了文件，但还没保存到数据库中，增加、删除文件也相当于已修改；已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</p>
+<p>由此引入 Git 项目的三个工作区域的概念：Git 仓库、工作目录以及暂存区域。</p>
+<p><img src="https://git-scm.com/book/en/v2/images/areas.png" alt="Working tree, staging area, and Git directory"></p>
+        <!-- Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+Documentationgit-scm.com
+Git 是一个开源的分布式版本控......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/13/Git--命令(二)/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
   
     <article id="post-hiker博客主题配置"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
@@ -432,54 +538,6 @@
 <!-- Table of Contents -->
 
   
-    <article id="post-Convolutional-Neural-Networks-Week-3"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-3/">Convolutional Neural Networks / Week 3</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" class="article-date">
-	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Object-Localization"><a href="#Object-Localization" class="headerlink" title="Object Localization"></a>Object Localization</h3><p>Object localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。</p>
-<p>定义目标变量$y$ (同时也是神经网络的输出层)，<br>$$<br>y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T<br>\tag{1}<br>$$<br>
-        <!-- Object LocalizationObject localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。
-定义目标变量$y$ (同时也是神经网络的输出层)，$$y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T\ta......  -->
-        <p class="article-more-link">
-          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
     <article id="post-Convolutional-Neural-Networks-Week-1"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -543,7 +601,7 @@ One of the challenges of computer vision problems is that the input can be very 
 <!-- Table of Contents -->
 
   
-    <article id="post-Convolutional-Neural-Networks-Week-2"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Convolutional-Neural-Networks-Week-3"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -551,7 +609,7 @@ One of the challenges of computer vision problems is that the input can be very 
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-2/">Convolutional Neural Networks / Week 2</a>
+      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-3/">Convolutional Neural Networks / Week 3</a>
     </h1>
   
 
@@ -559,7 +617,7 @@ One of the challenges of computer vision problems is that the input can be very 
     
     <div class="article-meta">
       
-	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" class="article-date">
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" class="article-date">
 	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
 	</a>
 
@@ -570,18 +628,12 @@ One of the challenges of computer vision problems is that the input can be very 
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Classic-Networks"><a href="#Classic-Networks" class="headerlink" title="Classic Networks"></a>Classic Networks</h3><p>LeNet-5的网络结构如下，</p>
-<p><img src="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/lenet-5.jpeg" width="80%" align="center"></p>
-        <!-- Classic NetworksLeNet-5的网络结构如下，
-
-
-AlexNet的网络结构如下，
-
-VGG-16的网络结构如下，
-
-ResNets在一般的神经网络中，两层神经网络的数学表达如下，$$\begin{split}&amp; z^{[l+1]} = W^{[l+1]}a^{[l]} + b^{[l+1]} \\&amp; a^{[l+1]} = g(z^{[l+1]}) \\&a......  -->
+        <h3 id="Object-Localization"><a href="#Object-Localization" class="headerlink" title="Object Localization"></a>Object Localization</h3><p>Object localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。</p>
+<p>定义目标变量$y$ (同时也是神经网络的输出层)，<br>$$<br>y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T<br>\tag{1}<br>$$<br>
+        <!-- Object LocalizationObject localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。
+定义目标变量$y$ (同时也是神经网络的输出层)，$$y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T\ta......  -->
         <p class="article-more-link">
-          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/#more">阅读全文</a>
+          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/#more">阅读全文</a>
         </p>
       
     </div>
@@ -671,6 +723,60 @@ Recognition
 <!-- Table of Contents -->
 
   
+    <article id="post-Convolutional-Neural-Networks-Week-2"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-2/">Convolutional Neural Networks / Week 2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" class="article-date">
+	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Classic-Networks"><a href="#Classic-Networks" class="headerlink" title="Classic Networks"></a>Classic Networks</h3><p>LeNet-5的网络结构如下，</p>
+<p><img src="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/lenet-5.jpeg" width="80%" align="center"></p>
+        <!-- Classic NetworksLeNet-5的网络结构如下，
+
+
+AlexNet的网络结构如下，
+
+VGG-16的网络结构如下，
+
+ResNets在一般的神经网络中，两层神经网络的数学表达如下，$$\begin{split}&amp; z^{[l+1]} = W^{[l+1]}a^{[l]} + b^{[l+1]} \\&amp; a^{[l+1]} = g(z^{[l+1]}) \\&a......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-利用GitHub搭建一个你的博客"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -725,134 +831,6 @@ Recognition
 <!-- Table of Contents -->
 
   
-    <article id="post-Git--命令"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/Git--命令/">Git--命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/04/12/Git--命令/" class="article-date">
-	  <time datetime="2018-04-12T07:02:42.000Z" itemprop="datePublished">2018-04-12</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>git命令学习</p>
-</blockquote>
-<h1 id="Git笔记"><a href="#Git笔记" class="headerlink" title=" Git笔记 "></a><p align="center"> Git笔记 </p></h1><p><img src="http://oo8jzybo8.bkt.clouddn.com/hello-github.jpg" alt=""></p>
-<h2 id="GitHub介绍"><a href="#GitHub介绍" class="headerlink" title="GitHub介绍"></a>GitHub介绍</h2><p>GitHub 是为开发者提供 Git 仓库的托管服务。这是一个让开发者与朋友、同事、同学及陌生人共享代码的完美场所。总结一下，GitHub 最大的特征是“面向人”</p>
-<p>Git是一个“<strong>分布式版本管理工具</strong>”，简单的理解版本管理工具：大家在写东西的时候都用过“回撤”这个功能，但是回撤只能回撤几步，假如想要找回我三天之前的修改，光用“回撤”是找不回来的。而“<strong>版本管理工具</strong>”能记录每次的修改，只要提交到版本仓库，你就可以找到之前任何时刻的状态（文本状态）。</p>
-<ul>
-<li><p><strong>统一概念</strong></p>
-<ul>
-<li>工作区：改动（增删文件和内容）</li>
-<li>暂存区：输入命令：<code>git add 改动的文件名</code>，此次改动就放到了‘暂存区’</li>
-<li>本地仓库(简称：本地)：输入命令：<code>git commit 此次修改的描述</code>，此次改动就放到了’本地仓库’，每个commit，我叫它为一个‘版本’。</li>
-<li>远程仓库(简称：远程)：输入命令：<code>git push 远程仓库</code>，此次改动就放到了‘远程仓库’（GitHub等)</li>
-<li>分支：Git鼓励你使用<code>branch</code>完成某个任务，合并后再删掉分支，过程更安全。</li>
-<li>commit-id：输出命令：<code>git log</code>，最上面那行<code>commit xxxxxx</code>，后面的字符串就是commit-id</li>
-</ul>
-</li>
-</ul>
-<p>参考<a href="https://github.com/git-tips/tips">tips</a>项目,和廖雪峰老师的<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">git网站</a>。</p>
-        <!-- 
-git命令学习
-
- Git笔记 
-GitHub介绍GitHub 是为开发者提供 Git 仓库的托管服务。这是一个让开发者与朋友、同事、同学及陌生人共享代码的完美场所。总结一下，GitHub 最大的特征是“面向人”
-Git是一个“分布式版本管理工具”，简单的理解版本管理工具：大家在写东西的时候都用过“回撤”这个功能，但是回撤只能回撤几步，假如想要找回我三天之前的修改，光用“回撤”是找不回来的......  -->
-        <p class="article-more-link">
-          <a href="/2018/04/12/Git--命令/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-Markdown语法"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/Markdown语法/">Markdown语法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/04/12/Markdown语法/" class="article-date">
-	  <time datetime="2018-04-12T02:39:01.000Z" itemprop="datePublished">2018-04-12</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>针对中文,演示Markdown的语法</p>
-</blockquote>
-<h1 id="大标题"><a href="#大标题" class="headerlink" title="大标题"></a>大标题</h1><p>  大标题一般显示工程名，类似html的h1<br><br>  你只要在标题下面跟上=====即可（超过3个=即可，长度不限）<br><br>  或者你可以在标题前面加一个 # 来实现（# 大标题）</p>
-        <!-- 
-针对中文,演示Markdown的语法
-
-大标题  大标题一般显示工程名，类似html的h1  你只要在标题下面跟上=====即可（超过3个=即可，长度不限）  或者你可以在标题前面加一个 # 来实现（# 大标题）
-
-中标题  中标题一般显示重点项，类似html的h2  你只要在标题下面输入—–即可（超过3个-即可，长度不限）  或者你可以在标题前面加两个 # 来实现（## 中标题）
-小标题......  -->
-        <p class="article-more-link">
-          <a href="/2018/04/12/Markdown语法/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -872,7 +850,7 @@ Git是一个“分布式版本管理工具”，简单的理解版本管理工�
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2018 KingJames’s blog All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2017 - 2018 King   James All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -904,7 +882,7 @@ Git是一个“分布式版本管理工具”，简单的理解版本管理工�
     </div>
     <!-- <nav id="mobile-nav">
   
-    <a href="/" class="mobile-nav-link">首页</a>
+    <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
@@ -1023,7 +1001,7 @@ Git是一个“分布式版本管理工具”，简单的理解版本管理工�
         </div>
          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
           <div class="panel-body">
-            KingJames’s blog
+            King   James
           </div>
           <div class="panel-body">
             Copyright © 2018 Mr.Yi All Rights Reserved.

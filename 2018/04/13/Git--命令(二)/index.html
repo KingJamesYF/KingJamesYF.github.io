@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git--命令(二) | King   James</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="git" />
+  
+  
+  
+    <meta name="baidu-site-verification" content="a936eb4d4dfc73dd81ea6d7860454bc8" />
+  
+  
+  <meta name="description" content="Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Documentationgit-scm.com Git 是一个开源的分布式版本控制系统">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git--命令(二)">
+<meta property="og:url" content="http://github.com/2018/04/13/Git--命令(二)/index.html">
+<meta property="og:site_name" content="King   James">
+<meta property="og:description" content="Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Documentationgit-scm.com Git 是一个开源的分布式版本控制系统">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://git-scm.com/book/en/v2/images/areas.png">
+<meta property="og:image" content="https://git-scm.com/book/en/v2/images/lifecycle.png">
+<meta property="og:image" content="http://github.com/2018/04/13/Git--命令(二)/github.png">
+<meta property="og:updated_time" content="2018-04-13T14:06:01.044Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git--命令(二)">
+<meta name="twitter:description" content="Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Documentationgit-scm.com Git 是一个开源的分布式版本控制系统">
+<meta name="twitter:image" content="https://git-scm.com/book/en/v2/images/areas.png">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;">
+                  <img width="190px" height="127px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Git--命令(二)" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Git--命令(二)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/13/Git--命令(二)/" class="article-date">
+	  <time datetime="2018-04-13T14:04:29.000Z" itemprop="datePublished">2018-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/工具/">工具</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><p>Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</p>
+<footer><strong>Documentation</strong><cite><a href="https://git-scm.com/" target="_blank" rel="external">git-scm.com</a></cite></footer></blockquote>
+<p>Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。它是由 Linux 之父 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。本文介绍了 Git 的常用命令。</p>
+<h2 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h2><p>在学习 Git 命令之前，首先要理解它的三种状态：已提交（committed）、已修改（modified）和已暂存（staged）。已提交表示数据已经安全的保存在本地数据库中；已修改表示修改了文件，但还没保存到数据库中，增加、删除文件也相当于已修改；已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</p>
+<p>由此引入 Git 项目的三个工作区域的概念：Git 仓库、工作目录以及暂存区域。</p>
+<p><img src="https://git-scm.com/book/en/v2/images/areas.png" alt="Working tree, staging area, and Git directory"></p>
+<a id="more"></a>
+<p>它们之间的关系可以参考 <a href="http://www.runoob.com/git/git-workspace-index-repo.html" target="_blank" rel="external">Git 工作区、暂存区和版本库</a>。</p>
+<p>在阅读下面的内容之前，最好在自己的电脑上<a href="https://git-scm.com/" target="_blank" rel="external">安装 Git</a>，然后按照顺序操作。如果你想先感受一下 Git 的魅力， <a href="https://try.github.io/" target="_blank" rel="external">Try Git</a> 是一个不错的选择。</p>
+<h2 id="Git-配置"><a href="#Git-配置" class="headerlink" title="Git 配置"></a>Git 配置</h2><p>安装完 Git，初次运行前需要做一些配置，比如用户信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name <span class="string">"Your Name"</span></div><div class="line">git config --global user.email email@example.com</div></pre></td></tr></table></figure>
+<p>Windows 环境下，推荐使用文本编辑器 <a href="https://notepad-plus-plus.org/" target="_blank" rel="external">Notepad++</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 注意更改为自己的安装目录</span></div><div class="line">git config --global core.editor <span class="string">"'C:\Program Files\Notepad++\notepad++.exe' -multiInst -nosession"</span></div></pre></td></tr></table></figure>
+<p>配置完成后，可以通过 <code>git config --list</code> 查看所有的配置信息，或者使用 <code>git config user.name</code> 查看单个信息。</p>
+<p>另外，还可以自定义配置一些命令的别名，方便记忆。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global alias.last <span class="string">'log -1'</span></div></pre></td></tr></table></figure>
+<p>这样 <code>git last</code> 就相当于 <code>git log -1</code>，用于查看最后一次的提交记录。我比较喜欢这样配置，用于查看提交历史：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global alias.lg <span class="string">"log --oneline --decorate --graph --all"</span></div></pre></td></tr></table></figure>
+<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><p>创建版本库有两种方式，一种是使用 <code>git clone</code> 从现有 Git 仓库中拷贝项目，格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> &lt;repo&gt; &lt;directory&gt;</div></pre></td></tr></table></figure>
+<p>另一种是通过 <code>git init</code> 初始化一个 Git 仓库，省略 directory 会在当前文件夹中创建。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init &lt;directory&gt;</div></pre></td></tr></table></figure>
+<p>例如，在 <code>D:\test</code> 文件夹下执行 <code>git init</code> 命令，这样会生成一个 <strong>隐藏</strong> 的 .git 目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git init</div><div class="line">Initialized empty Git repository <span class="keyword">in</span> D:/<span class="built_in">test</span>/.git/</div></pre></td></tr></table></figure>
+<h2 id="Git-工作流程"><a href="#Git-工作流程" class="headerlink" title="Git 工作流程"></a>Git 工作流程</h2><p>基本的 Git 工作流程如下：</p>
+<ol>
+<li><p>在工作目录中修改文件。</p>
+</li>
+<li><p>暂存文件，将文件的快照放入暂存区域。</p>
+</li>
+<li><p>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</p>
+</li>
+</ol>
+<p>使用 Git 时文件的生命周期如下：</p>
+<p><img src="https://git-scm.com/book/en/v2/images/lifecycle.png" alt="The lifecycle of the status of your files"></p>
+<p>上图来源于 <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" target="_blank" rel="external">Pro Git</a>，这里的 <code>Add the file</code> 应该理解为使用 <code>git add</code> 命令，<code>Reomve the file</code> 则是手动删除文件。</p>
+<h3 id="First-Commit"><a href="#First-Commit" class="headerlink" title="First Commit"></a>First Commit</h3><p>在 <code>D:\test</code> 中手动添加 <code>a.txt</code> 文件，使用 Notepad++ 编辑（<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000" target="_blank" rel="external">不要用记事本</a>），然后运行 <code>git status</code> 命令，查看当前状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line"></div><div class="line">No commits yet</div><div class="line"></div><div class="line">Untracked files:</div><div class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</div><div class="line"></div><div class="line">        a.txt</div><div class="line"></div><div class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</div></pre></td></tr></table></figure>
+<p>Git 的提示十分人性化，可以看出 <code>a.txt</code> 处于 <code>Untracked</code> 状态。执行 <code>git add</code> 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ git add a.txt</div><div class="line"></div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line"></div><div class="line">No commits yet</div><div class="line"></div><div class="line">Changes to be committed:</div><div class="line">  (use <span class="string">"git rm --cached &lt;file&gt;..."</span> to unstage)</div><div class="line"></div><div class="line">        new file:   a.txt</div></pre></td></tr></table></figure>
+<p>此时 <code>a.txt</code> 处于 <code>Staged</code> 状态，可以通过 <code>git rm --cached &lt;file&gt;...</code> 使其回到 <code>Untracked</code> 状态。最后执行 <code>git commit</code> 命令，进行第一次提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"Add a.txt"</span></div><div class="line">[master (root-commit) 3fbc25c] Add a.txt</div><div class="line"> 1 file changed, 1 insertion(+)</div><div class="line"> create mode 100644 a.txt</div></pre></td></tr></table></figure>
+<p>其中 <code>-m</code> 是参数，后面跟着提交信息。如果配置了文本编辑器，执行不带参数的 <code>git commit</code> 后，可在弹出的编辑器中填写提交信息。注意只有 <strong>保存文件</strong> 并 <strong>退出编辑器</strong>，commit 才会生效。</p>
+<p>另外，在只 <strong>修改文件</strong> 时，使用 <code>-a</code> 可以跳过 <code>Staged</code> 状态直接提交，可以和 <code>-m</code> 一起使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -am <span class="string">"Update file"</span></div></pre></td></tr></table></figure>
+<h3 id="Second-Commit"><a href="#Second-Commit" class="headerlink" title="Second Commit"></a>Second Commit</h3><p>添加 <code>b.txt</code>，然后修改 <code>a.txt</code>，查看此时的状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Changes not staged <span class="keyword">for</span> commit:</div><div class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</div><div class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</div><div class="line"></div><div class="line">        modified:   a.txt</div><div class="line"></div><div class="line">Untracked files:</div><div class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</div><div class="line"></div><div class="line">        b.txt</div><div class="line"></div><div class="line">no changes added to commit (use <span class="string">"git add"</span> and/or <span class="string">"git commit -a"</span>)</div></pre></td></tr></table></figure>
+<p>此时 <code>a.txt</code> 处于 <code>Modified</code> 状态，可通过 <code>git checkout -- &lt;file&gt;...</code> 放弃更改，但是要 <strong>慎用</strong>，这些更改是找不回来的。 而 <code>b.txt</code> 处于 <code>Untracked</code> 状态。</p>
+<p><code>git diff</code> 命令用于比较工作目录中当前文件和暂存区域快照之间的差异，也就是修改之后还没有暂存起来的变化内容。</p>
+<p><code>git diff --cached</code>（Git 1.6.1 及更高版本还允许使用 <code>git diff --staged</code>，效果是相同的，但更好记些）可以查看已暂存的将要添加到下次提交里的内容。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ git diff</div><div class="line">diff <span class="comment">--git a/a.txt b/a.txt</span></div><div class="line">index <span class="number">69</span>dd9b9..b0c1f18 <span class="number">100644</span></div><div class="line"><span class="comment">--- a/a.txt</span></div><div class="line">+++ b/<span class="keyword">a</span>.txt</div><div class="line">@@ <span class="number">-1</span> +<span class="number">1</span>,<span class="number">2</span> @@</div><div class="line"> aaaaaaaaaa    <span class="comment"># a.txt 原本的内容</span></div><div class="line">+AAAAAAAAAA    <span class="comment"># a.txt 添加的内容</span></div><div class="line">$ git diff <span class="comment">--staged # nothing</span></div></pre></td></tr></table></figure>
+<p>添加这两个文件到暂存区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ git add <span class="string">"*.txt"</span> <span class="comment"># git add .(一个点，表示添加所有文件)</span></div><div class="line"></div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Changes to be committed:</div><div class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</div><div class="line"></div><div class="line">        modified:   a.txt</div><div class="line">        new file:   b.txt</div></pre></td></tr></table></figure>
+<p>同理，<code>git reset HEAD &lt;file&gt;...</code> 命令可使文件回到 add 之前的状态。此时再次执行 diff：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$ git diff <span class="comment"># nothing</span></div><div class="line"></div><div class="line">$ git diff --staged</div><div class="line">diff --git a/a.txt b/a.txt</div><div class="line">index 69dd9b9..b0c1f18 100644</div><div class="line">--- a/a.txt</div><div class="line">+++ b/a.txt</div><div class="line">@@ -1 +1,2 @@</div><div class="line"> aaaaaaaaaa</div><div class="line">+AAAAAAAAAA</div><div class="line">diff --git a/b.txt b/b.txt</div><div class="line">new file mode 100644</div><div class="line">index 0000000..817e5ca</div><div class="line">--- /dev/null</div><div class="line">+++ b/b.txt</div><div class="line">@@ -0,0 +1 @@</div><div class="line">+bbbbbbbbbb <span class="comment"># b.txt 中添加的内容</span></div></pre></td></tr></table></figure>
+<p>以上对比可以看出不同 diff 的差别。执行 commit 命令进行第二次提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"Update a.txt and add b.txt"</span></div><div class="line">[master 24e0903] Update a.txt and add b.txt</div><div class="line"> 2 files changed, 2 insertions(+)</div><div class="line"> create mode 100644 b.txt</div></pre></td></tr></table></figure>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>为了演示删除操作，先添加 <code>c.txt</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git add c.txt</div><div class="line"></div><div class="line">$ git commit -m <span class="string">"Add c.txt"</span></div><div class="line">[master 9d8751a] Add c.txt</div><div class="line"> 1 file changed, 1 insertion(+)</div><div class="line"> create mode 100644 c.txt</div></pre></td></tr></table></figure>
+<p>手动删除后的状态为 <code>Untracked</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">Changes not staged <span class="keyword">for</span> commit:</div><div class="line">  (use <span class="string">"git add/rm &lt;file&gt;..."</span> to update what will be committed)</div><div class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</div><div class="line"></div><div class="line">        deleted:    c.txt</div><div class="line"></div><div class="line">no changes added to commit (use <span class="string">"git add"</span> and/or <span class="string">"git commit -a"</span>)</div></pre></td></tr></table></figure>
+<p>使用 <code>git checkout -- &lt;file&gt;...</code> 撤销，然后执行 <code>git rm</code> 命令，此时的状态为 <code>Staged</code>。这就是两者的差别吧。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git rm c.txt</div><div class="line">rm <span class="string">'c.txt'</span></div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Changes to be committed:</div><div class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</div><div class="line"></div><div class="line">        deleted:    c.txt</div></pre></td></tr></table></figure>
+<p>提交删除：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"Delete c.txt"</span></div><div class="line">[master 95d6e7e] Delete c.txt</div><div class="line"> 1 file changed, 1 deletion(-)</div><div class="line"> delete mode 100644 c.txt</div></pre></td></tr></table></figure>
+<p>如果删除之前修改过并且已经放到暂存区域的话，则必须要用强制删除 <code>git rm -f &lt;file&gt;</code>。 这是一种安全特性，用于防止误删还没有添加到快照的数据，这样的数据不能被 Git 恢复。</p>
+<p>而 <code>git rm --cached</code> 命令只会将文件从 Git 仓库中删除，但仍然保留在当前工作目录中。当你忘记添加 <code>.gitignore</code> 文件，不小心把一个很大的日志文件或一堆无关的文件添加到暂存区时，这一做法尤其有用。</p>
+<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>在 Git 中，用 HEAD 表示当前版本，上一个版本就是 <code>HEAD^</code>（<code>HEAD~</code>）。有关 <code>~</code> 和 <code>^</code> 的区别，请参考 <a href="https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git" target="_blank" rel="external">What’s the difference between HEAD^ and HEAD~ in Git?</a></p>
+<p>注意，Windows 环境下 <code>^</code> 识别不了，必须加 <strong>双引号</strong> 才行，像这样 <code>&quot;HEAD^&quot;</code>。</p>
+<p>假如又要用到 <code>c.txt</code>，想反悔，怎么办？Git 允许我们在版本的历史之间穿梭，使用 <code>git reset --hard &lt;commit_id&gt;</code> 命令。如果不知道 commit_id，<code>git log</code> 可以查看提交历史。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ git lg <span class="comment"># 自定义的 git log</span></div><div class="line">* 95d6e7e (HEAD -&gt; master) Delete c.txt</div><div class="line">* 9d8751a Add c.txt</div><div class="line">* 24e0903 Update a.txt and add b.txt</div><div class="line">* 3fbc25c Add a.txt</div><div class="line"></div><div class="line">$ git reset --hard HEAD~</div><div class="line">HEAD is now at 9d8751a Add c.txt</div><div class="line"></div><div class="line">$ git lg</div><div class="line">* 9d8751a (HEAD -&gt; master) Add c.txt</div><div class="line">* 24e0903 Update a.txt and add b.txt</div><div class="line">* 3fbc25c Add a.txt</div></pre></td></tr></table></figure>
+<p>其中 <code>3fbc25c</code> 为版本号（commit_id），它是一个由 SHA-1 计算出来的校验和，用十六进制表示，而且每次都不一样。因为我使用了自定义的 <code>git lg</code>， 这里只显示 7 位，其实它是 <code>3fbc25c7d58e06169a45b587a9c6164234efd43c</code>。</p>
+<p><code>git log</code> 功能十分强大，可参考 <a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History" target="_blank" rel="external">Git Basics - Viewing the Commit History</a>。</p>
+<p>另外，可以使用命令 <code>git reflog</code> 查看命令历史。如果想回到 <code>Delete c.txt</code> 的版本，直接 reset 对应的 commit_id 即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div><div class="line">9d8751a (HEAD -&gt; master) HEAD@&#123;0&#125;: reset: moving to HEAD~</div><div class="line">95d6e7e HEAD@&#123;1&#125;: commit: Delete c.txt</div><div class="line">9d8751a HEAD@&#123;2&#125;: commit: Add c.txt</div><div class="line">24e0903 HEAD@&#123;3&#125;: commit: Update a.txt and add b.txt</div><div class="line">3fbc25c HEAD@&#123;4&#125;: commit (initial): Add a.txt</div></pre></td></tr></table></figure>
+<h3 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h3><p>其实 reset 分三类，分别为 <code>--soft</code>、<code>--mixed</code>（默认，可不加）和 <code>--hard</code>，它们之间到底有什么区别呢？我们做个试验。注意此时是 <code>Add c.txt</code> 的版本。</p>
+<h4 id="soft"><a href="#soft" class="headerlink" title="soft"></a>soft</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git reset --soft HEAD~</div><div class="line"></div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Changes to be committed:</div><div class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</div><div class="line"></div><div class="line">        new file:   c.txt</div></pre></td></tr></table></figure>
+<p><code>--soft</code> 参数使文件回到了 <code>Staged</code> 的状态。</p>
+<h4 id="mixed"><a href="#mixed" class="headerlink" title="mixed"></a>mixed</h4><p>重新回到 <code>Add c.txt</code> 的版本，执行 <code>--mixed</code> 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ git reset --mixed HEAD~</div><div class="line"></div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Untracked files:</div><div class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</div><div class="line"></div><div class="line">        c.txt</div><div class="line"></div><div class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</div></pre></td></tr></table></figure>
+<p><code>--mixed</code> 参数使文件回到了 <code>Untracked</code> 状态。</p>
+<h4 id="hard"><a href="#hard" class="headerlink" title="hard"></a>hard</h4><p>重新回到 <code>Add c.txt</code> 的版本，执行 <code>--hard</code> 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard HEAD~</div><div class="line">HEAD is now at 24e0903 Update a.txt and add b.txt</div><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">nothing to commit, working tree clean</div></pre></td></tr></table></figure>
+<p>而 <code>--hard</code> 参数直接回到了上一个版本。</p>
+<p>想要了解更多关于 Reset 的知识，请参考 <a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified" target="_blank" rel="external">Git Tools - Reset Demystified</a>。</p>
+<h2 id="Git-分支"><a href="#Git-分支" class="headerlink" title="Git 分支"></a>Git 分支</h2><p>几乎每一种版本控制系统都以某种形式支持分支。使用分支意味着你可以从开发主线上分离开来，然后在不影响主线的同时继续工作。<br>有人把 Git 的分支模型称为它的“必杀技特性”，也正因为这一特性，使得 Git 从众多版本控制系统中脱颖而出。为何 Git 的分支模型如此出众呢？Git 处理分支的方式可谓是难以置信的轻量，创建新分支这一操作几乎能在瞬间完成，并且在不同分支之间的切换操作也是一样便捷。</p>
+<p>下面演示了 Git 分支的工作流程。创建并切换到 dev 分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git branch dev</div><div class="line"></div><div class="line">$ git checkout dev</div><div class="line">Switched to branch <span class="string">'dev'</span></div></pre></td></tr></table></figure>
+<p>简单地，这两个命令可以合并为一个命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b dev</div><div class="line">Switched to a new branch <span class="string">'dev'</span></div></pre></td></tr></table></figure>
+<p>在 dev 分支添加 <code>d.txt</code>，修改 <code>c.txt</code>，提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git add .</div><div class="line"></div><div class="line">$ git commit -m <span class="string">"Add d.txt and update c.txt"</span></div><div class="line">[dev 7f5d2b1] Add d.txt and update c.txt</div><div class="line"> 2 files changed, 2 insertions(+), 1 deletion(-)</div><div class="line"> create mode 100644 d.txt</div></pre></td></tr></table></figure>
+<p>切换到 master 分支，合并 dev 分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ git checkout master</div><div class="line"></div><div class="line">$ git merge dev</div><div class="line">Updating 9d8751a..7f5d2b1</div><div class="line">Fast-forward</div><div class="line"> c.txt | 2 +-</div><div class="line"> d.txt | 1 +</div><div class="line"> 2 files changed, 2 insertions(+), 1 deletion(-)</div><div class="line"> create mode 100644 d.txt</div></pre></td></tr></table></figure>
+<p>最后删除 dev 分支：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="keyword">branch </span>-d dev</div><div class="line"><span class="symbol">Deleted</span> <span class="keyword">branch </span>dev (was <span class="number">7</span>f5d2b1).</div></pre></td></tr></table></figure>
+<h2 id="Git-远程仓库"><a href="#Git-远程仓库" class="headerlink" title="Git 远程仓库"></a>Git 远程仓库</h2><p>为了能在任意 Git 项目上协作，需要知道如何管理自己的远程仓库。远程仓库是指托管在因特网或其他网络中的你的项目的版本库。 你可以有好几个远程仓库，通常有些仓库对你只读，有些则可以读写。与他人协作涉及管理远程仓库以及根据需要推送或拉取数据。</p>
+<p>这里以 GitHub 为例，演示如何使用远程仓库。在 GitHub 上创建一个新的 Repository，不要添加任何内容，完成后如下图所示：</p>
+<p><img src="github.png" alt="GitHub"></p>
+<p>添加远程仓库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:muwednesday/git-learning.git</div></pre></td></tr></table></figure>
+<p>使用命令 <code>git push</code> 将本地仓库推送到 GitHub，其中 <code>-u</code> 为设置当前本地分支的默认远程分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ git push -u origin master</div><div class="line">Counting objects: 14, <span class="keyword">done</span>.</div><div class="line">Delta compression using up to 8 threads.</div><div class="line">Compressing objects: 100% (7/7), <span class="keyword">done</span>.</div><div class="line">Writing objects: 100% (14/14), 913 bytes | 304.00 KiB/s, <span class="keyword">done</span>.</div><div class="line">Total 14 (delta 2), reused 0 (delta 0)</div><div class="line">remote: Resolving deltas: 100% (2/2), <span class="keyword">done</span>.</div><div class="line">To github.com:muwednesday/git-learning.git</div><div class="line"> * [new branch]      master -&gt; master</div><div class="line">Branch <span class="string">'master'</span> <span class="built_in">set</span> up to track remote branch <span class="string">'master'</span> from <span class="string">'origin'</span>.</div></pre></td></tr></table></figure>
+<p>刷新页面后即可看到文件。然后在 GitHub 上创建一个 <code>README.md</code> 的文件，提交。</p>
+<p>返回本地仓库，查看状态，这里居然显示 <code>up to date</code>。本来应该落后才对，为什么呢？原因参见 <a href="https://stackoverflow.com/questions/27828404/why-does-git-status-show-branch-is-up-to-date-when-changes-exist-upstream" target="_blank" rel="external">Why does git status show branch is up-to-date when changes exist upstream?</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Your branch is up to date with <span class="string">'origin/master'</span>.</div><div class="line"></div><div class="line">nothing to commit, working tree clean</div></pre></td></tr></table></figure>
+<p>最后使用命令 <code>git pull</code> 来自动的抓取然后合并远程分支到当前分支。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ git pull</div><div class="line"><span class="string">remote:</span> Counting <span class="string">objects:</span> <span class="number">3</span>, done.</div><div class="line"><span class="string">remote:</span> Compressing <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">2</span>/<span class="number">2</span>), done.</div><div class="line"><span class="string">remote:</span> Total <span class="number">3</span> (delta <span class="number">1</span>), reused <span class="number">0</span> (delta <span class="number">0</span>), pack-reused <span class="number">0</span></div><div class="line">Unpacking <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">3</span>/<span class="number">3</span>), done.</div><div class="line">From github.<span class="string">com:</span>muwednesday/git-learning</div><div class="line">   <span class="number">7</span>f5d2b1..ad27849  master     -&gt; origin/master</div><div class="line">Updating <span class="number">7</span>f5d2b1..ad27849</div><div class="line">Fast-forward</div><div class="line"> README.md | <span class="number">1</span> +</div><div class="line"> <span class="number">1</span> file changed, <span class="number">1</span> insertion(+)</div><div class="line"> create mode <span class="number">100644</span> README.md</div></pre></td></tr></table></figure>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
+<li><p><a href="https://git-scm.com/book/en/v2" target="_blank" rel="external">Pro Git</a></p>
+</li>
+<li><p><a href="https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf" target="_blank" rel="external">GitHub Cheat Sheet</a></p>
+</li>
+<li><p><a href="https://git-scm.com/doc" target="_blank" rel="external">Reference Manual</a></p>
+</li>
+<li><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的 Git 教程</a></p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git" target="_blank" rel="external">What’s the difference between HEAD^ and HEAD~ in Git?</a></p>
+</li>
+<li><p><a href="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting" target="_blank" rel="external">Reset, Checkout, and Revert</a></p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch" target="_blank" rel="external">What is the difference between ‘git pull’ and ‘git fetch’?</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/AliPayQR.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY4NS8xMjIyMQ==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/13/Hexo + GitHub Pages 搭建个人博客/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Hexo + GitHub Pages 搭建个人博客
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/13/hiker博客主题配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">hiker博客主题配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#三种状态"><span class="nav-number">1.</span> <span class="nav-text">三种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-配置"><span class="nav-number">2.</span> <span class="nav-text">Git 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建版本库"><span class="nav-number">3.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-工作流程"><span class="nav-number">4.</span> <span class="nav-text">Git 工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#First-Commit"><span class="nav-number">4.1.</span> <span class="nav-text">First Commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Second-Commit"><span class="nav-number">4.2.</span> <span class="nav-text">Second Commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">4.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本回退"><span class="nav-number">4.4.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reset"><span class="nav-number">4.5.</span> <span class="nav-text">Reset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#soft"><span class="nav-number">4.5.1.</span> <span class="nav-text">soft</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mixed"><span class="nav-number">4.5.2.</span> <span class="nav-text">mixed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hard"><span class="nav-number">4.5.3.</span> <span class="nav-text">hard</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-分支"><span class="nav-number">5.</span> <span class="nav-text">Git 分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-远程仓库"><span class="nav-number">6.</span> <span class="nav-text">Git 远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐阅读"><span class="nav-number">7.</span> <span class="nav-text">推荐阅读</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2017 - 2018 King   James All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            King   James
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 Mr.Yi All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
