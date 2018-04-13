@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【machine learning】机器学习-1 | KingJames’s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Machine Learning" />
+  
+  
+  
+  
+  <meta name="description" content="科学算法库的安装(linux) 1.安装Numpysudo apt-get install python-numpy  2.安装Scipysudo apt-get install python-numpy  3.Matplotlibsudo apt-get install tk-dev sudo apt-get install python-gtk2-dev sudo apt-get instal">
+<meta name="keywords" content="Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【machine Learning】机器学习-1">
+<meta property="og:url" content="http://github.com/2018/04/11/【machine Learning】机器学习-1/index.html">
+<meta property="og:site_name" content="KingJames’s blog">
+<meta property="og:description" content="科学算法库的安装(linux) 1.安装Numpysudo apt-get install python-numpy  2.安装Scipysudo apt-get install python-numpy  3.Matplotlibsudo apt-get install tk-dev sudo apt-get install python-gtk2-dev sudo apt-get instal">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-12T16:52:41.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【machine Learning】机器学习-1">
+<meta name="twitter:description" content="科学算法库的安装(linux) 1.安装Numpysudo apt-get install python-numpy  2.安装Scipysudo apt-get install python-numpy  3.Matplotlibsudo apt-get install tk-dev sudo apt-get install python-gtk2-dev sudo apt-get instal">
+  
+    <link rel="alternate" href="/atom.xml" title="KingJames’s blog" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="190px" height="127px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-【machine Learning】机器学习-1" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      【machine Learning】机器学习-1
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/11/【machine Learning】机器学习-1/" class="article-date">
+	  <time datetime="2018-04-11T08:00:08.000Z" itemprop="datePublished">2018-04-11</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="科学算法库的安装-linux"><a href="#科学算法库的安装-linux" class="headerlink" title="科学算法库的安装(linux)"></a>科学算法库的安装(linux)</h1><ul>
+<li>1.安装Numpy<pre><code>sudo apt-get install python-numpy
+</code></pre></li>
+<li>2.安装Scipy<pre><code>sudo apt-get install python-numpy
+</code></pre></li>
+<li>3.Matplotlib<pre><code>sudo apt-get install tk-dev
+sudo apt-get install python-gtk2-dev
+sudo apt-get install python-pyside
+</code></pre></li>
+<li>4.spyder GUI环境<pre><code>sudo apt-get install spyder
+</code></pre></li>
+</ul>
+<p><br><br><a id="more"></a></p>
+<ul>
+<li><p><strong>上述安装完毕后，可以利用</strong></p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/python</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">x = np.linspace(<span class="number">0</span>,<span class="number">4</span>*<span class="number">3.1415</span>,<span class="number">100</span>)</div><div class="line">y = np.sin(x)</div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">8</span>,<span class="number">4</span>))</div><div class="line">plt.plot(x,y,label=<span class="string">"$sin(x)$"</span>,color=<span class="string">"red"</span>,linewidth=<span class="number">2</span>)</div><div class="line">plt.legend()</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><strong>进行测试。若生成正弦曲线窗口，则配置完成. </strong></p>
+</li>
+</ul>
+<h1 id="NumPy的基本操作"><a href="#NumPy的基本操作" class="headerlink" title="NumPy的基本操作"></a>NumPy的基本操作</h1><ul>
+<li><h2 id="Numpy-的导入"><a href="#Numpy-的导入" class="headerlink" title="Numpy 的导入"></a>Numpy 的导入</h2><pre><code>import numpy as np
+</code></pre><p>  这种写法在使用相关函数的时候需要写明是哪个包的，如:</p>
+<pre><code>myZero = np.zeros([3,5])
+</code></pre><p>  还可以导入包全局使用</p>
+<pre><code>from numpy import *
+</code></pre></li>
+</ul>
+<ul>
+<li><h2 id="NumPy-的基本操作"><a href="#NumPy-的基本操作" class="headerlink" title="NumPy 的基本操作"></a>NumPy 的基本操作</h2><ol>
+<li><p>创建全0矩阵和全1矩阵</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">myZero = zeros([n,m])</div><div class="line">myOne = ones([n,m])</div></pre></td></tr></table></figure>
+</li>
+<li><p>生成随机矩阵</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myRand = random.rand(n,m)   <span class="comment"># n 行 m 列的 0～1 之间的随机数矩阵</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>生成单位矩阵</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myEye = eye(n)   <span class="comment"># n * n 的单位阵</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>将一个数组转化为一个矩阵</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myMatrix = mat([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</div></pre></td></tr></table></figure>
+</li>
+<li><p>矩阵所有元素求和</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">S = sum(myMatrix)</div></pre></td></tr></table></figure>
+</li>
+<li><p>矩阵各元素的乘积</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">matrix = multiply(matrix1, matrix2) <span class="comment"># matrix1 和 matrix2 对应元素相乘的矩阵</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>求矩阵的 n 次幂</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">matrix = power(myMatrix, n) <span class="comment">#生成一个矩阵，矩阵内部的元素是原矩阵对应元素的n次幂</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>矩阵的转置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> matrix.T   <span class="comment">#打印转置后的矩阵，不改变原矩阵</span></div><div class="line">matrix.transpose()   <span class="comment">#同上</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>矩阵的其他操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[m, n] = shape(matrix) <span class="comment"># m, n为矩阵的行列数</span></div><div class="line">myscl1 = matrix[<span class="number">0</span>] <span class="comment"># 矩阵的切片操作，取第一行</span></div><div class="line">myscl2 = matrix.T[<span class="number">0</span>] <span class="comment"># 矩阵的切片操作，取第一列</span></div><div class="line">mycpmat = matrix.copy() <span class="comment"># 矩阵的复制</span></div><div class="line"><span class="keyword">print</span> matrix1 &lt; matrix2 <span class="comment"># 矩阵的比较，会逐一比较对应的每一个元素，并输出一个仅包含True, False 的相同大小的矩阵</span></div><div class="line">dot(m1,m2)  <span class="comment">#计算m1,m2的点积</span></div><div class="line">norm(v)  <span class="comment">#计算向量V的范数</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><h2 id="Linalg线性代数库"><a href="#Linalg线性代数库" class="headerlink" title="Linalg线性代数库"></a>Linalg线性代数库</h2><ol>
+<li><p>矩阵的行列式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> linalg.det(matrix)</div></pre></td></tr></table></figure>
+</li>
+<li><p>矩阵的逆</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> linalg.inv(matrix)</div></pre></td></tr></table></figure>
+</li>
+<li><p>矩阵的对称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> matrix * matrix.T</div></pre></td></tr></table></figure>
+</li>
+<li><p>矩阵的秩</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> linalg.matrix_rank(A)</div></pre></td></tr></table></figure>
+</li>
+<li><p>可逆矩阵求解</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> linalg.solve(A,b.T) <span class="comment"># 如果b已经是一列的就不用转置了</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><h2 id="各类距离的python实现"><a href="#各类距离的python实现" class="headerlink" title="各类距离的python实现"></a>各类距离的python实现</h2><p>   <strong>各类距离会在后面说明</strong></p>
+<ol>
+<li><p>Euclidean Distance</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vector1 = mat([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</div><div class="line">vector2 = mat([<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</div><div class="line"><span class="keyword">print</span> sqrt((vector1-vector2)*(vector1-vector2).T)</div></pre></td></tr></table></figure>
+</li>
+<li><p>Manhattan Distance</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vector1 = mat([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</div><div class="line">vector2 = mat([<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</div><div class="line"><span class="keyword">print</span> sum(abs(vector1-vector2))</div></pre></td></tr></table></figure>
+</li>
+<li><p>Chebyshev Distance</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vector1 = mat([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</div><div class="line">vector2 = mat([<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</div><div class="line"><span class="keyword">print</span> abs(vector1-vector2).max()</div></pre></td></tr></table></figure>
+</li>
+<li><p>Cosine</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cosV12 = dot(vector1,vector2)/(linalg.norm(vector1)*linalg.norm(vector2))</div><div class="line"><span class="keyword">print</span> cosV12</div></pre></td></tr></table></figure>
+</li>
+<li><p>Hamming Distance</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">matV = mat([[<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>], [<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]])</div><div class="line">smstr = nonzero(matV[<span class="number">0</span>] - matV[<span class="number">1</span>]);</div><div class="line"><span class="keyword">print</span> shape(smstr[<span class="number">0</span>])[<span class="number">1</span>]</div></pre></td></tr></table></figure>
+</li>
+<li><p>Jaccard Distance</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scipy.spatial.distance <span class="keyword">as</span> dist</div><div class="line">matV = mat([[<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>], [<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]])</div><div class="line"><span class="keyword">print</span> dist.pdist(matV, <span class="string">'jaccard'</span>)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="机器学习的数学基础"><a href="#机器学习的数学基础" class="headerlink" title="机器学习的数学基础"></a>机器学习的数学基础</h1><ul>
+<li><strong>范数</strong><blockquote>
+<p>向量的范数可以简单、形象的理解为<strong>向量的长度</strong>，或者向量到坐标系原点的距离，或者<strong>相应空间内的两点之间的距离</strong></p>
+<p><strong><em>向量的范数定义</em></strong> : 向量的范数是一个函数 $ \parallel x\parallel $ ,满足非负性 $ \parallel x\parallel &gt; 0 $ , 齐次性 $ \parallel cx\parallel = \mid c\mid\parallel x\parallel $ ,三角不等式 $ \parallel x+y\parallel \leq\parallel x\parallel +\parallel y\parallel $ 。</p>
+<p>L1范数：  $\parallel x\parallel $为 $ x $向量各个元素绝对值之和。<br>L2范数：  $\parallel x\parallel $为 $ x $向量各个元素平方和的开方，又称 Euclidean 范数或者 Frobenius 范数。<br>Lp范数：  $\parallel x\parallel $为 $ x $向量各个元素绝对值 $ p $次方和的  $ 1\over p $ 次方<br>L $\infty $范数：  $\parallel x\parallel $为 $ x $向量各个元素绝对值最大的那个元素，如下：$$ \lim_{k\to\infty}\left( \sum_{i=1}^n\mid p_i-q_i\mid ^k\right)^\frac{1}{k}<br>$$</p>
+</blockquote>
+</li>
+<li><strong>Minkowski Distance (闵可夫斯基距离)</strong><blockquote>
+<p>严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义。<br>两个n维向量 $ A(x_{11},x_{12},\cdots,x_{1n}) $ 与 $ B(x_{21},x_{22},\cdots,x_{2n}) $ 间的Minkowski距离定义为：<br>$$ d_{12}=\sqrt[p]{\sum_{k=1}^n(x_{1k}-x_{2k})^p} $$<br>其中p是一个变参数。</p>
+<ul>
+<li>当 p=1 时，就是 Manhattan Distance (曼哈顿距离)</li>
+<li>当 p=2 时，就是 Euclidean Distance (欧氏距离)</li>
+<li>当 $ p\to\infty $ 时，就是 Chebyshev Distance (切比雪夫距离)</li>
+</ul>
+</blockquote>
+</li>
+<li><strong>Euclideam Distance</strong><blockquote>
+<p>欧氏距离（L2范数）是最易于理解的一种距离计算方法，源于欧氏空间的两点距离公式<br>两个n维向量 $ A(x_{11},x_{12},\cdots,x_{1n}) $ 与 $ B(x_{21},x_{22},\cdots,x_{2n}) $ 之间的欧氏距离：<br>$$ d_{12}=\sqrt{\sum_{k=1}^n(x_{1k}-x_{2k})^2} $$<br>表示为向量运算的形式：<br>$$ d_{12}=\sqrt{(A - B)(A - B)^T} $$</p>
+</blockquote>
+</li>
+<li><strong>Manhattan Distance</strong><blockquote>
+<p>曼哈顿距离（L1范数）可以理解为计算网格中两点路径的距离<br>二维平面两点 $ A(x_1,y_1) $ 和 $ B(x_2,y_2) $ 间的曼哈顿距离:<br>$$ d_{12}=\mid x_1-x_2\mid +\mid y_1-y_2\mid $$<br>两个n维向量 $ A(x_{11},x_{12},\cdots,x_{1n}) $ 与 $ B(x_{21},x_{22},\cdots,x_{2n}) $ 之间的曼哈顿距离：<br>$$ d_{12}=\sum_{k=1}^n\mid x_{1k}-x_{2k}\mid $$</p>
+</blockquote>
+</li>
+<li><strong>Chebyshev Distance</strong><blockquote>
+<p>切比雪夫距离类似与棋盘上国王从一点到另一点移动的最少次数，即 $ max(\mid x_1-x_2\mid,\mid y_1-y_2\mid) $<br>两个n维向量 $ A(x_{11},x_{12},\cdots,x_{1n}) $ 与 $ B(x_{21},x_{22},\cdots,x_{2n}) $ 之间的切比雪夫距离：<br>$$ d_{12}=max_i(\mid x_{1i}-x_{2i}\mid) $$<br>该公式的另一个等价公式：<br>$$ d_{12}=\lim_{k\to\infty}\left(\sum_{i=1}^n\mid x_{1i}-x_{2i}\mid^k\right)^\frac{1}{k} $$</p>
+</blockquote>
+</li>
+<li><strong>Cosine</strong><blockquote>
+<p>夹角余弦可以用来两个向量方向的差异，机器学习中借用这一概念来衡量样本之间的差异<br>两个n维向量 $ A(x_{11},x_{12},\cdots,x_{1n}) $ 与 $ B(x_{21},x_{22},\cdots,x_{2n}) $ 之间的夹角余弦：<br>$$ \cos\theta=\frac{AB}{\mid A\mid\mid B\mid} $$<br>即：<br>$$ \cos\theta=\frac{\sum_{k=1}^nx_{1k}x_{2k}}{\sqrt{\sum_{k=1}^nx_{1k}^2}\sqrt{\sum_{k=1}^nx_{2k}^2}} $$</p>
+</blockquote>
+</li>
+<li><strong>Hamming Distance</strong><blockquote>
+<p>汉明距离的定义：两个等长字符串s1,s2,将其中一个变成另一个需要的最小替换次数。<br>应用：信息编码（为了增强容错性，应使得编码间的最小汉明距离尽可能大）</p>
+</blockquote>
+</li>
+<li><strong>Jaccard Similarity Coefficient(杰卡德相似系数)</strong><blockquote>
+<p>杰卡德相似系数：两个集合A,B的交集元素在并集元素中所占的比例，用符号 $ J(A,B) $ 表示<br>$$ J(A,B)=\frac{\mid A\cap B\mid}{\mid A\cup B\mid} $$<br>杰卡德距：与杰卡德相似系数相反的概念：<br>$$ J_\delta(A,B)=1-J(A,B)=\frac{\mid A\cup B\mid-\mid A\cap B\mid}{\mid A\cup B\mid} $$</p>
+</blockquote>
+</li>
+<li><p><strong>特征间的相关性</strong></p>
+<blockquote>
+<ol>
+<li><p>相关系数与相关距离<br> 相关系数：<br> $$ \rho_{XY}=\frac{Cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}=\frac{E((X-EX)(Y-EY))}{\sqrt{D(X)}\sqrt{D(Y)}} $$<br> 相关距离：<br> $$ D_{XY}=1-\rho_{XY} $$<br>python实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">featuremat = mat(...)  <span class="comment"># 初始化矩阵</span></div><div class="line"><span class="comment"># 计算均值</span></div><div class="line">mv1 = mean(featuremat[<span class="number">0</span>])  <span class="comment"># 计算第一列的均值</span></div><div class="line">mv2 = mean(featuremat[<span class="number">1</span>])  <span class="comment"># 计算第二列的均值</span></div><div class="line"><span class="comment">#计算两列的标准差</span></div><div class="line">dv1 = std(featuremat[<span class="number">0</span>])</div><div class="line">dv2 = std(featuremat[<span class="number">1</span>])</div><div class="line">corref = mean(multiply(featuremat[<span class="number">0</span>]-mv1,featuremat[<span class="number">1</span>]-mv2))/(dv1*dv2)</div><div class="line"><span class="keyword">print</span> corref  <span class="comment">#输出相关系数</span></div><div class="line"><span class="keyword">print</span> corrcoef(featuremat)  <span class="comment">#输出相关系数矩阵</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>马氏距离</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/12/Markdown语法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Markdown语法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/11/【Machine Learning】机器学习：简明入门指南/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【Machine Learning】机器学习：简明入门指南</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#科学算法库的安装-linux"><span class="nav-number">1.</span> <span class="nav-text">科学算法库的安装(linux)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy的基本操作"><span class="nav-number">2.</span> <span class="nav-text">NumPy的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Numpy-的导入"><span class="nav-number">2.1.</span> <span class="nav-text">Numpy 的导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NumPy-的基本操作"><span class="nav-number">2.2.</span> <span class="nav-text">NumPy 的基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linalg线性代数库"><span class="nav-number">2.3.</span> <span class="nav-text">Linalg线性代数库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各类距离的python实现"><span class="nav-number">2.4.</span> <span class="nav-text">各类距离的python实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习的数学基础"><span class="nav-number">3.</span> <span class="nav-text">机器学习的数学基础</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+    <aside id="sidebar" class="outer">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关注我</h3>
+    <div class="widget widget_athemes_social_icons">
+
+    	<ul class="clearfix widget-social-icons">   
+    	
+          
+     			  <li><a href="https://github.com/KingJamesYF" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="http://www.yoursite.com" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="" title="Google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="" title="Flickr"><i class="fa fa-flickr" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+            <li><a href="mailto:?subject=请联系我&body=我能帮你什么" title="email"><i class="fa fa-envelope" aria-hidden="true"></i></a></li> 
+          
+   		
+   		</ul>
+
+
+   		<!--
+   		<ul class="clearfix widget-social-icons">   		
+   		<li class="widget-si-twitter"><a href="http://twitter.com" title="Twitter"><i class="ico-twitter"></i></a></li> 
+		<li class="widget-si-facebook"><a href="http://facebook.com" title="Facebook"><i class="ico-facebook"></i></a></li>
+			<li class="widget-si-gplus"><a href="http://plus.google.com" title="Google+"><i class="ico-gplus"></i></a></li>
+			<li class="widget-si-pinterest"><a href="http://pinterest.com" title="Pinterest"><i class="ico-pinterest"></i></a></li>
+			<li class="widget-si-flickr"><a href="http://flickr.com" title="Flickr"><i class="ico-flickr"></i></a></li>
+			<li class="widget-si-instagram"><a href="http://instagram.com" title="Instagram"><i class="ico-instagram"></i></a></li>
+		</ul> -->
+
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/javascript/">javascript</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/">C/C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git笔记/">Git笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog-config/">blog config</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端/">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/背包问题/">背包问题</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/Git笔记/" style="font-size: 10px;">Git笔记</a> <a href="/tags/Machine-Learning/" style="font-size: 10px;">Machine Learning</a> <a href="/tags/Markdown/" style="font-size: 20px;">Markdown</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/blog-config/" style="font-size: 10px;">blog config</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/后端/" style="font-size: 10px;">后端</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/背包问题/" style="font-size: 10px;">背包问题</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/13/hiker博客主题配置/">hiker博客主题配置</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/13/背包问题/">背包问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/12/markdown文档中mathjax的问题/">Markdown文档中mathjax的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/12/Convolutional-Neural-Networks-Week-1/">Convolutional Neural Networks / Week 1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/">Convolutional Neural Networks / Week 2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2018 KingJames’s blog All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            KingJames’s blog
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 Mr.Yi All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
