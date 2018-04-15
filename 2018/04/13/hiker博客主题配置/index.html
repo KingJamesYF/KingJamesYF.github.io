@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="google-site-verification" content="XlAf59rYjECq4vIVONrh_NcYxWH9CxNo7IyWC1erY2s" />
   
   <title>hiker博客主题配置 | King   James</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -216,7 +215,7 @@
 <ol>
 <li><p>启用</p>
 <p>把Hexo主目录下的 <code>_config.yml</code> 文件中的字段 <code>theme</code> 修改为 <code>hiker</code>.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> Extensions</span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Plugins: http://hexo.io/plugins/</span></span></div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Themes: http://hexo.io/themes/</span></span></div><div class="line">theme: hiker</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># Extensions</div><div class="line">## Plugins: http://hexo.io/plugins/</div><div class="line">## Themes: http://hexo.io/themes/</div><div class="line">theme: hiker</div></pre></td></tr></table></figure>
 </li>
 <li><p>更新</p>
 </li>
@@ -263,7 +262,7 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -S hexo-generator-json-content</div></pre></td></tr></table></figure>
 <h3 id="Fancybox"><a href="#Fancybox" class="headerlink" title="Fancybox"></a>Fancybox</h3><p>Hiker使用<a href="http://fancyapps.com/fancybox/" target="_blank" rel="external">Fancybox</a>来浏览展示您文章中的图片，支持以下方式在文章中添加图片：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">![<span class="string">img caption</span>](<span class="link">img url</span>)</div><div class="line"></div><div class="line">&#123;% fancybox img<span class="emphasis">_url [img_</span>thumbnail] [img_caption] %&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">![img caption](img url)</div><div class="line"></div><div class="line">&#123;% fancybox img_url [img_thumbnail] [img_caption] %&#125;</div></pre></td></tr></table></figure>
 <h3 id="侧边栏"><a href="#侧边栏" class="headerlink" title="侧边栏"></a>侧边栏</h3><p><code>sidebar</code>（侧边栏位置）可以设置为 <code>left</code> , <code>right</code>, <code>bottom</code>.</p>
 <p>Hiker 有以下5种侧边栏插件:</p>
 <ul>

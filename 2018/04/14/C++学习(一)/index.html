@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>c++学习(一) | King   James</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="C++" />
+  
+  
+  
+  
+  <meta name="description" content="extern与static的作用 extern可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义。另外，extern &amp;quot;C&amp;quot;语句实现了类C（类C代表的是跟C语言的编译和链接方式一致的所有语言）和C++的混合编程：在C++源文件中的语句前面加上extern “C”，表明它按照类C的编译和链接规约来编译和链接，而不是C+">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++学习(一)">
+<meta property="og:url" content="http://github.com/2018/04/14/C++学习(一)/index.html">
+<meta property="og:site_name" content="King   James">
+<meta property="og:description" content="extern与static的作用 extern可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义。另外，extern &amp;quot;C&amp;quot;语句实现了类C（类C代表的是跟C语言的编译和链接方式一致的所有语言）和C++的混合编程：在C++源文件中的语句前面加上extern “C”，表明它按照类C的编译和链接规约来编译和链接，而不是C+">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://controny.github.io/assets/images/posts/20180312201231.png">
+<meta property="og:image" content="https://controny.github.io/assets/images/posts/20180312201903.png">
+<meta property="og:image" content="https://controny.github.io/assets/images/posts/20180312201913.png">
+<meta property="og:image" content="https://controny.github.io/assets/images/posts/20180312202024.png">
+<meta property="og:updated_time" content="2018-04-14T15:30:07.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++学习(一)">
+<meta name="twitter:description" content="extern与static的作用 extern可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义。另外，extern &amp;quot;C&amp;quot;语句实现了类C（类C代表的是跟C语言的编译和链接方式一致的所有语言）和C++的混合编程：在C++源文件中的语句前面加上extern “C”，表明它按照类C的编译和链接规约来编译和链接，而不是C+">
+<meta name="twitter:image" content="https://controny.github.io/assets/images/posts/20180312201231.png">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;">
+                  <img width="190px" height="127px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-C++学习(一)" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      C++学习(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/C++学习(一)/" class="article-date">
+	  <time datetime="2018-04-14T14:18:42.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/C/">C++</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="extern与static的作用"><a href="#extern与static的作用" class="headerlink" title="extern与static的作用"></a>extern与static的作用</h3><ul>
+<li>extern可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义。另外，<code>extern &quot;C&quot;</code>语句实现了类C（类C代表的是跟C语言的编译和链接方式一致的所有语言）和C++的混合编程：在C++源文件中的语句前面加上extern “C”，表明它按照类C的编译和链接规约来编译和链接，而不是C++的编译和链接规约，这样在类C的代码中就可以调用C++的函数或变量等，更多详情参考<a href="http://www.cnblogs.com/skynet/archive/2010/07/10/1774964.html" target="_blank" rel="external">http://www.cnblogs.com/skynet/archive/2010/07/10/1774964.html</a>。</li>
+<li>static的作用则与extern“水火不相容”，它限制变量或函数只能在本文件中被访问。<a id="more"></a>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// test1.cpp</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</div><div class="line"><span class="keyword">int</span> c = a;</div><div class="line"></div><div class="line"><span class="comment">// test2.cpp</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">extern</span> <span class="keyword">int</span> a;</div><div class="line"><span class="comment">// int b = 4;</span></div><div class="line"><span class="comment">// error: multiple definition of `b`</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> c = <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"a == "</span> &lt;&lt; a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="comment">// a == 1</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c == "</span> &lt;&lt; c &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="comment">// c == 5</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述代码中，</p>
+<ul>
+<li>以<code>extern</code>声明的变量<code>a</code>相当于是两个文件的“全局变量”。</li>
+<li><code>b</code>没有以<code>extern</code>声明，却同时被两个文件都声明了，所以链接时会产生重复定义的错误。</li>
+<li><code>c</code>以<code>static</code>声明，只能在本文件内访问，两个文件各自有一个独立的<code>c</code>，所以不受影响。</li>
+</ul>
+<h3 id="new-operator、operator-new与placement-new"><a href="#new-operator、operator-new与placement-new" class="headerlink" title="new operator、operator new与placement new"></a>new operator、operator new与placement new</h3><ul>
+<li>new operator就是一般所说的<strong>new</strong>，用法如<code>A* pa = new A()</code>，它是C++操作符，是关键字。它的内部操作有三步：调用下面要讲的operator new分配空间，然后调用相关对象的初始化函数，最后返回指针。</li>
+<li>operator new与malloc作用类似，可看成是一个用于分配内存而不构造对象的函数，如<code>A* ptr = (A*)operator new(sizeof(A))</code>。operator new既然可看成一个函数，所以也可以被重载——一般在强调内存分配效率的情况下会考虑重载operator new。</li>
+<li>在上一项中，我用operator new分配了一块内存，然后就遇到了一个问题：怎么在这块内存上面构造对象呢？这就要用到placement new了，它实际上是operator new的一个重载版本，原型是<code>void* operator new (std::size_t size, void* ptr) noexcept;</code>，这里的<code>size</code>参数是被忽略的，只需传入已分配内存的指针<code>ptr</code>参数，目的是在已分配的内存上构造对象，最后将原指针返回。它的用法也与普通函数不同，需在函数后提供构造函数，如，我们可以这样解决上述问题：<code>A* pa = new(ptr) A()</code>。</li>
+</ul>
+<h3 id="new和malloc的区别"><a href="#new和malloc的区别" class="headerlink" title="new和malloc的区别"></a>new和malloc的区别</h3><ul>
+<li>malloc是库函数，new是C++关键字。</li>
+<li>new自行计算空间大小，如<code>int* a = new int[10]</code>；而malloc需要指定空间大小，如<code>int* a = malloc( sizeof(int)*10 )</code>。</li>
+<li>new在动态分配空间时会可调用对象的构造函数初始化对象；而malloc只是分配一段给定大小的内存。</li>
+<li>new分配失败时会抛出异常；而malloc只会返回NULL。</li>
+<li>new可以通过调用malloc来实现，反之则不可以。</li>
+</ul>
+<h3 id="C-多态性"><a href="#C-多态性" class="headerlink" title="C++多态性"></a>C++多态性</h3><p>多态性可以简单理解为“一个接口，多种方法”，程序在运行时才决定调用哪一种方法。C++的多态性是通过虚函数来实现的，虚函数允许子类重新定义父类的方法，即<strong>重写（override）</strong>。它与<strong>重载（overload）</strong>的区别是：重写主要针对名称相同、参数列表相同的函数，运行时才决定函数地址；而重载针对名称相同、参数列表不同的函数，编译期即可决定调用哪个函数，不体现多态性。</p>
+<h3 id="虚函数的实现"><a href="#虚函数的实现" class="headerlink" title="虚函数的实现"></a>虚函数的实现</h3><p>虚函数是通过<strong>vtable（virtual table，虚函数表）</strong>实现的。<br>注意该表是<strong>针对类的</strong>，而不是针对对象的，也就是说，编译器会为每一个有虚函数的类维护一张vtable，该类的每一个实例都会包含一个表指针，指向同一张表，如下图所示：<br><img src="https://controny.github.io/assets/images/posts/20180312201231.png" alt=""><br>C1和C2的vtable都分别只创建了一张，它们的实例通过表指针访问对应的vtable。<br>当一个子类重写了虚函数，其vtable的相关条目也会被替换为合适的函数地址。比如，假设上述的C2是C1的子类，C2重写了一些虚函数，也增加了一个虚函数，最终两者的vtable就分别是：<br><img src="https://controny.github.io/assets/images/posts/20180312201903.png" alt=""><br><img src="https://controny.github.io/assets/images/posts/20180312201913.png" alt=""></p>
+<p>下面再通过一段测试代码实际感受一下。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::f"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::g"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">h</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::h"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived::f"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">g1</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived::g1"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">h1</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived::h1"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    Base* b = <span class="keyword">new</span> Base();</div><div class="line">    Base* d1 = <span class="keyword">new</span> Derived();</div><div class="line">    Derived* d2 = <span class="keyword">new</span> Derived();</div><div class="line">    Derived* d3 = <span class="keyword">new</span> Derived();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以利用GDB的<code>info vtbl [obj]</code>命令来查看对象所指的vtable：<br><img src="https://controny.github.io/assets/images/posts/20180312202024.png" alt=""><br>可以看到：</p>
+<ul>
+<li>作为<code>Base</code>类的对象<code>b</code>所指的vtable包含了它三个虚函数的地址。</li>
+<li><code>d1</code>是<code>Derived</code>类，对应的vtable中，<code>f()</code>是<code>Derived</code>的重写版本，体现了多态性。而因为它由<code>Base</code>指针指向，所以只能访问vtable中的父类函数。</li>
+<li>注意到<code>d1</code>、<code>d2</code>、<code>d3</code>对应的vtable地址是一致的，证明它们都是同一张表。</li>
+</ul>
+<h3 id="引用与指针的区别"><a href="#引用与指针的区别" class="headerlink" title="引用与指针的区别"></a>引用与指针的区别</h3><ul>
+<li>指针是个实体，有自己的内存空间；引用只是一块内存的别名，编译器没有为其分配空间。</li>
+<li>指针可以不初始化，可为空；引用必须初始化，不可为空。</li>
+<li>指针可以改变其指向的对象；引用则不可变。</li>
+<li>实际上，引用可以做的事情指针都可以完成，但引用更加安全。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/AliPayQR.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY4NS8xMjIyMQ==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/14/Linux学习（一）命令行/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Linux学习（一）命令行
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/14/vi常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">vi常用命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#extern与static的作用"><span class="nav-number">1.</span> <span class="nav-text">extern与static的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new-operator、operator-new与placement-new"><span class="nav-number">2.</span> <span class="nav-text">new operator、operator new与placement new</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new和malloc的区别"><span class="nav-number">3.</span> <span class="nav-text">new和malloc的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-多态性"><span class="nav-number">4.</span> <span class="nav-text">C++多态性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚函数的实现"><span class="nav-number">5.</span> <span class="nav-text">虚函数的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用与指针的区别"><span class="nav-number">6.</span> <span class="nav-text">引用与指针的区别</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2017 - 2018 King   James All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s22.cnzz.com/z_stat.php?id=1273428283&web_id=1273428283" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+	<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a936eb4d4dfc73dd81ea6d7860454bc8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            King   James
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 Mr.Yi All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

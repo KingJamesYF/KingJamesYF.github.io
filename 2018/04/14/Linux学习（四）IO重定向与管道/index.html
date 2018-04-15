@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux学习（四）io重定向与管道 | King   James</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Linuxstudy" />
+  
+  
+  
+  
+  <meta name="description" content="IO重定向(IO redirection)Linux的有一个强大之处就是可以通过管道(Pipe)跟IO重定向将一系列命令的输出跟输入连接起来。IO重定向是Linux中非常重要的概念，是理解Linux命令，脚本以及Linux IO的基础。 标准输入输出对于shell来说，有三个基础的流，标准输入流(stdin或者stream 0)，标准输出流(stdout或者stream 1)，标准错误流(stde">
+<meta name="keywords" content="Linux,study">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习（四）IO重定向与管道">
+<meta property="og:url" content="http://github.com/2018/04/14/Linux学习（四）IO重定向与管道/index.html">
+<meta property="og:site_name" content="King   James">
+<meta property="og:description" content="IO重定向(IO redirection)Linux的有一个强大之处就是可以通过管道(Pipe)跟IO重定向将一系列命令的输出跟输入连接起来。IO重定向是Linux中非常重要的概念，是理解Linux命令，脚本以及Linux IO的基础。 标准输入输出对于shell来说，有三个基础的流，标准输入流(stdin或者stream 0)，标准输出流(stdout或者stream 1)，标准错误流(stde">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://github.com/img/blog-linux-shell-stdinout.png">
+<meta property="og:image" content="http://github.com/img/blog-linux-shell-keyboard-stdinout.png">
+<meta property="og:updated_time" content="2018-04-14T15:07:22.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux学习（四）IO重定向与管道">
+<meta name="twitter:description" content="IO重定向(IO redirection)Linux的有一个强大之处就是可以通过管道(Pipe)跟IO重定向将一系列命令的输出跟输入连接起来。IO重定向是Linux中非常重要的概念，是理解Linux命令，脚本以及Linux IO的基础。 标准输入输出对于shell来说，有三个基础的流，标准输入流(stdin或者stream 0)，标准输出流(stdout或者stream 1)，标准错误流(stde">
+<meta name="twitter:image" content="http://github.com/img/blog-linux-shell-stdinout.png">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;">
+                  <img width="190px" height="127px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Linux学习（四）IO重定向与管道" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Linux学习（四）IO重定向与管道
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/Linux学习（四）IO重定向与管道/" class="article-date">
+	  <time datetime="2018-04-14T15:06:32.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="IO重定向-IO-redirection"><a href="#IO重定向-IO-redirection" class="headerlink" title="IO重定向(IO redirection)"></a>IO重定向(IO redirection)</h1><p>Linux的有一个强大之处就是可以通过管道(Pipe)跟IO重定向将一系列命令的输出跟输入连接起来。IO重定向是Linux中非常重要的概念，是理解Linux命令，脚本以及Linux IO的基础。</p>
+<h2 id="标准输入输出"><a href="#标准输入输出" class="headerlink" title="标准输入输出"></a>标准输入输出</h2><p>对于<code>shell</code>来说，有三个基础的流，标准输入流(stdin或者stream 0)，标准输出流(stdout或者stream 1)，标准错误流(stderr或者stream2)。</p>
+<p><img src="/img/blog-linux-shell-stdinout.png" alt="标准输入输出"></p>
+<p>举个例子，当我们用键盘在<code>shell</code>中执行命令的时候，可以如下图：</p>
+<p><img src="/img/blog-linux-shell-keyboard-stdinout.png" alt="键盘输入输出"></p>
+<p>通常，stdout跟stderr都输出到了屏幕上，但对于Linux来说，其实是两种不同的输出。<br><a id="more"></a></p>
+<h2 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h2><p>可以用<code>&gt;</code>大于号将stdout重定向到另一个IO，比如文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># echo &quot;hello&quot; &gt; test.log</div><div class="line"># cat test.log</div><div class="line">hello</div></pre></td></tr></table></figure>
+<p>上面的命令将stdout重定向到文件<code>test.log</code>中，此时，如果该文件不存在则创建新文件，如果存在则覆盖已有文件。事实上，<code>&gt;</code>重定向是<code>1&gt;</code>的简写，<code>1&gt;</code>可以更清楚的看到实际上是把stdout(stream 1)重定向。</p>
+<p>必须注意的是，默认情况下，该重定向会覆盖已有文件，这个在有时候可能不经意间丢失重要数据。<code>shell</code>提供了选项使得我们可以禁止这种覆盖，<code>set -o noclobber</code>可以打开该选项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># cat test.log</div><div class="line">hello</div><div class="line"># set -o noclobber</div><div class="line"># echo &quot;world&quot; &gt; test.log</div><div class="line">-bash: test.log: cannot overwrite existing file</div></pre></td></tr></table></figure>
+<p>此外，在打开该选项之后，其实还是可以强制执行覆盖，可以采用<code>&gt;|</code>来强制重定向到已存在的文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># echo &quot;world&quot; &gt; test.log</div><div class="line">-bash: test.log: cannot overwrite existing file</div><div class="line"># echo &quot;world&quot; &gt;| test.log</div><div class="line"># cat test.log</div><div class="line">world</div></pre></td></tr></table></figure>
+<h2 id="追加输出"><a href="#追加输出" class="headerlink" title="追加输出"></a>追加输出</h2><p>可以采用<code>&gt;&gt;</code>将输出重定向到文件并追加在文件结尾，这样就可以避免覆盖文件了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># cat test.log</div><div class="line">world</div><div class="line"># echo hello &gt;&gt; test.log</div><div class="line"># cat test.log</div><div class="line">world</div><div class="line">hello</div></pre></td></tr></table></figure>
+<h2 id="标准错误重定向"><a href="#标准错误重定向" class="headerlink" title="标准错误重定向"></a>标准错误重定向</h2><p>如<code>1&gt;</code>一样，我们可以通过<code>2&gt;</code>将stderr重定向到文件，具体行为跟stdout类似。</p>
+<h2 id="同时重定向stdout跟stderr"><a href="#同时重定向stdout跟stderr" class="headerlink" title="同时重定向stdout跟stderr"></a>同时重定向stdout跟stderr</h2><p>我们可以在同一行命令中同时将stdout跟stderr重定向，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># ls test* tttt*</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">test.log  test2</div><div class="line"># ls test* tttt* &gt; stdout.log 2&gt; stderr.log</div><div class="line"># cat stdout.log</div><div class="line">test.log</div><div class="line">test2</div><div class="line"># cat stderr.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div></pre></td></tr></table></figure>
+<p>可以看出，stdout跟stderr被分别重定向到<code>stdout.log</code>跟<code>stderr.log</code>文件中了。</p>
+<p>此外，还有一个常见的用法是将stderr重定向到stdout，这样就可以将所有输出都定向在一起了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># ls test* tttt* &gt; stdout.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line"># cat stdout.log</div><div class="line">test.log</div><div class="line">test2</div><div class="line"># ls test* tttt* &gt; stdout.log 2&gt;&amp;1</div><div class="line"># cat stdout.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">test.log</div><div class="line">test2</div></pre></td></tr></table></figure>
+<p>可见，通过<code>2&gt;&amp;1</code>将stderr重定向给stdout，而stdout又重定向给文件<code>stdout.log</code>，这样所有的输出都重定向到文件<code>stdout.log</code>中了。另外，还可以通过<code>&amp;&gt;</code>直接将stderr跟stdout合并：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># ls -l test* tttt* &amp;&gt; stdout.log</div><div class="line"># cat stdout.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">-rw-r--r--. 1 root root 12 Nov 16 01:02 test.log</div><div class="line">-rw-r--r--. 1 root root  0 Nov 16 00:17 test2</div></pre></td></tr></table></figure>
+<h2 id="重定向顺序"><a href="#重定向顺序" class="headerlink" title="重定向顺序"></a>重定向顺序</h2><p>将stderr重定向给stdout的时候，请务必注意其顺序，如上面的重定向如果写成这样，结果就完全不同了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># ls test* tttt* 2&gt;&amp;1 &gt; stdout.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line"># cat stdout.log</div><div class="line">test.log</div><div class="line">test2</div></pre></td></tr></table></figure>
+<p>可以看出，stderr其实并没有被重定向到文件<code>stdout.log</code>中，可见顺序是非常重要的。那么，如果理解这种不同呢？咱们可以这么样来理解：</p>
+<ul>
+<li>将<code>&gt;</code>看作是<code>shell</code>中的赋值操作<code>=</code></li>
+<li>将stdout跟stderr看作是变量，但对其引用采用<code>&amp;</code>，这样<code>&amp;1</code>表示对stdout变量的引用</li>
+<li>假定stdout跟stderr变量的初始值是屏幕，将屏幕记为<code>/dev/tty</code></li>
+<li><code>shell</code>从左到有扫描解释命令，并对stdout跟stderr分别赋值</li>
+<li>查看stdout跟stderr的最终值即可知道分别被重定向到哪里了</li>
+</ul>
+<p>还是以上面的例子来解释，<code>ls test* tttt* 2&gt;&amp;1 &gt; stdout.log</code></p>
+<ul>
+<li>命令开始前，stdout=/dev/tty, stderr=/dev/tty</li>
+<li><code>shell</code>从左到右扫描并重新赋值，首先<code>2&gt;&amp;1</code>就相当于<code>stderr=$stdin</code>，此时<code>stderr</code>的值其实还是<code>/dev/tty</code></li>
+<li><code>&gt; stdout.log</code>就相当于<code>stdout=stdout.log</code>，此时stdout值为<code>stdout.log</code></li>
+<li>最后，stdout值为<code>stdout.log</code>，而stderr值仍然为<code>/dev/tty</code>，所以只有stdout输出到文件<code>stdout.log</code>中了</li>
+</ul>
+<p>基于这个原则，在讲述完管道之后咱们将展示如何把stdout跟stderr交换一下。</p>
+<h2 id="输入重定向"><a href="#输入重定向" class="headerlink" title="输入重定向"></a>输入重定向</h2><ul>
+<li><code>&lt;</code>符号</li>
+</ul>
+<p>既然输出有重定向，那么输入是否也可以呢？答案是肯定的，可以采用<code>&lt;</code>将输入重定向，<code>&lt;</code>其实是<code>0&lt;</code>的简写。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># cat stdout.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">-rw-r--r--. 1 root root 12 Nov 16 01:02 test.log</div><div class="line">-rw-r--r--. 1 root root  0 Nov 16 00:17 test2</div><div class="line"># cat &lt;stdout.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">-rw-r--r--. 1 root root 12 Nov 16 01:02 test.log</div><div class="line">-rw-r--r--. 1 root root  0 Nov 16 00:17 test2</div></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;&lt;</code>符号</li>
+</ul>
+<p>此外，还可以<code>&lt;&lt;EOF</code>通过手动输入直到输入<code>EOF</code>（或者Ctrl-D）。</p>
+<ul>
+<li><code>&lt;&lt;&lt;</code>符号</li>
+</ul>
+<p>该符号可以直接将一个字符串重定向给输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># base64 &lt;&lt;&lt; hello</div><div class="line">aGVsbG8K</div></pre></td></tr></table></figure>
+<p><code>base64</code>命令参数只接受文件，通过这种方式就可以把字符串直接传给它。</p>
+<h2 id="输入输出同时重定向"><a href="#输入输出同时重定向" class="headerlink" title="输入输出同时重定向"></a>输入输出同时重定向</h2><p><code>shell</code>是可以支持同时重定向输入跟输出的，以下方式都会被准确解析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># cat &lt;test.log &gt; stdout.log 2&gt; stderr.log</div><div class="line"># &lt;test.log &gt; stdout.log 2&gt; stderr.log cat</div></pre></td></tr></table></figure>
+<h2 id="快速清除文件内容"><a href="#快速清除文件内容" class="headerlink" title="快速清除文件内容"></a>快速清除文件内容</h2><p>可以通过重定向快速的清空文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># cat test.log</div><div class="line">hello world</div><div class="line"># &gt; test.log</div><div class="line"># cat test.log</div><div class="line">#</div></pre></td></tr></table></figure>
+<p>可见，咱们并不需要写<code>echo &quot;&quot; &gt; test.log</code>这样的命令来清空一个文件。当<code>noclobber</code>选项被打开时，可以通过<code>&gt;|</code>来强制清空。</p>
+<h1 id="管道-Pipe"><a href="#管道-Pipe" class="headerlink" title="管道(Pipe)"></a>管道(Pipe)</h1><p>在Linux中，我们可以使用管道(Pipe)将前一个命令的stdout作为输入给后面一个命令，管道由<code>|</code>表示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># ls test* tttt*</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">test.log  test2</div><div class="line"># ls -l test* tttt* | grep log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">-rw-r--r--. 1 root root 12 Nov 16 01:02 test.log</div></pre></td></tr></table></figure>
+<p>请务必注意的是，管道只会将stdout传递给下一个命令，stderr并不会传递，为了证明这一点，咱们将后一个命令的stderr重定向到文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># ls -l test* tttt* | grep log 2&gt; stderr.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">-rw-r--r--. 1 root root 12 Nov 16 01:02 test.log</div><div class="line"># cat stderr.log</div><div class="line">#</div></pre></td></tr></table></figure>
+<p>这时可以看出，第二个命令的stderr为空，而第一个命令的stderr仍输出到屏幕了。当然，咱们也可以将第一个命令的stderr重定向到stdout上，这样<code>grep</code>命令也可以收到了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># ls -l test* tttt* 2&gt;&amp;1 | grep &quot;No &quot;</div><div class="line">ls: cannot access tttt*: No such file or directory</div></pre></td></tr></table></figure>
+<p>再回到上一节的问题，咱们如何将stdout跟stderr互相交换一下呢？可以这么做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># ls -l test* tttt* 3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3 | grep &quot;No &quot; 2&gt; stderr.log</div><div class="line">ls: cannot access tttt*: No such file or directory</div><div class="line">-rw-r--r--. 1 root root 12 Nov 16 01:02 test.log</div><div class="line">-rw-r--r--. 1 root root  0 Nov 16 00:17 test2</div><div class="line"># cat stderr.log</div><div class="line">#</div></pre></td></tr></table></figure>
+<p>如果你的Linux发行版本对grep输出的颜色设置正确，会发现只有第一行是grep出来的，由此可见<code>3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3</code>居然将stdout跟stderr互换了一下，至于怎么解释，可以参照前面的赋值方式自行拆解一下。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/AliPayQR.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY4NS8xMjIyMQ==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/14/Linux学习（五）常用命令/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Linux学习（五）常用命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/14/Linux学习（三）shell基础/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Linux学习（三）shell基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IO重定向-IO-redirection"><span class="nav-number">1.</span> <span class="nav-text">IO重定向(IO redirection)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标准输入输出"><span class="nav-number">1.1.</span> <span class="nav-text">标准输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出重定向"><span class="nav-number">1.2.</span> <span class="nav-text">输出重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#追加输出"><span class="nav-number">1.3.</span> <span class="nav-text">追加输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准错误重定向"><span class="nav-number">1.4.</span> <span class="nav-text">标准错误重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同时重定向stdout跟stderr"><span class="nav-number">1.5.</span> <span class="nav-text">同时重定向stdout跟stderr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向顺序"><span class="nav-number">1.6.</span> <span class="nav-text">重定向顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入重定向"><span class="nav-number">1.7.</span> <span class="nav-text">输入重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出同时重定向"><span class="nav-number">1.8.</span> <span class="nav-text">输入输出同时重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速清除文件内容"><span class="nav-number">1.9.</span> <span class="nav-text">快速清除文件内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#管道-Pipe"><span class="nav-number">2.</span> <span class="nav-text">管道(Pipe)</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2017 - 2018 King   James All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s22.cnzz.com/z_stat.php?id=1273428283&web_id=1273428283" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+	<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a936eb4d4dfc73dd81ea6d7860454bc8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            King   James
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 Mr.Yi All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

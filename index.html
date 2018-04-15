@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="google-site-verification" content="XlAf59rYjECq4vIVONrh_NcYxWH9CxNo7IyWC1erY2s" />
   
   <title>King   James</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -259,7 +258,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Hexo + GitHub Pages 搭建个人博客"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-矩阵的-SVD-分解"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -267,7 +266,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/13/Hexo + GitHub Pages 搭建个人博客/">Hexo + GitHub Pages 搭建个人博客</a>
+      <a class="article-title" href="/2018/04/15/矩阵的-SVD-分解/">矩阵的 SVD 分解</a>
     </h1>
   
 
@@ -275,35 +274,26 @@
     
     <div class="article-meta">
       
-	<a href="/2018/04/13/Hexo + GitHub Pages 搭建个人博客/" class="article-date">
-	  <time datetime="2018-04-13T14:08:49.000Z" itemprop="datePublished">2018-04-13</time>
+	<a href="/2018/04/15/矩阵的-SVD-分解/" class="article-date">
+	  <time datetime="2018-04-15T05:49:07.000Z" itemprop="datePublished">2018-04-15</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/blog/">blog</a>
+    <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><p>Hexo is a fast, simple and powerful blog framework. You write posts in Markdown (or other languages) and Hexo generates static files with a beautiful theme in seconds.</p>
-<footer><strong>Documentation</strong><cite><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">hexo.io</a></cite></footer></blockquote>
-<p>这一篇 note 讲解如何使用 <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> + <a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a> 搭建个人博客，并用 GitHub 进行版本控制。其中源文件位于 hexo 分支，静态文件位于 master 分支。</p>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
-<li><p>安装最新版的 <a href="https://git-scm.com/" target="_blank" rel="external">Git</a>。在命令行输入 <code>git version</code> 检查 git 是否安装成功。</p>
-</li>
-<li><p>安装 LTS 版的 <a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>。同样在命令行输入 <code>node -v</code> 和 <code>npm -v</code>以检查 node.js 是否安装成功。</p>
-</li>
-<li><p>注册 GitHub 账号，新建一个 repository，一般命名为 <code>username.github.io</code>，这样 GitHub 会自动开启 GitHub Pages 功能。勾选 <code>Initialize this repository with a README</code> 的话即可访问个人主页，否则需要添加内容才能访问，建议暂时不要勾选。</p>
-</li>
-<li><p>GitHub 添加 SSH（推荐），可参考 <a href="https://help.github.com/articles/connecting-to-github-with-ssh/" target="_blank" rel="external">Connecting to GitHub with SSH</a>。</p>
-</li>
-</ul>
-        <!-- Hexo is a fast, simple and powerful blog framework. You write posts in Markdown (or other languages) and Hexo generates static files with a beautiful theme in seconds.
-Documentationhexo.io
-这一篇 note......  -->
+        <p>看似高大上的人工智能、机器学习，实际上都脱不开数学的支持。在这些数学内容中，最重要的无疑是两个部分：代数和概率论。我无法在博客中完整地介绍代数（特别是矩阵论）和概率论，但是将其中部分有趣又重要的内容提出来讲解，还是可行的。</p>
+<p>此篇，我们谈谈矩阵的 SVD 分解。</p>
+        <!-- 看似高大上的人工智能、机器学习，实际上都脱不开数学的支持。在这些数学内容中，最重要的无疑是两个部分：代数和概率论。我无法在博客中完整地介绍代数（特别是矩阵论）和概率论，但是将其中部分有趣又重要的内容提出来讲解，还是可行的。
+此篇，我们谈谈矩阵的 SVD 分解。
+
+一些矩阵知识首先我们来看一些基本的矩阵知识。
+转置与共轭转置矩阵的转置（transpose）是最简单的一种矩阵变换。简单来说，若 ......  -->
         <p class="article-more-link">
-          <a href="/2018/04/13/Hexo + GitHub Pages 搭建个人博客/#more">阅读全文</a>
+          <a href="/2018/04/15/矩阵的-SVD-分解/#more">阅读全文</a>
         </p>
       
     </div>
@@ -311,7 +301,7 @@ Documentationhexo.io
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git笔记/">Git笔记</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Matrix/">Matrix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVD/">SVD</a></li></ul>
 
     </footer>
   </div>
@@ -321,7 +311,7 @@ Documentationhexo.io
 <!-- Table of Contents -->
 
   
-    <article id="post-Git--命令(二)"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-C++学习(二)"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -329,7 +319,7 @@ Documentationhexo.io
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/13/Git--命令(二)/">Git--命令(二)</a>
+      <a class="article-title" href="/2018/04/14/C++学习(二)/">C++学习(二)</a>
     </h1>
   
 
@@ -337,28 +327,23 @@ Documentationhexo.io
     
     <div class="article-meta">
       
-	<a href="/2018/04/13/Git--命令(二)/" class="article-date">
-	  <time datetime="2018-04-13T14:04:29.000Z" itemprop="datePublished">2018-04-13</time>
+	<a href="/2018/04/14/C++学习(二)/" class="article-date">
+	  <time datetime="2018-04-14T15:30:54.000Z" itemprop="datePublished">2018-04-14</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/工具/">工具</a>
+    <a class="article-category-link" href="/categories/C/">C++</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><p>Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</p>
-<footer><strong>Documentation</strong><cite><a href="https://git-scm.com/" target="_blank" rel="external">git-scm.com</a></cite></footer></blockquote>
-<p>Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。它是由 Linux 之父 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。本文介绍了 Git 的常用命令。</p>
-<h2 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h2><p>在学习 Git 命令之前，首先要理解它的三种状态：已提交（committed）、已修改（modified）和已暂存（staged）。已提交表示数据已经安全的保存在本地数据库中；已修改表示修改了文件，但还没保存到数据库中，增加、删除文件也相当于已修改；已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</p>
-<p>由此引入 Git 项目的三个工作区域的概念：Git 仓库、工作目录以及暂存区域。</p>
-<p><img src="https://git-scm.com/book/en/v2/images/areas.png" alt="Working tree, staging area, and Git directory"></p>
-        <!-- Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
-Documentationgit-scm.com
-Git 是一个开源的分布式版本控......  -->
+        <p><strong>整形溢出和提升</strong></p>
+<p>大部分 C 程序员都以为基本的整形操作都是安全的其实不然,看下面这个例子,<br>你觉得输出结果是什么:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</div><div class="line">    <span class="keyword">long</span> i = <span class="number">-1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (i &lt; <span class="keyword">sizeof</span>(i)) &#123;</div><div class="line">         <span class="built_in">printf</span>(<span class="string">"OK\n"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">         <span class="built_in">printf</span>(<span class="string">"error\n"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <!-- 整形溢出和提升
+大部分 C 程序员都以为基本的整形操作都是安全的其实不然,看下面这个例子,你觉得输出结果是什么:123456789101112int main(int argc, char** argv) &#123;    long i = -1;    if (i &lt; sizeof(i)) &#123;         printf("OK\n");    &#125;    el......  -->
         <p class="article-more-link">
-          <a href="/2018/04/13/Git--命令(二)/#more">阅读全文</a>
+          <a href="/2018/04/14/C++学习(二)/#more">阅读全文</a>
         </p>
       
     </div>
@@ -366,7 +351,7 @@ Git 是一个开源的分布式版本控......  -->
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
 
     </footer>
   </div>
@@ -376,7 +361,7 @@ Git 是一个开源的分布式版本控......  -->
 <!-- Table of Contents -->
 
   
-    <article id="post-hiker博客主题配置"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-算法-图算法介绍"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -384,7 +369,7 @@ Git 是一个开源的分布式版本控......  -->
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/13/hiker博客主题配置/">hiker博客主题配置</a>
+      <a class="article-title" href="/2018/04/14/算法-图算法介绍/">算法--图算法介绍</a>
     </h1>
   
 
@@ -392,60 +377,8 @@ Git 是一个开源的分布式版本控......  -->
     
     <div class="article-meta">
       
-	<a href="/2018/04/13/hiker博客主题配置/" class="article-date">
-	  <time datetime="2018-04-13T02:01:03.000Z" itemprop="datePublished">2018-04-13</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Hiker"><a href="#Hiker" class="headerlink" title="Hiker"></a>Hiker</h1><p>An attractive, exquisite theme for <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>. named “Hiker”, short for “HikerNews”.  </p>
-<p><a href="https://itimetraveler.github.io/hexo-theme-hiker/" target="_blank" rel="external"><strong>☞ 在线预览</strong></a>  |  <a href="https://gitter.im/hexo-theme-hiker/Lobby?utm_source=share-link&amp;utm_medium=link&amp;utm_campaign=share-link" target="_blank" rel="external"><strong>Hiker问题交流群</strong></a><br><img src="https://itimetraveler.github.io/hexo-theme-hiker/2016/10/24/Hiker%E4%B8%BB%E9%A2%98%E9%A2%84%E8%A7%88/homepage-index.png" alt="Desktop Preview"><br>
-        <!-- HikerAn attractive, exquisite theme for Hexo. named “Hiker”, short for “HikerNews”.  
-☞ 在线预览  |  Hiker问题交流群
-
-以上Demo站点的源文件在这里，大家有需要的可以参考：https://github.com/iTimeTraveler/hexo-theme-hiero/tree/site-s......  -->
-        <p class="article-more-link">
-          <a href="/2018/04/13/hiker博客主题配置/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog-config/">blog config</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-背包问题"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/13/背包问题/">背包问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/04/13/背包问题/" class="article-date">
-	  <time datetime="2018-04-12T16:57:50.000Z" itemprop="datePublished">2018-04-13</time>
+	<a href="/2018/04/14/算法-图算法介绍/" class="article-date">
+	  <time datetime="2018-04-14T15:17:46.000Z" itemprop="datePublished">2018-04-14</time>
 	</a>
 
       
@@ -455,20 +388,15 @@ Git 是一个开源的分布式版本控......  -->
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="0-1背包问题"><a href="#0-1背包问题" class="headerlink" title="0/1背包问题"></a>0/1背包问题</h1><blockquote>
-<p>有N件物品和一个容量为V的背包。放入第i件物品耗费的空间是Ci，得到的价值是Wi。求解将哪些物品装入背包可使价值总和最大？</p>
-</blockquote>
-<p>  将每一件物品从1到n编号，从第1件物品开始，每一件物品就只有两个状态：放进背包了 / 没有放进背包。</p>
-<p>  我们画一张表格，行对应着每一件物品，列对应着背包的重量，那么pack[i][j]就表示  <strong>前i件物品，背包最大承重j</strong> 这个子问题的解。</p>
-        <!-- 0/1背包问题
-有N件物品和一个容量为V的背包。放入第i件物品耗费的空间是Ci，得到的价值是Wi。求解将哪些物品装入背包可使价值总和最大？
-
-  将每一件物品从1到n编号，从第1件物品开始，每一件物品就只有两个状态：放进背包了 / 没有放进背包。
-  我们画一张表格，行对应着每一件物品，列对应着背包的重量，那么pack[i][j]就表示  前i件物品，背包最大承重j 这个子问题的解。
-
- 给......  -->
+        <h2 id="图的定义："><a href="#图的定义：" class="headerlink" title="图的定义："></a>图的定义：</h2><p>图（graph）由顶点（vertex）和边（edge）的集合组成，每一条边就是一个点对（v,w)。</p>
+<p>图的种类：地图，电路图，调度图，事物，网络，程序结构</p>
+<p>图的属性：有V个顶点的图最多有V*（V-1）/2条边<br><img src="https://www.ezlippi.com/images/images/githubpages/graph/graph1.jpg" alt=""><br>
+        <!-- 图的定义：图（graph）由顶点（vertex）和边（edge）的集合组成，每一条边就是一个点对（v,w)。
+图的种类：地图，电路图，调度图，事物，网络，程序结构
+图的属性：有V个顶点的图最多有V*（V-1）/2条边
+邻接矩阵：邻接矩阵是一个元素为bool值的VV矩阵，若图中存在一条连接顶点V和W的边，折矩阵adj[v][w]=1,否则为0。占用的空间为VV，当图是稠密时，邻接矩阵是比较合适......  -->
         <p class="article-more-link">
-          <a href="/2018/04/13/背包问题/#more">阅读全文</a>
+          <a href="/2018/04/14/算法-图算法介绍/#more">阅读全文</a>
         </p>
       
     </div>
@@ -476,7 +404,7 @@ Git 是一个开源的分布式版本控......  -->
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C+</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/背包问题/">背包问题</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图算法/">图算法</a></li></ul>
 
     </footer>
   </div>
@@ -486,7 +414,7 @@ Git 是一个开源的分布式版本控......  -->
 <!-- Table of Contents -->
 
   
-    <article id="post-markdown文档中mathjax的问题"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Linux学习（五）常用命令"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -494,7 +422,7 @@ Git 是一个开源的分布式版本控......  -->
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/markdown文档中mathjax的问题/">Markdown文档中mathjax的问题</a>
+      <a class="article-title" href="/2018/04/14/Linux学习（五）常用命令/">Linux学习（五）常用命令</a>
     </h1>
   
 
@@ -502,24 +430,30 @@ Git 是一个开源的分布式版本控......  -->
     
     <div class="article-meta">
       
-	<a href="/2018/04/12/markdown文档中mathjax的问题/" class="article-date">
-	  <time datetime="2018-04-12T14:35:54.000Z" itemprop="datePublished">2018-04-12</time>
+	<a href="/2018/04/14/Linux学习（五）常用命令/" class="article-date">
+	  <time datetime="2018-04-14T15:08:43.000Z" itemprop="datePublished">2018-04-14</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/Markdown/">Markdown</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在写markdown文档时经常会需要插入数学公式，我之前只会使用图片插入，上次在看到mathjax后，我开始了使用mathjax的历程，但在实际写文档的过程中遇到了一些问题。</p>
-        <!-- 在写markdown文档时经常会需要插入数学公式，我之前只会使用图片插入，上次在看到mathjax后，我开始了使用mathjax的历程，但在实际写文档的过程中遇到了一些问题。
-
-关于有一些公式无法正确的显示在写机器学习的文章中遇到的一个关于范数的公式写出来编辑器上显示没有问题，但是一旦放进文档里就不行了，这个问题困扰了我很长时间。
-这是代码：12&gt; 严格意义上讲，Minkowski D......  -->
+        <h1 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h1><p>很多时候我们通过<code>cat</code>命令来查看文件内容，它会将文件的所有内容显示出来。当然，<code>cat</code>也可以通过管道接收数据，它主要完成的是将从管道接收的输入导到输出。</p>
+<h1 id="more跟less命令"><a href="#more跟less命令" class="headerlink" title="more跟less命令"></a>more跟less命令</h1><p>有时候用<code>cat</code>命令来显示一个较大的文件并不方便，整个文件内容一次性显示出来简直就是刷屏了。如果需要一页页的显示内容，可以使用<code>more</code>或者<code>less</code>命令，这两个命令会以分页的形式显示文件内容，至于使用哪个命令完全看个人习惯了。此外，这两个命令不仅可以分页显示，而且在分页模式下，你可以用快捷键方便的浏览及搜索：</p>
+<pre><code>* 按`d`下翻页
+* 按空格下翻页
+* 按回车下移一行
+* 按`/`进入搜索模式，输入要搜索的关键字，按回车搜索。
+* 按`n`搜索下一个
+* 按`q`退出查看
+</code></pre>
+        <!-- cat命令很多时候我们通过cat命令来查看文件内容，它会将文件的所有内容显示出来。当然，cat也可以通过管道接收数据，它主要完成的是将从管道接收的输入导到输出。
+more跟less命令有时候用cat命令来显示一个较大的文件并不方便，整个文件内容一次性显示出来简直就是刷屏了。如果需要一页页的显示内容，可以使用more或者less命令，这两个命令会以分页的形式显示文件内容，至于使用哪个命令完全看......  -->
         <p class="article-more-link">
-          <a href="/2018/04/12/markdown文档中mathjax的问题/#more">阅读全文</a>
+          <a href="/2018/04/14/Linux学习（五）常用命令/#more">阅读全文</a>
         </p>
       
     </div>
@@ -527,7 +461,7 @@ Git 是一个开源的分布式版本控......  -->
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
 
     </footer>
   </div>
@@ -537,7 +471,7 @@ Git 是一个开源的分布式版本控......  -->
 <!-- Table of Contents -->
 
   
-    <article id="post-Convolutional-Neural-Networks-Week-4"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Linux学习（四）IO重定向与管道"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -545,7 +479,7 @@ Git 是一个开源的分布式版本控......  -->
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-4/">Convolutional Neural Networks / Week 4</a>
+      <a class="article-title" href="/2018/04/14/Linux学习（四）IO重定向与管道/">Linux学习（四）IO重定向与管道</a>
     </h1>
   
 
@@ -553,49 +487,81 @@ Git 是一个开源的分布式版本控......  -->
     
     <div class="article-meta">
       
-	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-4/" class="article-date">
-	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
+	<a href="/2018/04/14/Linux学习（四）IO重定向与管道/" class="article-date">
+	  <time datetime="2018-04-14T15:06:32.000Z" itemprop="datePublished">2018-04-14</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="What-is-Face-Recognition"><a href="#What-is-Face-Recognition" class="headerlink" title="What is Face Recognition"></a>What is Face Recognition</h3><p>这里区分两个概念，<code>Face verification</code>和<code>Face recognition</code>，</p>
+        <h1 id="IO重定向-IO-redirection"><a href="#IO重定向-IO-redirection" class="headerlink" title="IO重定向(IO redirection)"></a>IO重定向(IO redirection)</h1><p>Linux的有一个强大之处就是可以通过管道(Pipe)跟IO重定向将一系列命令的输出跟输入连接起来。IO重定向是Linux中非常重要的概念，是理解Linux命令，脚本以及Linux IO的基础。</p>
+<h2 id="标准输入输出"><a href="#标准输入输出" class="headerlink" title="标准输入输出"></a>标准输入输出</h2><p>对于<code>shell</code>来说，有三个基础的流，标准输入流(stdin或者stream 0)，标准输出流(stdout或者stream 1)，标准错误流(stderr或者stream2)。</p>
+<p><img src="/img/blog-linux-shell-stdinout.png" alt="标准输入输出"></p>
+<p>举个例子，当我们用键盘在<code>shell</code>中执行命令的时候，可以如下图：</p>
+<p><img src="/img/blog-linux-shell-keyboard-stdinout.png" alt="键盘输入输出"></p>
+<p>通常，stdout跟stderr都输出到了屏幕上，但对于Linux来说，其实是两种不同的输出。<br>
+        <!-- IO重定向(IO redirection)Linux的有一个强大之处就是可以通过管道(Pipe)跟IO重定向将一系列命令的输出跟输入连接起来。IO重定向是Linux中非常重要的概念，是理解Linux命令，脚本以及Linux IO的基础。
+标准输入输出对于shell来说，有三个基础的流，标准输入流(stdin或者stream 0)，标准输出流(stdout或者stream 1)，标准错误流(s......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/14/Linux学习（四）IO重定向与管道/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Linux学习（三）shell基础"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/14/Linux学习（三）shell基础/">Linux学习（三）shell基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/Linux学习（三）shell基础/" class="article-date">
+	  <time datetime="2018-04-14T15:03:35.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>首先，咱们来了解一下，什么是<code>Shell</code>。操作系统内核给我们提供了各种接口，同时也提供了各种用户层的库，理论上我们基于这些可以编写程序实现各种我们想要的功能，不过问题是，咱们不可能做什么事情都要重新编写程序，这样使用起来也太困难了。因此，操作系统（包括Linux）通常都会引入一个<code>Shell</code>这样的特殊程序，这个程序会接受输入的命令然后执行，并可能将执行结果呈现出来。总结来说，<code>Shell</code>是一个从输入设备或者文件读取命令，并且解释、执行的用户态程序。</p>
+<p>在Linux系统中，通常使用的<code>Shell</code>程序包括有：</p>
 <ul>
-<li>Verification<ul>
-<li>输入：图像 + 名字/ID</li>
-<li>输出：输入的图像上是否有名字/ID表示的那个人</li>
-</ul>
-</li>
-<li>Recognition<ul>
-<li>数据库中有$K$个人</li>
-<li>输入：图像</li>
-<li>输出：图像上有的数据库中的人的名字/ID</li>
-</ul>
-</li>
-</ul>
-<p>很明显，Recognition比Verification的难度要大得多。<br>
-        <!-- What is Face Recognition这里区分两个概念，Face verification和Face recognition，
-
-Verification
-输入：图像 + 名字/ID
-输出：输入的图像上是否有名字/ID表示的那个人
-
-
-Recognition
-数据库中有$K$个人
-输入：图像
-输出：图像上有的数据库中的人的名字/ID
-
-
-
-很明显，Recognition比Verif......  -->
+<li>Sh (Bourne Shell)</li>
+<li>Bash (Bourne Again Shell)</li>
+<li>Csh (C Shell)</li>
+<li>Ksh (Korn Shell)
+        <!-- 概述首先，咱们来了解一下，什么是Shell。操作系统内核给我们提供了各种接口，同时也提供了各种用户层的库，理论上我们基于这些可以编写程序实现各种我们想要的功能，不过问题是，咱们不可能做什么事情都要重新编写程序，这样使用起来也太困难了。因此，操作系统（包括Linux）通常都会引入一个Shell这样的特殊程序，这个程序会接受输入的命令然后执行，并可能将执行结果呈现出来。总结来说，Shell是一个......  -->
         <p class="article-more-link">
-          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-4/#more">阅读全文</a>
+          <a href="/2018/04/14/Linux学习（三）shell基础/#more">阅读全文</a>
         </p>
       
     </div>
@@ -603,6 +569,8 @@ Recognition
       
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
     </footer>
   </div>
   
@@ -611,7 +579,7 @@ Recognition
 <!-- Table of Contents -->
 
   
-    <article id="post-Convolutional-Neural-Networks-Week-1"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-Linux学习（二）文件系统结构"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -619,7 +587,7 @@ Recognition
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-1/">Convolutional Neural Networks / Week 1</a>
+      <a class="article-title" href="/2018/04/14/Linux学习（二）文件系统结构/">Linux学习（二）文件系统结构</a>
     </h1>
   
 
@@ -627,38 +595,205 @@ Recognition
     
     <div class="article-meta">
       
-	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-1/" class="article-date">
-	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
+	<a href="/2018/04/14/Linux学习（二）文件系统结构/" class="article-date">
+	  <time datetime="2018-04-14T14:57:29.000Z" itemprop="datePublished">2018-04-14</time>
 	</a>
 
       
-    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Computer-Vision"><a href="#Computer-Vision" class="headerlink" title="Computer Vision"></a>Computer Vision</h3><p>Computer Vision Problems include:</p>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>多数Linux发行版本都是遵循<code>文件系统结构标准（Filesystem Hierarchy Standard, 简称FHS）</code>，可以在<a href="http://www.pathname.com/fhs/" target="_blank" rel="external">这里</a>找到该标准。本文对Linux的文件系统结构进行简单的介绍。</p>
+<h1 id="根目录"><a href="#根目录" class="headerlink" title="根目录/"></a>根目录<code>/</code></h1><p>所有的Linux系统都有根目录，由<code>/</code>表示。Linux系统的所有内容都在该目录下。</p>
+<h1 id="二进制目录"><a href="#二进制目录" class="headerlink" title="二进制目录"></a>二进制目录</h1><p>|—————-+——————————————————————————————————————–|<br>| 目录           | 说明                                                                                                               |<br>|—————-+——————————————————————————————————————–|<br>| /bin           | 包括了可执行的二进制文件，通常这些二进制文件可以被所有用户访问。FHS规定，该目录至少包括<code>/bin/cat</code>跟<code>/bin/date</code>文件 |<br>| /sbin          | 包括了系统的二进制文件，通过需要root权限，用来配置系统                                                             |<br>| /lib           | 包括了<code>/bin</code>所依赖的库                                                                                             |<br>| /lib/modules   | Linux将从<code>/lib/modules/$kernel-version/</code>目录下载入内核模块                                                         |<br>| /lib32和/lib64 | 顾名思义，分别存放不同位数的库                                                                                     |<br>| /opt           | 该目录用来存放一些可选的软件，通常情况下，很多第三方的客户软件会选择安装在该目录下                                 |<br>|—————-+——————————————————————————————————————–|</p>
+        <!-- 概述多数Linux发行版本都是遵循文件系统结构标准（Filesystem Hierarchy Standard, 简称FHS），可以在这里找到该标准。本文对Linux的文件系统结构进行简单的介绍。
+根目录/所有的Linux系统都有根目录，由/表示。Linux系统的所有内容都在该目录下。
+二进制目录|—————-+——————————————————————————————————————–|......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/14/Linux学习（二）文件系统结构/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Linux学习（一）命令行"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/14/Linux学习（一）命令行/">Linux学习（一）命令行</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/Linux学习（一）命令行/" class="article-date">
+	  <time datetime="2018-04-14T14:54:30.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>随着Linux的发展，现在已经有了非常多的桌面版本，比如著名的Ubuntu。用这些桌面版本系统，可以满足基本的操作，然而对于一些高级点的操作，还是离不开Linux的命令行(Command Line)。而Linux的精髓也更多的体现在命令行上，其强大的功能，海量的工具，可以帮你轻而易举的完成各种复杂的系统管理操作。本文将详细讲述Linux命令行。</p>
+<h1 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h1><h2 id="帮助类"><a href="#帮助类" class="headerlink" title="帮助类"></a>帮助类</h2><h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><p>Linux有着海量的命令，而每个命令又有很多的不同参数，要记住所有的这些命令是比较困难的，因此，在使用Linux命令行的时候，必须时刻记着查看Linux的帮助，而查看帮助就是采用<code>man</code>命令。<br>
+        <!-- 概述随着Linux的发展，现在已经有了非常多的桌面版本，比如著名的Ubuntu。用这些桌面版本系统，可以满足基本的操作，然而对于一些高级点的操作，还是离不开Linux的命令行(Command Line)。而Linux的精髓也更多的体现在命令行上，其强大的功能，海量的工具，可以帮你轻而易举的完成各种复杂的系统管理操作。本文将详细讲述Linux命令行。
+基础命令帮助类manLinux有着海量的命......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/14/Linux学习（一）命令行/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-C++学习(一)"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/14/C++学习(一)/">C++学习(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/C++学习(一)/" class="article-date">
+	  <time datetime="2018-04-14T14:18:42.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/C/">C++</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="extern与static的作用"><a href="#extern与static的作用" class="headerlink" title="extern与static的作用"></a>extern与static的作用</h3><ul>
+<li>extern可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义。另外，<code>extern &quot;C&quot;</code>语句实现了类C（类C代表的是跟C语言的编译和链接方式一致的所有语言）和C++的混合编程：在C++源文件中的语句前面加上extern “C”，表明它按照类C的编译和链接规约来编译和链接，而不是C++的编译和链接规约，这样在类C的代码中就可以调用C++的函数或变量等，更多详情参考<a href="http://www.cnblogs.com/skynet/archive/2010/07/10/1774964.html" target="_blank" rel="external">http://www.cnblogs.com/skynet/archive/2010/07/10/1774964.html</a>。</li>
+<li>static的作用则与extern“水火不相容”，它限制变量或函数只能在本文件中被访问。
+        <!-- extern与static的作用
+extern可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义。另外，extern &quot;C&quot;语句实现了类C（类C代表的是跟C语言的编译和链接方式一致的所有语言）和C++的混合编程：在C++源文件中的语句前面加上extern “C”，表明它按照类C的编译和链接规约来编译和链接，而不......  -->
+        <p class="article-more-link">
+          <a href="/2018/04/14/C++学习(一)/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-vi常用命令"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/04/14/vi常用命令/">vi常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/vi常用命令/" class="article-date">
+	  <time datetime="2018-04-14T14:03:27.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/工具/">工具</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>vi编辑器拥有众多命令，可以按如下方式分为三类：</p>
 <ul>
-<li>Image Classication</li>
-<li>Object Detection</li>
-<li>… …</li>
+<li>移动光标的命令</li>
+<li>进入输入模式的命令</li>
+<li>进行修改的命令</li>
 </ul>
-<p>One of the challenges of computer vision problems is that the input can be very big. For example, a 1000 by 1000 image can have $1000 \times  64 \times 3 = 12288$ dimensions because there are three color channels. If the size of hidden layer is 1000, the number of parameters from input layer to hidden layer could be 3 billion. This will cause these problems:</p>
-<ol>
-<li>data size requirements;</li>
-<li>computational requirements;</li>
-<li>memory requirements.</li>
-</ol>
-        <!-- Computer VisionComputer Vision Problems include:
+<h1 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h1><h2 id="移动一个位置"><a href="#移动一个位置" class="headerlink" title="移动一个位置"></a>移动一个位置</h2><ul>
+<li>j：向下移动一个位置</li>
+<li>k：向上移动一个位置</li>
+<li>h：向左移动一个位置</li>
+<li>l：向右移动一个位置
+        <!-- vi编辑器拥有众多命令，可以按如下方式分为三类：
 
-Image Classication
-Object Detection
-… …
+移动光标的命令
+进入输入模式的命令
+进行修改的命令
 
-One of the challenges of computer vision problems is that the input can be very big. For example, a 1000 b......  -->
+移动光标移动一个位置
+j：向下移动一个位置
+k：向上移动一个位置
+h：向左移动一个位置
+l：向右移动一个位置
+
+
+行内大范围移动
+0：移动至行头
+$：移动至行尾
+^：移动至行内第一个非空格字符上
+
+单词间移动
+w：移动至下一个单词的词首
+e：移动至下一个单词的词尾
+b：移动至上一个单词的......  -->
         <p class="article-more-link">
-          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-1/#more">阅读全文</a>
+          <a href="/2018/04/14/vi常用命令/#more">阅读全文</a>
         </p>
       
     </div>
@@ -666,161 +801,7 @@ One of the challenges of computer vision problems is that the input can be very 
       
       
       
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-Convolutional-Neural-Networks-Week-3"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-3/">Convolutional Neural Networks / Week 3</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" class="article-date">
-	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Object-Localization"><a href="#Object-Localization" class="headerlink" title="Object Localization"></a>Object Localization</h3><p>Object localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。</p>
-<p>定义目标变量$y$ (同时也是神经网络的输出层)，<br>$$<br>y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T<br>\tag{1}<br>$$<br>
-        <!-- Object LocalizationObject localization用来识别图像中是否包含特定对象以及该对象的位置，并最终使用一个矩形框在图像中标出该特定对象。为了简化问题，在这里我们假设图片中最多包含一个待识别的对象。下面对问题进行形式化描述。
-定义目标变量$y$ (同时也是神经网络的输出层)，$$y = [P_c~b_x~b_y~b_h~b_w~C_1~C_2~C_3]^T\ta......  -->
-        <p class="article-more-link">
-          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-Convolutional-Neural-Networks-Week-2"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/Convolutional-Neural-Networks-Week-2/">Convolutional Neural Networks / Week 2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/" class="article-date">
-	  <time datetime="2018-04-12T09:09:44.000Z" itemprop="datePublished">2018-04-12</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/deep-learning/">deep-learning</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Classic-Networks"><a href="#Classic-Networks" class="headerlink" title="Classic Networks"></a>Classic Networks</h3><p>LeNet-5的网络结构如下，</p>
-<p><img src="https://raw.githubusercontent.com/HouJP/my-hexo/master/source/img/cnn-w2/lenet-5.jpeg" width="80%" align="center"></p>
-        <!-- Classic NetworksLeNet-5的网络结构如下，
-
-
-AlexNet的网络结构如下，
-
-VGG-16的网络结构如下，
-
-ResNets在一般的神经网络中，两层神经网络的数学表达如下，$$\begin{split}&amp; z^{[l+1]} = W^{[l+1]}a^{[l]} + b^{[l+1]} \\&amp; a^{[l+1]} = g(z^{[l+1]}) \\&a......  -->
-        <p class="article-more-link">
-          <a href="/2018/04/12/Convolutional-Neural-Networks-Week-2/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-利用GitHub搭建一个你的博客"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/12/利用GitHub搭建一个你的博客/">利用GitHub搭建一个你的博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/04/12/利用GitHub搭建一个你的博客/" class="article-date">
-	  <time datetime="2018-04-12T08:04:26.000Z" itemprop="datePublished">2018-04-12</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://upload-images.jianshu.io/upload_images/1917079-bbc62e5e352027e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Photo From Google"></p>
-<blockquote>
-<p><em>为什么要写博客</em><br>作为一只程序猿，踩到坑是一件非常正常的事，当我们踩到坑的时候就会花心思去研究它，可能我们能够在当时把问题弄懂并把问题给解决掉。可是过一段时间我们又遇到了同样的坑的时候，难道还要再去 百毒 Google 重新搜索一遍吗？这样做效率难免太低了，倒不如在第一次解决问题的时候就把解决方法写到我们的博客了，当我们再一次遇到相同的坑的时候翻一翻我们之前写的博客就能快速的把问题给解决掉，何乐而不为。而且我们学习新技术的时候也可以将当时学到的内容写到我们的博客，再次遇到的时候我们就可以找回当时学习的思路，继续学习。废话不多说，马上开始行动起来，搭建博客！</p>
-</blockquote>
-<p><em>声明：本文在Windows下进行操作的，Mac以及其它操作系统请做参考</em> <strong>多图警告！</strong><br>
-        <!-- 
-
-为什么要写博客作为一只程序猿，踩到坑是一件非常正常的事，当我们踩到坑的时候就会花心思去研究它，可能我们能够在当时把问题弄懂并把问题给解决掉。可是过一段时间我们又遇到了同样的坑的时候，难道还要再去 百毒 Google 重新搜索一遍吗？这样做效率难免太低了，倒不如在第一次解决问题的时候就把解决方法写到我们的博客了，当我们再一次遇到相同的坑的时候翻一翻我们之前写的博客就能快速的把问题给解决掉，......  -->
-        <p class="article-more-link">
-          <a href="/2018/04/12/利用GitHub搭建一个你的博客/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git笔记/">Git笔记</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vi/">vi</a></li></ul>
 
     </footer>
   </div>
@@ -834,7 +815,7 @@ ResNets在一般的神经网络中，两层神经网络的数学表达如下，$
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
   </nav>
 
 </section>

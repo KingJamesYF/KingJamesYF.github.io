@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="google-site-verification" content="XlAf59rYjECq4vIVONrh_NcYxWH9CxNo7IyWC1erY2s" />
   
   <title>markdown文档中mathjax的问题 | King   James</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -196,18 +195,18 @@
         <p>在写markdown文档时经常会需要插入数学公式，我之前只会使用图片插入，上次在看到mathjax后，我开始了使用mathjax的历程，但在实际写文档的过程中遇到了一些问题。</p>
 <a id="more"></a>
 <h1 id="关于有一些公式无法正确的显示"><a href="#关于有一些公式无法正确的显示" class="headerlink" title="关于有一些公式无法正确的显示"></a>关于有一些公式无法正确的显示</h1><p>在写机器学习的文章中遇到的一个关于范数的公式写出来编辑器上显示没有问题，但是一旦放进文档里就不行了，这个问题困扰了我很长时间。</p>
-<p>这是代码：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; 严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义</div><div class="line">&gt; <span class="formula">$$ <span class="tag">\<span class="name">lim</span></span>_&#123;k<span class="tag">\<span class="name">to</span></span><span class="tag">\<span class="name">infty</span></span>&#125;<span class="tag">\<span class="name">left</span></span>( <span class="tag">\<span class="name">sum</span></span>_&#123;i=1&#125;^n<span class="tag">\<span class="name">mid</span></span> p_i-q_i<span class="tag">\<span class="name">mid</span></span> ^k<span class="tag">\<span class="name">right</span></span>)^<span class="tag">\<span class="name">frac</span><span class="string">&#123;1&#125;</span><span class="string">&#123;k&#125;</span></span> $$</span></div></pre></td></tr></table></figure></p>
+<p>这是代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; 严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义</div><div class="line">&gt; $$ \lim_&#123;k\to\infty&#125;\left( \sum_&#123;i=1&#125;^n\mid p_i-q_i\mid ^k\right)^\frac&#123;1&#125;&#123;k&#125; $$</div></pre></td></tr></table></figure></p>
 <p>这是效果：</p>
 <blockquote>
 <p>严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义<br>$$ \lim<em>{k\to\infty}\left( \sum</em>{i=1}^n\mid p_i-q_i\mid ^k\right)^\frac{1}{k} $$</p>
 </blockquote>
 <p>这里haroopad显示的公式是正确的，但是hexo编译过后的网页显示就不对了。</p>
-<p>把代码剪裁一下，看看什么样子的公式是可以的：<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; 严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义</div><div class="line">&gt; $$ <span class="symbol">\l</span>im_&#123;k<span class="symbol">\t</span>o<span class="symbol">\i</span>nfty&#125;<span class="symbol">\l</span>eft( <span class="symbol">\s</span>um_i <span class="symbol">\r</span>ight) $$</div></pre></td></tr></table></figure></p>
+<p>把代码剪裁一下，看看什么样子的公式是可以的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; 严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义</div><div class="line">&gt; $$ \lim_&#123;k\to\infty&#125;\left( \sum_i \right) $$</div></pre></td></tr></table></figure></p>
 <p>效果：</p>
 <blockquote>
 <p>严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义<br>$$ \lim_{k\to\infty}\left( \sum_i \right) $$</p>
 </blockquote>
-<p>这个好像就可以，但是貌似sum后面的i一旦加上花括号就不行：<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; 严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义</div><div class="line">&gt; $$ <span class="symbol">\l</span>im_&#123;k<span class="symbol">\t</span>o<span class="symbol">\i</span>nfty&#125;<span class="symbol">\l</span>eft( <span class="symbol">\s</span>um_&#123;i&#125; <span class="symbol">\r</span>ight) $$</div></pre></td></tr></table></figure></p>
+<p>这个好像就可以，但是貌似sum后面的i一旦加上花括号就不行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; 严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义</div><div class="line">&gt; $$ \lim_&#123;k\to\infty&#125;\left( \sum_&#123;i&#125; \right) $$</div></pre></td></tr></table></figure></p>
 <p>效果：</p>
 <blockquote>
 <p>严格意义上讲，Minkowski Distance 不是一种距离，而是一组距离的定义<br>$$ \lim<em>{k\to\infty}\left( \sum</em>{i} \right) $$</p>
@@ -281,9 +280,9 @@ var a = new Donate({
     </a>
   
   
-    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-4/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/12/Convolutional-Neural-Networks-Week-3/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Convolutional Neural Networks / Week 4</div>
+      <div class="article-nav-title">Convolutional Neural Networks / Week 3</div>
     </a>
   
 </nav>

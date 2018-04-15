@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux学习（二）文件系统结构 | King   James</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Linuxstudy" />
+  
+  
+  
+  
+  <meta name="description" content="概述多数Linux发行版本都是遵循文件系统结构标准（Filesystem Hierarchy Standard, 简称FHS），可以在这里找到该标准。本文对Linux的文件系统结构进行简单的介绍。 根目录/所有的Linux系统都有根目录，由/表示。Linux系统的所有内容都在该目录下。 二进制目录|—————-+——————————————————————————————————————–|| 目">
+<meta name="keywords" content="Linux,study">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习（二）文件系统结构">
+<meta property="og:url" content="http://github.com/2018/04/14/Linux学习（二）文件系统结构/index.html">
+<meta property="og:site_name" content="King   James">
+<meta property="og:description" content="概述多数Linux发行版本都是遵循文件系统结构标准（Filesystem Hierarchy Standard, 简称FHS），可以在这里找到该标准。本文对Linux的文件系统结构进行简单的介绍。 根目录/所有的Linux系统都有根目录，由/表示。Linux系统的所有内容都在该目录下。 二进制目录|—————-+——————————————————————————————————————–|| 目">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-14T15:02:36.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux学习（二）文件系统结构">
+<meta name="twitter:description" content="概述多数Linux发行版本都是遵循文件系统结构标准（Filesystem Hierarchy Standard, 简称FHS），可以在这里找到该标准。本文对Linux的文件系统结构进行简单的介绍。 根目录/所有的Linux系统都有根目录，由/表示。Linux系统的所有内容都在该目录下。 二进制目录|—————-+——————————————————————————————————————–|| 目">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;">
+                  <img width="190px" height="127px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Linux学习（二）文件系统结构" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Linux学习（二）文件系统结构
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/Linux学习（二）文件系统结构/" class="article-date">
+	  <time datetime="2018-04-14T14:57:29.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>多数Linux发行版本都是遵循<code>文件系统结构标准（Filesystem Hierarchy Standard, 简称FHS）</code>，可以在<a href="http://www.pathname.com/fhs/" target="_blank" rel="external">这里</a>找到该标准。本文对Linux的文件系统结构进行简单的介绍。</p>
+<h1 id="根目录"><a href="#根目录" class="headerlink" title="根目录/"></a>根目录<code>/</code></h1><p>所有的Linux系统都有根目录，由<code>/</code>表示。Linux系统的所有内容都在该目录下。</p>
+<h1 id="二进制目录"><a href="#二进制目录" class="headerlink" title="二进制目录"></a>二进制目录</h1><p>|—————-+——————————————————————————————————————–|<br>| 目录           | 说明                                                                                                               |<br>|—————-+——————————————————————————————————————–|<br>| /bin           | 包括了可执行的二进制文件，通常这些二进制文件可以被所有用户访问。FHS规定，该目录至少包括<code>/bin/cat</code>跟<code>/bin/date</code>文件 |<br>| /sbin          | 包括了系统的二进制文件，通过需要root权限，用来配置系统                                                             |<br>| /lib           | 包括了<code>/bin</code>所依赖的库                                                                                             |<br>| /lib/modules   | Linux将从<code>/lib/modules/$kernel-version/</code>目录下载入内核模块                                                         |<br>| /lib32和/lib64 | 顾名思义，分别存放不同位数的库                                                                                     |<br>| /opt           | 该目录用来存放一些可选的软件，通常情况下，很多第三方的客户软件会选择安装在该目录下                                 |<br>|—————-+——————————————————————————————————————–|</p>
+<a id="more"></a>
+<h1 id="配置文件目录"><a href="#配置文件目录" class="headerlink" title="配置文件目录"></a>配置文件目录</h1><p>|—————-+————————————————————————————————————————–|<br>| 目录           | 说明                                                                                                                     |<br>|—————-+————————————————————————————————————————–|<br>| /boot          | 顾名思义，用来存放系统启动的配置文件，如grub引导的配置文件<code>/boot/grub/grub.cfg</code>                                          |<br>| /etc           | 几乎大部分配置文件都放在改目录下。历史上<code>etc</code>的全称是<code>etcetera</code>，不过，现在一般认为是<code>Editable Text Configuration</code>的缩写 |<br>| /etc/init.d    | 存放daemon启动、停止等的脚本文件。不过在引入systemd之后，启动脚本有所变化                                                |<br>| /etc/skel      | 存放创建新用户之后所需的配置文件的模板，如<code>.bashrc</code>文件，默认会从该目录拷贝到用户目录                                    |<br>| /etc/sysconfig | 一般出现在RedHat系列的Linux系统中，存放系统有关配置，如IP的配置文件等                                                    |<br>|—————-+————————————————————————————————————————–|</p>
+<h1 id="数据目录"><a href="#数据目录" class="headerlink" title="数据目录"></a>数据目录</h1><p>|——–+—————————————————————————————————-|<br>| 目录   | 说明                                                                                               |<br>|——–+—————————————————————————————————-|<br>| /home  | 当创建一个新用户的时候，默认情况下，系统会为用户创建一个<code>/home/&lt;username&gt;</code>的目录用来存放个人数据。 |<br>| /root  | 该目录被很多Linux系统用来存放root用户的个人数据                                                    |<br>| /srv   | 可以被解释为<code>served by your system</code>。FHS允许<code>rsync</code>，<code>ftp</code>，<code>www</code>等数据存放在改目录                |<br>| /media | 该目录通常被用来挂载可移除设备，如CD-ROM，U盘等                                                    |<br>| /mnt   | 根据FHS，该目录通常被用来作为短期的挂载点                                                          |<br>| /tmp   | 该目录用来存放一些短期的文件，<strong><em>不要再该目录下存放重要文件，该目录下的文件有可能会被系统回收</em></strong>   |<br>|——–+—————————————————————————————————-|</p>
+<h1 id="内存目录"><a href="#内存目录" class="headerlink" title="内存目录"></a>内存目录</h1><p>Linux系统中，几乎所有的东西都被映射成文件，文件有的是对应着硬盘、设备（CD-ROM等）等，有的则被Linux映射到内存中。这一节介绍映射到内存中的目录。</p>
+<h2 id="dev目录"><a href="#dev目录" class="headerlink" title="/dev目录"></a>/dev目录</h2><p><code>/dev</code>目录映射了各种设备文件，这些文件由系统启动的时候扫描硬件生成。</p>
+<h3 id="物理设备文件"><a href="#物理设备文件" class="headerlink" title="物理设备文件"></a>物理设备文件</h3><p>物理设备包括很多种，如硬盘，CD-ROM等。不同的物理设备映射为<code>/dev</code>目录下不同的文件。如SATA/SCSI设备或USB通常被映射为<code>/dev/sd*</code>，其中<code>*</code>可以为<code>[a-z]</code>中的任意字符；而IDE设备通常被映射为<code>/dev/hd*</code>，其中<code>*</code>为<code>[a-z]</code>中任意字符。</p>
+<h3 id="dev-tty跟-dev-pts"><a href="#dev-tty跟-dev-pts" class="headerlink" title="/dev/tty跟/dev/pts"></a>/dev/tty跟/dev/pts</h3><p>首先需要搞清楚<code>tty</code>设备跟<code>pts</code>设备的区别。这两者都是终端设备，所谓终端设备通常指的是能够接受命令输入，并可能同时能够输出的设备，但是这两者是有本质的不同的：</p>
+<ul>
+<li><p>tty设备</p>
+<p>  <code>tty</code>是<code>Teletype</code>的简称，表示原生的终端设备，通常指的是物理终端设备如串口，键鼠接口等，以及系统内核模拟的终端设备。</p>
+</li>
+<li><p>pts设备</p>
+<p>  <code>pts</code>是<code>Pseudo Terminal Slave</code>的简称，表示伪终端设备，通常由应用进程模拟出来，如ssh开启的终端等。</p>
+</li>
+</ul>
+<p><code>tty</code>设备通常被映射为<code>/dev/tty*</code>，其中<code>*</code>代表数字，如<code>/dev/tty1</code>等。而<code>pts</code>设备被映射为<code>/dev/pts/*</code>，其中<code>*</code>表示数字，如<code>/dev/pts/1</code>。</p>
+<h3 id="dev-null"><a href="#dev-null" class="headerlink" title="/dev/null"></a>/dev/null</h3><p>该文件在Linux中有着特殊的意义，是一个只有输入的文件，且文件有无限的大小，你不能从该文件读出任何东西，任何写入的内容逻辑上相当于消失了。从实现的角度，实际上任何写入的内容都被系统丢弃了。</p>
+<h2 id="proc目录"><a href="#proc目录" class="headerlink" title="/proc目录"></a>/proc目录</h2><p>该目录用来记录内核以及内核进程的实时信息，可以通过它轻而易举的实现对内核状态的获取甚至改变。</p>
+<p>|——————+——————————————————————————————————————-|<br>| 目录             | 说明                                                                                                              |<br>|——————+——————————————————————————————————————-|<br>| /proc/<id>       | 几乎每个进程都会在该目录下有映射的文件<code>/proc/*</code>，其中<code>&lt;id&gt;</code>代表进程的ID。该目录记录的该进程的几乎所有的状态信息。 |<br>| /proc/cpuinfo    | 记录了系统的CPU信息，通常通过该文件可以知道系统有多少个CPU（核数）。                                              |<br>| /proc/meminfo    | 记录了系统的内存信息，可以通过它知道系统有多少内存                                                                |<br>| /proc/sys        | 在<code>/proc</code>目录下的绝大部分文件都是只读的文件，但是在该目录下有些文件是可写的，可以通过它们改变内核状态             |<br>| /proc/interrupts | 记录了当前系统的中断信息                                                                                          |<br>| /proc/kcore      | 这个文件代表了系统的物理内存，其大小就是物理内存的大小，因此千万不要用<code>cat</code>来试图显示该文件内容                   |<br>|——————+——————————————————————————————————————-|</id></p>
+<h1 id="usr目录"><a href="#usr目录" class="headerlink" title="/usr目录"></a>/usr目录</h1><p><code>/usr</code>目录估计是被误解最多的目录，一般大家都以为它是<code>user</code>的简写，感觉应该存放的是用户相关的东西，但是实际上完全不是这样。它其实是<code>Unix System Resources</code>的简写，表示Unix系统资源。通常情况下，该目录以只读的权限被挂载。</p>
+<p>|————–+————————————————————————————————————-|<br>| 目录         | 说明                                                                                                        |<br>|————–+————————————————————————————————————-|<br>| /usr/bin     | 很多命令都存放在这个目录下面，事实上，在Centos跟Solaris系统中，<code>/bin</code>目录实际上只是一个软连接，连接到此目录 |<br>| /usr/include | 存放大量的头文件，可能会被C代码引用                                                                         |<br>| /usr/lib     | 存放库文件，同样，在Centos跟Solaris系统中，<code>/lib</code>其实就是软连接到此目录                                     |<br>| /usr/lib64   | 存放64位的库文件，在Centos中，<code>/lib64</code>也是软连接到此目录                                                    |<br>| /usr/sbin    | 很多daemon程序都是放在此目录下，在Centos中，<code>/sbin</code>也是软连接到此目录                                       |<br>| /usr/local   | 此目录通常用来安装一些本地的应用                                                                            |<br>| /usr/share   | 此目录通常用来存放各种体系无关的数据。<code>/usr/share/man</code>就是用来存放<code>man</code>命令用到的帮助文档                   |<br>| /usr/src     | 此目录通常存放内核的代码文件                                                                                |<br>|————–+————————————————————————————————————-|</p>
+<h1 id="var目录"><a href="#var目录" class="headerlink" title="/var目录"></a>/var目录</h1><p><code>/var</code>目录用来存放可变的数据，如日志，数据库文件等。</p>
+<p>|——————-+————————————————————————————————————-|<br>| 目录              | 说明                                                                                                        |<br>|——————-+————————————————————————————————————-|<br>| /var/log          | 此目录用来存放各种日志文件，包括系统跟应用的日志                                                            |<br>| /var/log/messages | 在RedHat系列系统中，此文件用来记录系统刚刚发生的事情。在Debian和Ubuntu系统中，对应的文件是<code>/var/log/syslog</code> |<br>| /var/cache        | 此目录存放很多应用的缓存数据，如<code>yum</code>命令可能会缓存部分数据在此目录                                         |<br>| /var/spool        | 一般情况下，该目录会存放邮件cron任务等数据                                                                  |<br>| /var/lib          | 通常此目录下会存放应用的状态信息，如<code>/var/lib/mysql</code>存放<code>mysql</code>数据库，<code>/var/lib/docker</code>存放<code>docker</code>的数据  |<br>|——————-+————————————————————————————————————-|</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/AliPayQR.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY4NS8xMjIyMQ==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/14/Linux学习（三）shell基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Linux学习（三）shell基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/14/Linux学习（一）命令行/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Linux学习（一）命令行</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根目录"><span class="nav-number">2.</span> <span class="nav-text">根目录/</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二进制目录"><span class="nav-number">3.</span> <span class="nav-text">二进制目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件目录"><span class="nav-number">4.</span> <span class="nav-text">配置文件目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据目录"><span class="nav-number">5.</span> <span class="nav-text">数据目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存目录"><span class="nav-number">6.</span> <span class="nav-text">内存目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dev目录"><span class="nav-number">6.1.</span> <span class="nav-text">/dev目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#物理设备文件"><span class="nav-number">6.1.1.</span> <span class="nav-text">物理设备文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dev-tty跟-dev-pts"><span class="nav-number">6.1.2.</span> <span class="nav-text">/dev/tty跟/dev/pts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dev-null"><span class="nav-number">6.1.3.</span> <span class="nav-text">/dev/null</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proc目录"><span class="nav-number">6.2.</span> <span class="nav-text">/proc目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usr目录"><span class="nav-number">7.</span> <span class="nav-text">/usr目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var目录"><span class="nav-number">8.</span> <span class="nav-text">/var目录</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2017 - 2018 King   James All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s22.cnzz.com/z_stat.php?id=1273428283&web_id=1273428283" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+	<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a936eb4d4dfc73dd81ea6d7860454bc8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            King   James
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 Mr.Yi All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

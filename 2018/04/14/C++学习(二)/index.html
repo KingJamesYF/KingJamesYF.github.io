@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>c++学习(二) | King   James</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="C++" />
+  
+  
+  
+  
+  <meta name="description" content="整形溢出和提升 大部分 C 程序员都以为基本的整形操作都是安全的其实不然,看下面这个例子,你觉得输出结果是什么:123456789101112int main(int argc, char** argv) &amp;#123;    long i = -1;    if (i &amp;lt; sizeof(i)) &amp;#123;         printf(&quot;OK\n&quot;);    &amp;#125;    else">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++学习(二)">
+<meta property="og:url" content="http://github.com/2018/04/14/C++学习(二)/index.html">
+<meta property="og:site_name" content="King   James">
+<meta property="og:description" content="整形溢出和提升 大部分 C 程序员都以为基本的整形操作都是安全的其实不然,看下面这个例子,你觉得输出结果是什么:123456789101112int main(int argc, char** argv) &amp;#123;    long i = -1;    if (i &amp;lt; sizeof(i)) &amp;#123;         printf(&quot;OK\n&quot;);    &amp;#125;    else">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-15T07:21:33.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++学习(二)">
+<meta name="twitter:description" content="整形溢出和提升 大部分 C 程序员都以为基本的整形操作都是安全的其实不然,看下面这个例子,你觉得输出结果是什么:123456789101112int main(int argc, char** argv) &amp;#123;    long i = -1;    if (i &amp;lt; sizeof(i)) &amp;#123;         printf(&quot;OK\n&quot;);    &amp;#125;    else">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;">
+                  <img width="190px" height="127px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-C++学习(二)" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      C++学习(二)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/C++学习(二)/" class="article-date">
+	  <time datetime="2018-04-14T15:30:54.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/C/">C++</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>整形溢出和提升</strong></p>
+<p>大部分 C 程序员都以为基本的整形操作都是安全的其实不然,看下面这个例子,<br>你觉得输出结果是什么:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</div><div class="line">    <span class="keyword">long</span> i = <span class="number">-1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (i &lt; <span class="keyword">sizeof</span>(i)) &#123;</div><div class="line">         <span class="built_in">printf</span>(<span class="string">"OK\n"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">         <span class="built_in">printf</span>(<span class="string">"error\n"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>当一个变量转换成无符号整形时,i的值不再是-1,而是 size_t的最大值,因<br>为sizeof操作返回的是一个 size_t类型的无符号数。<br>在C99/C11标准里写道:</p>
+<blockquote>
+<p>“If the operand that has unsigned integer type has rank greater or<br>equal to the rank of the type of the other operand, then the operand<br>with signed integer type is converted to the type of the operand with<br>unsigned integer type.”</p>
+</blockquote>
+<p>在C标准里面 size_t至少是一个 16 位的无符号整数,对于给定的架构 size_t 一般对应long,所以sizeof（int）和size_t至少相等,这就带来了可移植性的问题,C标准没有定义 short, int,long,longlong的大小,只是说明了他们的最小长度,对于 x86_64 架构,long在Linux下是64位,而在64位Windows下是32位。一般的方法是采用固定长度的类型比如定义在C99头文件stdint.h中的uint16_t,int32_t,uint_least16_t,uint_fast16_t等。</p>
+<p>如果 int可以表示原始类型的所有值,那么这个操作数会转换成 int,否则<br>他会转换成 unsigned int。下面这个函数在 32 位平台返回 65536,但是在 16 位系统返回 0。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">uint32_t</span> sum()</div><div class="line">&#123;</div><div class="line">    <span class="keyword">uint16_t</span> a = <span class="number">65535</span>;</div><div class="line">    <span class="keyword">uint16_t</span> b = <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对于char 类型到底是 signed 还是 unsigned 取决于硬件架构和操作系统,通常<br>由特定平台的 ABI(Application Binary Interface) 指定,如果是 signed char,下面的代码输出-128 和-127,否则输出 128,129(x86 架构)。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> c = <span class="number">128</span>;</div><div class="line"><span class="keyword">char</span> d = <span class="number">129</span>;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d,%d\n"</span>,c,d);</div></pre></td></tr></table></figure></p>
+<hr>
+<p>##内存管理和分配</p>
+<p>malloc 函数分配制定字节大小的内存,对象未被初始化,如果 size 是 0 取<br>决与系统实现。malloc(0)返回一个空指针或者 unique pointer,如果 size 是表达式的运算结果,确保没有整形溢出。</p>
+<blockquote>
+<p>“If the size of the space requested is 0, the behavior is<br>implementation- defined: the value returned shall be either a null<br>pointer or a unique pointer.”<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">size_t</span> computed_size;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (elem_size &amp;&amp; num &gt; SIZE_MAX / elem_size) &#123;</div><div class="line">    errno = ENOMEM;</div><div class="line">    err(<span class="number">1</span>, <span class="string">"overflow"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">computed_size = elem_size*num;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>malloc不会给分配的内存初始化，如果要对新分配的内存初始化，可以用calloc代替malloc,一般情况下给序列分配相等大小的元素时,用calloc来代替用表达式计算大小,calloc 会把内存初始化为 0。</p>
+<p>realloc 用来对已经分配内存的对象改变大小,如果新的 size 更大,额外的空间<br>没 有 被 初 始 化 , 如 果 提 供 给 realloc 的 指 针 是 空 指 针 , realloc 就 等 效 于malloc,如果原指针非空而 new size是0,结果依赖于操作系统的具体实现。</p>
+<blockquote>
+<p>“In case of failure realloc shall return NULL and leave provided memory<br>object intact. Thus it is important not only to check for integer<br>overflow of size argument, but also to correctly handle object size if<br>realloc fails.”</p>
+</blockquote>
+<p>下面这段代码可以带你领会malloc,calloc，realloc,free的用法：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;malloc.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> VECTOR_OK            0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> VECTOR_NULL_ERROR    1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> VECTOR_SIZE_ERROR    2</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> VECTOR_ALLOC_ERROR   3</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">vector</span> &#123;</span></div><div class="line">    <span class="keyword">int</span> *data;</div><div class="line">    <span class="keyword">size_t</span> size;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">create_vector</span><span class="params">(struct <span class="built_in">vector</span> *vc, <span class="keyword">size_t</span> num)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (vc == <span class="literal">NULL</span>) &#123;</div><div class="line">        <span class="keyword">return</span> VECTOR_NULL_ERROR;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    vc-&gt;data = <span class="number">0</span>;</div><div class="line">    vc-&gt;size = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="comment">/* check for integer and SIZE_MAX overflow */</span></div><div class="line">    <span class="keyword">if</span> (num == <span class="number">0</span> || SIZE_MAX / num &lt; <span class="keyword">sizeof</span>(<span class="keyword">int</span>)) &#123;</div><div class="line">        errno = ENOMEM;</div><div class="line">        <span class="keyword">return</span> VECTOR_SIZE_ERROR;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    vc-&gt;data = <span class="built_in">calloc</span>(num, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</div><div class="line"></div><div class="line">    <span class="comment">/* calloc faild */</span></div><div class="line">    <span class="keyword">if</span> (vc-&gt;data == <span class="literal">NULL</span>) &#123;</div><div class="line">        <span class="keyword">return</span> VECTOR_ALLOC_ERROR;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    vc-&gt;size = num * <span class="keyword">sizeof</span>(<span class="keyword">int</span>);</div><div class="line">    <span class="keyword">return</span> VECTOR_OK;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">grow_vector</span><span class="params">(struct <span class="built_in">vector</span> *vc)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">void</span> *newptr = <span class="number">0</span>;</div><div class="line">    <span class="keyword">size_t</span> newsize;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (vc == <span class="literal">NULL</span>) &#123;</div><div class="line">        <span class="keyword">return</span> VECTOR_NULL_ERROR;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/* check for integer and SIZE_MAX overflow */</span></div><div class="line">    <span class="keyword">if</span> (vc-&gt;size == <span class="number">0</span> || SIZE_MAX / <span class="number">2</span> &lt; vc-&gt;size) &#123;</div><div class="line">        errno = ENOMEM;</div><div class="line">        <span class="keyword">return</span> VECTOR_SIZE_ERROR;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    newsize = vc-&gt;size * <span class="number">2</span>;</div><div class="line"></div><div class="line">    newptr = <span class="built_in">realloc</span>(vc-&gt;data, newsize);</div><div class="line"></div><div class="line">    <span class="comment">/* realloc faild; vector stays intact size was not changed */</span></div><div class="line">    <span class="keyword">if</span> (newptr == <span class="literal">NULL</span>) &#123;</div><div class="line">        <span class="keyword">return</span> VECTOR_ALLOC_ERROR;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/* upon success; update new address and size */</span></div><div class="line">    vc-&gt;data = newptr;</div><div class="line">    vc-&gt;size = newsize;</div><div class="line">    <span class="keyword">return</span> VECTOR_OK;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>##避免重大错误</p>
+<ol>
+<li><p>使用未初始化的变量，<br>C语言要求所有变量在使用之前要初始化，使用未初始化的变量会造成为定义的行为，这和C++不同，C++保证所有变量在使用之前都得到初始化，Java<strong>尽量保证</strong>变量使用前的得到初始化，如类基本数据成员会被初始化为默认值。</p>
+</li>
+<li><p>free错误<br>对空指针调用 free,对不是由 malloc family 函数分配的指针调用 free,或者对<br>已经调用 free 的指针再次调用 free。<br>一开始初始化指针为NULL可以减少错误,GCC和Clang编译器有-Wuninitialized 选项来对未初始化的变量显示警告信息,另外不要将同一个指针用于静态变量和动态变量。</p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;     <span class="keyword">char</span> *ptr = <span class="literal">NULL</span>;</div><div class="line">&gt;     <span class="function"><span class="keyword">void</span> <span class="title">nullfree</span><span class="params">(<span class="keyword">void</span> **pptr)</span> </span>&#123;</div><div class="line">&gt;         <span class="keyword">void</span> *ptr = *pptr;</div><div class="line">&gt;         assert(ptr != <span class="literal">NULL</span>)</div><div class="line">&gt;         <span class="built_in">free</span>(ptr);</div><div class="line">&gt;         *pptr = <span class="literal">NULL</span>;</div><div class="line">&gt;     &#125;</div></pre></td></tr></table></figure>
+<p>3.对空指针解引用，数组越界访问</p>
+<p>对NULL指针或者free’d内存解引用，数组越界访问，是很明显的错误，为了消除这种错误，一般的做法就是增加数组越界检查的功能，比如Java里的array就有下标检查的功能，但是这样会带来严重的性能代价，我们要修改ABI（application binary interface），让每个指针都跟随着它的范围信息，在数值计算中cost is terrible。</p>
+<p>4.违反类型规则</p>
+<p>把int×指针cast成float×，然后对它解引用，在C里面会引发undefined behavior，C规定这种类型的转换需要使用memset，C++里面有个reinterpret_cast函数用于无关类型之间的转换，reinterpret_cast <new_type> (expression)</new_type></p>
+<hr>
+<p>##防止内存泄漏</p>
+<p>内存泄漏发生在程序不再使用的动态内存没有得到释放，这需要我们掌握动态分配对象的作用域，尤其是什么时候该调用free来释放内存，常用的集中方法如下：</p>
+<ol>
+<li><p>在程序启动的时候分配<br>在程序启动的时候分配需要的heap memory，程序退出时把释放的任务交给操作系统，这种方法一般适用于程序运行后马上退出的那种。</p>
+</li>
+<li><p>使用变长数组（VLA）<br>如果你需要一块变长大小的空间并且作用域在函数中，变长数组可以帮到你，但是也有一个限制，一个函数中的变长数组内存大小一般不超过几百字节，这个数字C标准没有明确的定义，最好是把内存分配到栈上，在栈上允许分配的最大VLA内存是SIZE_MAX，掌握目标平台的栈大小可以有效的防止栈溢出。</p>
+</li>
+<li><p>使用引用计数<br>引用计数是一个很好的管理内存的方法，特别是当你不希望自己定义的对象被复制时，每一次赋值把引用计数加1,每次失去引用就把引用计数减1,当引用计数等于0时，以为的对象已经不再需要了，我们需要释放对象占用的内存，由于C不提供自动的析构函数，我们必须手动释放内存，看一个例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_REF_OBJ 100</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> RC_ERROR -1</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mem_obj_t</span>&#123;</span></div><div class="line">    <span class="keyword">void</span> *ptr;</div><div class="line">    <span class="keyword">uint16_t</span> count;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">mem_obj_t</span> <span class="title">references</span>[<span class="title">MAX_REF_OBJ</span>];</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">uint16_t</span> reference_count = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="comment">/* create memory object and return handle */</span></div><div class="line"><span class="keyword">uint16_t</span> create(<span class="keyword">size_t</span> size)&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (reference_count &gt;= MAX_REF_OBJ)</div><div class="line">        <span class="keyword">return</span> RC_ERROR;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (size)&#123;</div><div class="line">  <span class="keyword">void</span> *ptr = <span class="built_in">calloc</span>(<span class="number">1</span>, size);</div><div class="line"></div><div class="line"><span class="keyword">if</span> (ptr != <span class="literal">NULL</span>)&#123;</div><div class="line">    references[reference_count].ptr = ptr;</div><div class="line">    references[reference_count].count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> reference_count++;</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> RC_ERROR;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/* get memory object and increment reference counter */</span></div><div class="line"><span class="function"><span class="keyword">void</span>* <span class="title">retain</span><span class="params">(<span class="keyword">uint16_t</span> handle)</span></span>&#123;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(handle &lt; reference_count &amp;&amp; handle &gt;= <span class="number">0</span>)&#123;</div><div class="line">    references[handle].count++;</div><div class="line">    <span class="keyword">return</span> references[handle].ptr;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* decrement reference counter */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">release</span><span class="params">(<span class="keyword">uint16_t</span> handle)</span></span>&#123;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"release\n"</span>);</div><div class="line"></div><div class="line"><span class="keyword">if</span>(handle &lt; reference_count &amp;&amp; handle &gt;= <span class="number">0</span>)&#123;</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">mem_obj_t</span> *<span class="title">object</span> = &amp;<span class="title">references</span>[<span class="title">handle</span>];</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (object-&gt;count &lt;= <span class="number">1</span>)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"released\n"</span>);</div><div class="line">    <span class="built_in">free</span>(object-&gt;ptr);</div><div class="line">    reference_count--;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"decremented\n"</span>);</div><div class="line">    object-&gt;count--;</div><div class="line">        &#125;</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>C++标准库有个auto_ptr智能指针，能够自动释放指针所指对象的内存，C++ boost库有个boost：：shared_ptr智能指针，内置引用计数，支持拷贝和赋值，看下面这个例子：</p>
+<blockquote>
+<p>“Objects of shared_ptr types have the ability of taking ownership of a pointer and share that ownership: once they take ownership, the group of owners of a pointer become responsible for its deletion when the last one of them releases that ownership.”</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/smart_ptr.hpp&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="comment">// Basic useage</span></div><div class="line">    boost::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>));</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ref count of p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    boost::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p2(p1); <span class="comment">// or p2 = p1;</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ref count of p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    *p1 = <span class="number">999</span>;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"*p2: "</span> &lt;&lt; *p2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    p2.reset();</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ref count of p1: "</span> &lt;&lt; p1.use_count() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 4.内存池，有利于减少内存碎片，看下面这个例子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mem_pool_t</span>&#123;</span></div><div class="line"><span class="keyword">void</span>* ptr;<span class="comment">//指向内存池起始地址</span></div><div class="line"><span class="keyword">size_t</span> size;<span class="comment">//内存池大小</span></div><div class="line"><span class="keyword">size_t</span> used;<span class="comment">//已用内存大小</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//create memory pool</span></div><div class="line"><span class="function">struct mem_pool_t* <span class="title">create_pool</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>&#123;</div><div class="line"><span class="keyword">mem_pool_t</span>* pool=<span class="built_in">calloc</span>(<span class="number">1</span>,<span class="keyword">sizeof</span>(struct <span class="keyword">men_pool_t</span>));</div><div class="line"><span class="keyword">if</span>(pool!=<span class="literal">NULL</span>)&#123;</div><div class="line"><span class="keyword">void</span>* mem=<span class="built_in">calloc</span>(<span class="number">1</span>,size);</div><div class="line"><span class="keyword">if</span>(mem!=<span class="literal">NULL</span>)&#123;</div><div class="line">pool-&gt;ptr=mem;</div><div class="line">pool-&gt;size=size;</div><div class="line">pool-&gt;used=<span class="number">0</span>;</div><div class="line"><span class="keyword">return</span> pool;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//allocate memory from pool</span></div><div class="line"><span class="function"><span class="keyword">void</span>* <span class="title">pool_alloc</span><span class="params">(<span class="keyword">mem_pool_t</span>* pool,<span class="keyword">size_t</span> size)</span></span>&#123;</div><div class="line"><span class="keyword">if</span>(pool=<span class="literal">NULL</span>)</div><div class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line"><span class="keyword">size_t</span> bytes_left=pool-&gt;size-pool-&gt;used;</div><div class="line"><span class="keyword">if</span>(size&amp;&amp;size&lt;=bytes_left)&#123;</div><div class="line">    <span class="keyword">void</span>* mem=pool-&gt;ptr+pool-&gt;used;</div><div class="line">    pool-&gt;used+=size;</div><div class="line">    <span class="keyword">return</span> mem;</div><div class="line">    &#125;</div><div class="line"><span class="keyword">return</span> <span class="literal">NULL</span>；</div><div class="line">&#125;</div><div class="line"></div><div class="line">／／release memory of the pool</div><div class="line"><span class="keyword">void</span> pool_free(<span class="keyword">mem_pool_t</span>* pool)&#123;</div><div class="line"><span class="keyword">if</span>(pool!=<span class="literal">NULL</span>)&#123;</div><div class="line"><span class="built_in">free</span>(pool-&gt;ptr);</div><div class="line"><span class="built_in">free</span>(pool);</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 5.垃圾回收机制<br> 引用计数采用的方法是当内存不再需要时得到手动释放，垃圾回收发生在内存分配失败或者内存到达一定的水位（watermarks），实现垃圾回收最简单的一个算法是MARK AND SWEEP算法，该算法的思路是遍历所有动态分配对象的内存，标记那些还能继续使用的，回收那些没有被标记的内存。<br>    Java采用的垃圾回收机制就更复杂了，思路也是回收那些不再使用的内存，JAVA的垃圾回收和C++的析构函数又不一样，C++保证对象在使用之前得到初始化，对象超出作用域之后内存得到释放，而JAVA不能保证对象一定被析构。</p>
+<hr>
+<p>##指针和数组</p>
+<p>我们一般的概念里指针和数组名是可互换的，但是在编译器里他们被不同的对待，当我们说一个对象或者表达式具有某种类型的时候我们一般是说这个对象是个左值（lvalue），当对象不是const的时候，左值是可以修改的，比如对象是复制操作符的左参数，而数组名是一个const左值，指向地一个元素的const指针，所以你不能给数组名赋值或者意图改变数组名，如果表达式是数组类型，数组名通常转换成指向地一个元素的指针。</p>
+<p>但是也有例外，什么情况下数组名不是一个指针呢？<br>1.当它是sizeof操作符的操作数时，返回数组占的内存字节数<br>2.当它是取地址操作&amp;的操作数时，返回一个数组的地址</p>
+<p>看下面这个例子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">short</span> a[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</div><div class="line"><span class="keyword">short</span> *pa;</div><div class="line"><span class="keyword">short</span> (*px)[];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">    pa = a;</div><div class="line">    px = &amp;a;</div><div class="line"></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"a:%p; pa:%p; px:%p\n"</span>, a, pa, px);</div><div class="line"></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"a[1]:%i; pa[1]:%i (*px)[1]:%i\n"</span>, a[<span class="number">1</span>], pa[<span class="number">1</span>],(*px)[<span class="number">1</span>]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>a是一个short类型数组，pa是一个指向short类型的指针，px呢？<br>px是一个指向数组类型的指针，在a被赋值给pa之前，他的值被转换成一个指向数组第一个元素的指针，下面那个a却没有转换，因为遇到的是&amp;操作符。<br>数组下标a[1]等价于<em>(a+1),和p[1]一样，也指向</em>(p+1)，但是两者还是有区别的，a是一个数组，它实际上存储的是第一个元素的地址，所以数组a是用来定位第一个元素的，而pa不一样，它就是一个指针，不是用来定位的。<br>再比如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> b[<span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> *a;</div><div class="line">c=&amp;a[<span class="number">0</span>];<span class="comment">//c是指向数组a地一个元素的指针</span></div><div class="line">c=a;<span class="comment">//a自动转换成指向第一个元素的指针，实际上是指针拷贝</span></div><div class="line">b=a;<span class="comment">//非法的，你不能用赋值符把一个数组的所有元素赋给另一个数组</span></div><div class="line">a=c;<span class="comment">//非法的，你不能修改const指针的值</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/AliPayQR.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY4NS8xMjIyMQ==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/15/矩阵的-SVD-分解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          矩阵的 SVD 分解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/14/算法-图算法介绍/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">算法--图算法介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav">无</ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2017 - 2018 King   James All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s22.cnzz.com/z_stat.php?id=1273428283&web_id=1273428283" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+	<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a936eb4d4dfc73dd81ea6d7860454bc8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            King   James
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 Mr.Yi All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

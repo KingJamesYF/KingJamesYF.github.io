@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux学习（三）shell基础 | King   James</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Linuxstudy" />
+  
+  
+  
+  
+  <meta name="description" content="概述首先，咱们来了解一下，什么是Shell。操作系统内核给我们提供了各种接口，同时也提供了各种用户层的库，理论上我们基于这些可以编写程序实现各种我们想要的功能，不过问题是，咱们不可能做什么事情都要重新编写程序，这样使用起来也太困难了。因此，操作系统（包括Linux）通常都会引入一个Shell这样的特殊程序，这个程序会接受输入的命令然后执行，并可能将执行结果呈现出来。总结来说，Shell是一个从输入">
+<meta name="keywords" content="Linux,study">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习（三）shell基础">
+<meta property="og:url" content="http://github.com/2018/04/14/Linux学习（三）shell基础/index.html">
+<meta property="og:site_name" content="King   James">
+<meta property="og:description" content="概述首先，咱们来了解一下，什么是Shell。操作系统内核给我们提供了各种接口，同时也提供了各种用户层的库，理论上我们基于这些可以编写程序实现各种我们想要的功能，不过问题是，咱们不可能做什么事情都要重新编写程序，这样使用起来也太困难了。因此，操作系统（包括Linux）通常都会引入一个Shell这样的特殊程序，这个程序会接受输入的命令然后执行，并可能将执行结果呈现出来。总结来说，Shell是一个从输入">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-14T15:05:08.572Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux学习（三）shell基础">
+<meta name="twitter:description" content="概述首先，咱们来了解一下，什么是Shell。操作系统内核给我们提供了各种接口，同时也提供了各种用户层的库，理论上我们基于这些可以编写程序实现各种我们想要的功能，不过问题是，咱们不可能做什么事情都要重新编写程序，这样使用起来也太困难了。因此，操作系统（包括Linux）通常都会引入一个Shell这样的特殊程序，这个程序会接受输入的命令然后执行，并可能将执行结果呈现出来。总结来说，Shell是一个从输入">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;">
+                  <img width="190px" height="127px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Linux学习（三）shell基础" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Linux学习（三）shell基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/04/14/Linux学习（三）shell基础/" class="article-date">
+	  <time datetime="2018-04-14T15:03:35.000Z" itemprop="datePublished">2018-04-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>首先，咱们来了解一下，什么是<code>Shell</code>。操作系统内核给我们提供了各种接口，同时也提供了各种用户层的库，理论上我们基于这些可以编写程序实现各种我们想要的功能，不过问题是，咱们不可能做什么事情都要重新编写程序，这样使用起来也太困难了。因此，操作系统（包括Linux）通常都会引入一个<code>Shell</code>这样的特殊程序，这个程序会接受输入的命令然后执行，并可能将执行结果呈现出来。总结来说，<code>Shell</code>是一个从输入设备或者文件读取命令，并且解释、执行的用户态程序。</p>
+<p>在Linux系统中，通常使用的<code>Shell</code>程序包括有：</p>
+<ul>
+<li>Sh (Bourne Shell)</li>
+<li>Bash (Bourne Again Shell)</li>
+<li>Csh (C Shell)</li>
+<li>Ksh (Korn Shell)<a id="more"></a>
+一般来说，<code>Bash</code>应该是使用最多的<code>Shell</code>程序了，本文也主要基于<code>Bash</code>来展开。</li>
+</ul>
+<h1 id="Shell展开（Shell-Expansion）"><a href="#Shell展开（Shell-Expansion）" class="headerlink" title="Shell展开（Shell Expansion）"></a>Shell展开（Shell Expansion）</h1><p><code>Shell</code>程序是一个命令解释器，因此在终端输入命令之后，<code>Shell</code>将扫描命令并做适当的修改，这个过程称为Shell展开。Shell展开是Shell解释执行之前极为重要的一步，了解它将有利于你对Shell命令或者脚本的理解，本章节将逐步带大家来了解这个过程。</p>
+<h2 id="命令参数解析"><a href="#命令参数解析" class="headerlink" title="命令参数解析"></a>命令参数解析</h2><p>这里的空格包括了制表符（Tab）。当Shell程序扫描输入的命令时，会以<em>连续</em>的空格为界，将命令切分成一组参数，因此你输入多个空格为界跟输入一个空格的效果是一样的。通常来讲，第一个参数就是要执行的命令，而后面的参数则是改命令的参数。一下几个命令其实是等效的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># echo Hello World</div><div class="line">Hello World</div><div class="line"># echo   Hello World</div><div class="line">Hello World</div><div class="line">#    echo Hello World</div><div class="line">Hello World</div></pre></td></tr></table></figure>
+<h2 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h2><p>当然，有时候你需要在一个参数中包括空格，这样的话你就需要将这个参数以引号引起来，引号包括了单引号<code>&#39;</code>跟双引号<code>&quot;</code>，两者都可以。<code>shell</code>会将引号中的字符串视为一个参数，不论里面有没有空格。当然，特别指出的是，不要用反引号<code>` </code>，反引号将在后面详细讲述。</p>
+<p>如命令<code>echo &#39;Hello World!&#39;</code>在<code>shell</code>解析之后会有两个参数，分别为<code>echo</code>跟<code>Hello World!</code>。而如果不用引号<code>echo Hello World!</code>，则将解析为三个参数。</p>
+<blockquote>
+<p>特别提一下，对于<code>echo</code>命令，如果需要输出需要转义的字符，如回车等，则需要执行<code>echo -e &quot;Hello World!\n&quot;</code>，如果不加<code>-e</code>，则<code>\n</code>会被直接显示出来。</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;    # echo &quot;hello\n&quot;</div><div class="line">&gt;    hello\n</div><div class="line">&gt;    # echo -e &quot;hello\n&quot;</div><div class="line">&gt;    hello</div><div class="line">&gt;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p>对于<code>shell</code>来说，命令有内部命令（Builtin Commands）跟外部命令（External Commands）之分，所谓内部命令指的是包含在<code>shell</code>解析器中的命令。内部命令一般有<a href="http://www.gnu.org/software/bash/manual/bashref.html#Shell-Builtin-Commands" target="_blank" rel="external">4种类型</a>：</p>
+<ul>
+<li><p><code>sh</code>内部命令</p>
+<p>  这些内部命令来源于<code>Bourne Shell</code>，通常包括了以下命令：<br>  <code>: . break cd continue eval exec exit export getopts hash pwd readonly return shift test/[ times trap umask unset</code>。</p>
+</li>
+<li><p><code>bash</code>内部命令</p>
+<p>  这些内部命令来源于<code>Bourne Again Shell</code>，通常包括了以下命令：<br>  <code>alias bind builtin caller command declare echo enable help let local logout mapfile printf read readarray source type typeset ulimit unalias</code>。</p>
+</li>
+<li><p>修改<code>shell</code>行为的内部命令</p>
+<p>  这些内部命令用来修改<code>shell</code>的默认行为。包括了<code>set shopt</code>命令。</p>
+</li>
+<li><p>特殊内部命令</p>
+<p>  由于历史原因，POSIX标准将一些内部命令划分为特殊内部命令，特殊的之处在于这些命令的查找时间以及命令运行后的状态等方面，只有当Bash以<a href="http://www.gnu.org/software/bash/manual/bashref.html#Bash-POSIX-Mode" target="_blank" rel="external">POSIX模式</a>运行时，这些命令才是特殊命令，否则它们跟其它内部命令没啥区别。特殊内部命令包括了<code>break : . continue eval exec exit export readonly return set shift trap unset</code>。</p>
+</li>
+</ul>
+<p><strong>内部命令可能会被提前至于内存中，因此运行起来会比外部命令要快。</strong>对于外部命令，可以认为除了内部命令之后就可以认为是外部命令了，通常来讲，<code>/bin</code>跟<code>/sbin</code>下的都是外部命令，当然，应用有关的通常也是外部命令。</p>
+<p>我们可以通过<code>type</code>命令来查看一个命令是否是内部命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># type cd</div><div class="line">cd is a shell builtin</div><div class="line"># type awk</div><div class="line">awk is /usr/bin/awk</div></pre></td></tr></table></figure>
+<p>另外，对于很多内部命令，它们可能对应的会有外部命令版本，可以通过<code>type</code>命令来查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># type -a echo</div><div class="line">echo is a shell builtin</div><div class="line">echo is /usr/bin/echo</div><div class="line"># type -a cd</div><div class="line">cd is a shell builtin</div><div class="line">cd is /usr/bin/cd</div></pre></td></tr></table></figure>
+<p>反过来，我们一般可以通过命令<code>which</code>来查询一个命令是否是外部命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># which awk</div><div class="line">/usr/bin/awk</div><div class="line"># which .</div><div class="line">/usr/bin/which: no . in (/opt/rh/rh-python34/root/usr/bin:/usr/java/default/bin/:/usr/local/git/bin:/opt/ActiveTcl-8.5/bin:/root/perl5/bin:/root/env/maven/apache-maven-3.3.3/bin:/root/soft/wrk/wrk-4.0.1:/root/usr/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin)</div></pre></td></tr></table></figure>
+<p>总结一下，通过<code>which</code>查询出来的是其外部命令版本，通过<code>type</code>默认查询出来的是内部命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># which echo</div><div class="line">/usr/bin/echo</div><div class="line"># type echo</div><div class="line">echo is a shell builtin</div></pre></td></tr></table></figure>
+<p>对于内部命令的详细说明，可以查看<a href="http://www.gnu.org/software/bash/manual/bashref.html#Shell-Builtin-Commands" target="_blank" rel="external">GNU的文档</a>。</p>
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><p>可以用<code>alias</code>命令给一个命令取一个别名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># alias print=echo</div><div class="line"># print &quot;hello&quot;</div><div class="line">hello</div><div class="line"># type print</div><div class="line">print is aliased to `echo&apos;</div></pre></td></tr></table></figure>
+<p>别名一个常用的用法是用来缩写已知的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># type ls</div><div class="line">ls is aliased to `ls --color=auto&apos;</div></pre></td></tr></table></figure>
+<p>可见<code>ls</code>命令实际上是命令<code>ls --color=auto</code>的别名，这样就相当于改变了<code>ls</code>命令的默认行为了。在这种情况下，如果仍然想用原先的命令，可以在别名前加反斜杠<code>\</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># type ls</div><div class="line">ls is aliased to `ls --color=auto&apos;</div><div class="line"># \ls</div><div class="line">Test1  test2  test.cpp  test.log  time.log</div></pre></td></tr></table></figure>
+<p>前面咱们通过<code>type</code>命令来查看命令的别名，实际上更加推荐采用<code>alias</code>或者<code>which</code>来查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># alias ls</div><div class="line">alias ls=&apos;ls --color=auto&apos;</div><div class="line"># which ls</div><div class="line">alias ls=&apos;ls --color=auto&apos;</div><div class="line">    /usr/bin/ls</div></pre></td></tr></table></figure>
+<p>如果要取消别名，则可以采用<code>unalias</code>命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># which ls</div><div class="line">alias ls=&apos;ls --color=auto&apos;</div><div class="line">    /usr/bin/ls</div><div class="line"># unalias ls</div><div class="line"># which ls</div><div class="line">/usr/bin/ls</div></pre></td></tr></table></figure>
+<h2 id="显示shell展开的结果"><a href="#显示shell展开的结果" class="headerlink" title="显示shell展开的结果"></a>显示shell展开的结果</h2><p>由于<code>shell</code>展开的存在，你输入的命令被展开之后可能会发生变化，如果需要知道<code>shell</code>展开之后的命令，可以使用内部命令<code>set</code>来修改<code>shell</code>的默认参数来显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># set -x</div><div class="line">++ printf &apos;\033]0;%s@%s:%s\007&apos; root traffic-base1 &apos;~&apos;</div><div class="line"># echo hello         world</div><div class="line">+ echo hello world</div><div class="line">hello world</div><div class="line">++ printf &apos;\033]0;%s@%s:%s\007&apos; root traffic-base1 &apos;~&apos;</div></pre></td></tr></table></figure>
+<p>其中，以<code>+</code>开头的就是展开之后的命令，可见展开之后，<code>shell</code>将多余的空格去掉了。如果不要再显示了，可以输入命令<code>set +x</code>。</p>
+<h1 id="shell控制操作符-Control-Operators）"><a href="#shell控制操作符-Control-Operators）" class="headerlink" title="shell控制操作符 (Control Operators）"></a>shell控制操作符 (Control Operators）</h1><h2 id="操作符"><a href="#操作符" class="headerlink" title="$?操作符"></a><code>$?</code>操作符</h2><p>每个命令执行完后都会有个退出码（Exit Code），其值为0时表示命令成功，否则命令失败。这个退出码可以通过<code>$?</code>来访问，执行完命令后立马访问<code>$?</code>可以获取该命令的退出码，并以此来判断命令是否成功。每个命令的执行都会产生新的退出码，所以请务必在命令执行完，立刻访问<code>$?</code>来获取退出码。</p>
+<p>初看起来，<code>$?</code>似乎是一个<code>shell</code>变量，但实际上并非如此，因为你无法对<code>$?</code>赋值。<code>$?</code>准确来说是<code>shell</code>的一个内部参数。</p>
+<h2 id="分号"><a href="#分号" class="headerlink" title="分号;"></a>分号<code>;</code></h2><p><code>shell</code>命令输入时，你可以将多个命令输入在一行，只要在不同命令之间以分号<code>;</code>隔开，当然分号不能是在引号中。</p>
+<blockquote>
+<p>必须注意的是，如果将多个命令以<code>;</code>连接在一起，执行的结果通过<code>$?</code>查询出来将只是最后一个命令的结果</p>
+</blockquote>
+<h2 id="amp-符号"><a href="#amp-符号" class="headerlink" title="&amp;符号"></a><code>&amp;</code>符号</h2><p>通常情况下，<code>shell</code>会在前台执行命令，并等待命令结束才返回。如果需要将命令放到后台去执行，可以使用<code>&amp;</code>符号放在命令最后面，这样的话命令会被放在后台执行，<code>shell</code>会立刻返回而不用等待命令结束。</p>
+<blockquote>
+<p>注意的是，即便放在后台执行，但是如果不处理好命令的输入，则命令的输出可能会继续在当前的终端输出，后面会讲述如何处理命令的输出。</p>
+</blockquote>
+<h2 id="amp-amp-操作符"><a href="#amp-amp-操作符" class="headerlink" title="&amp;&amp;操作符"></a><code>&amp;&amp;</code>操作符</h2><p>此操作符表示逻辑与，你可以将两个命令用此操作符连接起来，如<code>cmd1 &amp;&amp; cmd2</code>，只有当<code>cmd1</code>执行成功之后，<code>cmd2</code>才会被执行。这里的成功指的是<code>cmd1</code>的退出码是0。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># hello &amp;&amp; echo world</div><div class="line">-bash: hello: command not found</div><div class="line"># echo hello &amp;&amp; echo world</div><div class="line">hello</div><div class="line">world</div></pre></td></tr></table></figure>
+<p>当然，<code>&amp;&amp;</code>也可以将多个命令连接起来，其执行类似，只有当前面的命令成功，后面的才会执行。因此，将多个命令写在一行用<code>&amp;&amp;</code>可以实现，只不过<code>&amp;&amp;</code>必须按照逻辑与的关系执行，而<code>;</code>号的话会执行所有的命令。</p>
+<h2 id="操作符-1"><a href="#操作符-1" class="headerlink" title="||操作符"></a><code>||</code>操作符</h2><p>很显然，与<code>&amp;&amp;</code>相对，<code>||</code>操作符表示逻辑或的关系，同样可以连接两个命令，如<code>cmd1 || cmd2</code>，只有当<code>cmd1</code>失败了，才会执行<code>cmd2</code>，这里的失败指的是<code>cmd1</code>的退出码非0。</p>
+<h2 id="amp-amp-与-混合"><a href="#amp-amp-与-混合" class="headerlink" title="&amp;&amp;与||混合"></a><code>&amp;&amp;</code>与<code>||</code>混合</h2><p>这两个操作符是可以混合使用的，其遵循的原则保持一致，且是从左向右依次判断，结合这两种操作符，可以实现类似于<code>if then else</code>的逻辑结构。如<code>cmd1 &amp;&amp; cmd2 || cmd3</code>意思就是如果<code>cmd1</code>成功，则执行<code>cmd2</code>，否则执行<code>cmd3</code>。但务必注意的是，此处并非真正意思上的<code>if then else</code>逻辑，因为如果<code>cmd2</code>也执行失败，<code>cmd3</code>其实也会被执行。如下例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># echo hello &amp;&amp; echo ok || echo world</div><div class="line">hello</div><div class="line">ok</div><div class="line"># echo hello &amp;&amp; rm dfsdf || echo world</div><div class="line">hello</div><div class="line">rm: cannot remove ‘dfsdf’: No such file or directory</div><div class="line">world</div></pre></td></tr></table></figure>
+<p><code>&amp;&amp;</code>相当于将两条命令逻辑上连成了一条命令，这样就变成了<code>cmd1-2 || cmd3</code>，其中<code>cmd1-2</code>就是<code>cmd1 &amp;&amp; cmd2</code>，因此，<code>cmd3</code>只要在<code>cmd1-2</code>失败的情况下都会被执行，而<code>cmd1-2</code>失败的情况有两种，一种是<code>cmd1</code>失败，一种是<code>cmd1</code>成功但是<code>cmd2</code>失败。同样的，<code>||</code>也会将两条命令连成一条命令，如<code>cmd1-2 || cmd3 &amp;&amp; cmd4</code>就相当于<code>cmd1-2_3 &amp;&amp; cmd4</code>，<code>cmd4</code>是否会执行，决定于<code>cmd1-2_3</code>是否失败，以具体例子说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># echo hello &amp;&amp; echo ok || echo world &amp;&amp; rm dsdfsf || echo end</div><div class="line">hello</div><div class="line">ok</div><div class="line">rm: cannot remove ‘dsdfsf’: No such file or directory</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>这行命令相当于<code>cmd1 &amp;&amp; cmd2 || cmd3 &amp;&amp; cmd4 || cmd5</code>，可以看出<code>cmd1</code>，<code>cmd2</code>，<code>cmd4</code>还是有<code>cmd5</code>被执行了，而<code>cmd3</code>没有执行。咱们来解析一下，为何是如此的执行结果。首先，<code>shell</code>从左往右扫描执行：</p>
+<ul>
+<li>发现<code>cmd1 &amp;&amp; cmd2</code>，由<code>&amp;&amp;</code>连成一个命令<code>cmd1-2</code>，因为两个命令都是成功的，所以都被执行了，这样可以认为<code>cmd1-2</code>成功</li>
+<li>执行成功之后，接下来是<code>||</code>操作符，这里并不会因为前面的命令是成功的，而不再执行后面所有的命令，而是<code>||</code>操作符相当于将<code>cmd1-2</code>与<code>cmd3</code>连接成了<code>cmd1-2_3</code>，因为<code>cmd1-2</code>成功了，所以<code>cmd3</code>不再执行，但是<code>cmd1-2_3</code>相当于执行成功了</li>
+<li>继续执行，发现是<code>&amp;&amp;</code>操作符，同样将<code>cmd1-2_3</code>与<code>cmd4</code>连接起来，记为<code>cmd1-2_3-4</code>，因为<code>cmd1-2_3</code>执行成功了，所以<code>cmd4</code>也被执行，但是<code>cmd4</code>执行失败了，所以<code>cmd1-2_3-4</code>相当于执行失败</li>
+<li>继续执行，发现是<code>||</code>操作符，同样将<code>cmd1-2_3-4</code>与<code>cmd5</code>连成<code>cmd1-2_3-4_5</code>，因为<code>cmd1-2_3-4</code>执行失败，所以<code>cmd5</code>被执行</li>
+</ul>
+<p>可见，<code>shell</code>永远都是从左往右扫描执行，<code>&amp;&amp;</code>跟<code>||</code>会将前后两个命令连接起来，根据两种操作符的规则就可以知道多个连起来的命令是如何执行的了。</p>
+<h2 id="符号"><a href="#符号" class="headerlink" title="#符号"></a><code>#</code>符号</h2><p>跟其它很多语言一样，<code>#</code>在<code>shell</code>里面用来注释。</p>
+<h2 id="转义符号"><a href="#转义符号" class="headerlink" title="\转义符号"></a><code>\</code>转义符号</h2><p><code>\</code>符号可以用来转义一些特殊符号，如<code>$</code>，<code>#</code>等。</p>
+<blockquote>
+<p>特别指出的是，如果转义符号放在行末单独使用，则用来连接下一行。</p>
+</blockquote>
+<h1 id="shell变量"><a href="#shell变量" class="headerlink" title="shell变量"></a>shell变量</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="定义跟引用"><a href="#定义跟引用" class="headerlink" title="定义跟引用"></a>定义跟引用</h3><p><code>shell</code>中也可以使用变量，变量不需要像其它语言一样需要预先申明。<code>shell</code>中赋值给一个不存在的变量就相当于定义了变量，如<code>name=&quot;Mr. Hao&quot;</code>，就定义了<code>name</code>变量，后续如果再对<code>name</code>赋值，就相当于改变改变量的值。与很多语言不同的是，<code>shell</code>中变量引用以<code>$</code>符号开头，后面跟变量的名字。如前面的变量，引用如下<code>echo &quot;$name&quot;</code>。<strong>需要注意的是，在<code>shell</code>中，变量名是大小写敏感的。</strong></p>
+<p>在<code>shell</code>展开中会自动展开变量的引用，即便该变量处在双引号中。但是，如果变量引用在单引号中，<code>shell</code>不会对其进行解析。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># name=&quot;Mr. Hao&quot;</div><div class="line"># echo &quot;$name&quot;</div><div class="line">Mr. Hao</div><div class="line"># set -x</div><div class="line"># echo &apos;$name&apos;</div><div class="line">+ echo &apos;Mr. Hao&apos;</div><div class="line">$name</div></pre></td></tr></table></figure>
+<h3 id="查找变量"><a href="#查找变量" class="headerlink" title="查找变量"></a>查找变量</h3><p>可以使用<code>set</code>命令来查找所定义的变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># set | grep -E &apos;^name=&apos;</div><div class="line">name=&apos;Mr. Hao&apos;</div></pre></td></tr></table></figure>
+<h3 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h3><p>与很多语言不同的是，在<code>shell</code>中定义的变量是可以删除的，使用<code>unset</code>命令删除定义的变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># set | grep -E &apos;^name=&apos;</div><div class="line">name=&apos;Mr. Hao&apos;</div><div class="line"># unset name</div><div class="line"># set | grep -E &apos;^name=&apos;</div></pre></td></tr></table></figure>
+<h3 id="export声明"><a href="#export声明" class="headerlink" title="export声明"></a><code>export</code>声明</h3><p>通常情况下，<code>shell</code>在执行命令的时候会为该命令创建子进程。如果希望将当前的变量作用到子进程，则需要将变量<code>export</code>声明，这种变量称之为环境变量，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># var1=&quot;hello&quot;</div><div class="line"># export var2=&quot;world&quot;</div><div class="line"># bash</div><div class="line"># echo &quot;var1=$var1, var2=$var2&quot;</div><div class="line">var1=, var2=world</div></pre></td></tr></table></figure>
+<p>其中，<code>bash</code>命令开启了一个新的<code>shell</code>，可见只有<code>export</code>声明的变量在新的<code>shell</code>中才是可见的。环境变量可以通过<code>env</code>命令列举出来，在后面一节会详细讲述。此外，如果需要将非<code>export</code>变量重新声明为<code>export</code>变量，则只需要用<code>export</code>重新声明一下即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># var1=hello</div><div class="line"># env | grep var1</div><div class="line"># export var1</div><div class="line"># env | grep var1</div><div class="line">var1=hello</div></pre></td></tr></table></figure>
+<h3 id="env命令"><a href="#env命令" class="headerlink" title="env命令"></a><code>env</code>命令</h3><p>如果需要查看当前<code>shell</code>中有哪些<code>export</code>声明的变量，可以使用<code>env</code>命令，该命令会列出当前所有<code>export</code>声明的变量。请注意与<code>set</code>命令的区别，<code>set</code>命令会列出所有的变量，包括哪些不是<code>export</code>声明的变量。通常，我们把<code>env</code>命令输出的变量称之为<code>环境变量</code>。</p>
+<p>此外，<code>env</code>也常用来为子<code>shell</code>预先定义一些临时变量，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># var1=&quot;hello&quot;</div><div class="line"># env var1=&quot;tmp&quot; bash -c &apos;echo &quot;$var1&quot;&apos;</div><div class="line">tmp</div><div class="line"># echo $var1</div><div class="line">hello</div></pre></td></tr></table></figure>
+<p>其中，用<code>env</code>命令定义了临时变量<code>var1</code>，然后<code>bash</code>命令开启了一个子<code>shell</code>，并在子<code>shell</code>中执行了<code>echo &quot;$var1&quot;</code>命令。可见，输出了定义的临时变量，在命令结束后，又回到之前的<code>shell</code>，输出的也是之前<code>shell</code>中定义的值。当然，在使用<code>env</code>定义临时变量的时候，为了方便，通常我们可以省略<code>env</code>命令，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># var1=&quot;hello&quot;</div><div class="line"># var1=&quot;tmp&quot; bash -c &apos;echo &quot;$var1&quot;&apos;</div><div class="line">tmp</div><div class="line"># echo $var1</div><div class="line">hello</div></pre></td></tr></table></figure>
+<p>另外，<code>env</code>命令还有一种常用的用法，就是用来开启一个干净的子<code>shell</code>，即在子<code>shell</code>中不继承所有的变量，即便这些变量在之前的<code>shell</code>中采用<code>export</code>声明，此时<code>env</code>命令需要加入<code>-i</code>的参数，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># export var1=&quot;hello world&quot;</div><div class="line"># bash -c &apos;echo &quot;var1=$var1&quot;&apos;</div><div class="line">var1=hello world</div><div class="line"># env -i bash -c &apos;echo &quot;var1=$var1&quot;&apos;</div><div class="line">var1=</div></pre></td></tr></table></figure>
+<p>可见，使用<code>env -i</code>之后，即便<code>var1</code>被<code>export</code>声明，但是在子<code>shell</code>中也没有被继承。</p>
+<h3 id="变量解释"><a href="#变量解释" class="headerlink" title="变量解释"></a>变量解释</h3><p>在前面章节，我们知道<code>shell</code>采用<code>$</code>符号引用变量，在<code>$</code>符号后紧跟变量的名字。而<code>shell</code>在提取变量名字的时候一般以非字母数字（non-alphanumeric）为边界，这有时候就会产生问题，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># prefix=Super</div><div class="line"># echo Hello $prefixman and $prefixgirl</div><div class="line">Hello  and</div></pre></td></tr></table></figure>
+<p>可见，<code>shell</code>并不能提取我们定义的变量<code>prefix</code>，因为其后并没有非字母数字的字符为界。这种情况下，我们可以使用<code>{}</code>将变量名保护起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># prefix=Super</div><div class="line"># echo Hello $&#123;prefix&#125;man and $&#123;prefix&#125;girl</div><div class="line">Hello Superman and Supergirl</div></pre></td></tr></table></figure>
+<h3 id="非绑定（unbound）变量"><a href="#非绑定（unbound）变量" class="headerlink" title="非绑定（unbound）变量"></a>非绑定（unbound）变量</h3><p>所谓非绑定（unbound）变量其实指的是没有预先定义的变量，或者说不存在的变量。默认情况下，<code>shell</code>在解释这种变量的时候会以空字符串替代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># echo $unbound_var</div></pre></td></tr></table></figure>
+<p>如果需要<code>shell</code>在这种情况下报错，可以配置<code>shell</code>选项<code>set -o nounset</code>，或者简写为<code>set -u</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># echo $unbound_var</div><div class="line">bash: unbound_var: unbound variable</div><div class="line"># set +u</div><div class="line"># echo $unbound_var</div></pre></td></tr></table></figure>
+<p>当然，由例子中可以看到，要取消该配置，可以相应的设置<code>set +o nounset</code>，或者简写为<code>set +u</code>。</p>
+<h2 id="特殊变量"><a href="#特殊变量" class="headerlink" title="特殊变量"></a>特殊变量</h2><p>在<code>shell</code>中预定义了很多特殊的变量，这一节咱们来说一下常见的几个变量。</p>
+<h3 id="PS1变量"><a href="#PS1变量" class="headerlink" title="$PS1变量"></a><code>$PS1</code>变量</h3><p>在<code>shell</code>终端输入命令时，咱们总是可以看到在输入行首总是会有提示符，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mrhao:~$</div></pre></td></tr></table></figure>
+<p>其中，<code>mrhao:~$</code>就是提示符，这个字串实际上是由<code>shell</code>变量<code>$PS1</code>决定的。如果咱们改变一下该变量的值，提示符也会相应的改变：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mrhao:~$ PS1=&quot;hello &gt; &quot;</div><div class="line">hello &gt; echo &quot;PS1 value is &apos;$PS1&apos;&quot;</div><div class="line">PS1 value is &apos;hello &gt; &apos;</div><div class="line">hello &gt;</div></pre></td></tr></table></figure>
+<p>为了方便在提示符中显示系统的某些实时信息，<code>$PS1</code>变量定义了一些特殊的字符：</p>
+<p>|——+——————–|<br>| 字符 | 说明               |<br>|——+——————–|<br>| \w   | 表示工作目录       |<br>| \u   | 表示用户名         |<br>| \h   | 表示系统的hostname |<br>|——+——————–|</p>
+<p>当然，这里只列举了几个，详细的可以查看Linux手册。另外，<code>$PS1</code>中还可以对对其中不同部分采用不同颜色显示，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># RED=&apos;\[\033[01;31m\]&apos;</div><div class="line"># WHITE=&apos;\[\033[01;00m\]&apos;</div><div class="line"># GREEN=&apos;\[\033[01;32m\]&apos;</div><div class="line"># BLUE=&apos;\[\033[01;34m\]&apos;</div><div class="line"># PS1=&quot;$GREEN\u$WHITE@$BLUE\h$WHITE\w\$ &quot;</div><div class="line">mrhao@mrhao-host~$ echo &quot;$PS1&quot;</div><div class="line">\[\033[01;32m\]\u\[\033[01;00m\]@\[\033[01;34m\]\h\[\033[01;00m\]\w$</div></pre></td></tr></table></figure>
+<h3 id="PATH变量"><a href="#PATH变量" class="headerlink" title="$PATH变量"></a><code>$PATH</code>变量</h3><p>当我们在Linux的terminal里面输入命令的时候，<code>shell</code>需要在一系列的目录中查找输入的命令，如果没有查找到会直接报<code>command not found</code>的错误。而这些查找的目录就定义在<code>$PATH</code>变量中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># echo $PATH</div><div class="line">/opt/rh/rh-python34/root/usr/bin:/usr/java/default/bin/:/usr/local/git/bin:/opt/ActiveTcl-8.5/bin:/root/perl5/bin:/root/env/maven/apache-maven-3.3.3/bin:/root/soft/wrk/wrk-4.0.1:/root/usr/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin</div></pre></td></tr></table></figure>
+<p>其中，每个目录以<code>:</code>隔开，如果需要增加目录，可以：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># PATH=$PATH:/opt/local/bin</div><div class="line"># echo $PATH</div><div class="line">/opt/rh/rh-python34/root/usr/bin:/usr/java/default/bin/:/usr/local/git/bin:/opt/ActiveTcl-8.5/bin:/root/perl5/bin:/root/env/maven/apache-maven-3.3.3/bin:/root/soft/wrk/wrk-4.0.1:/root/usr/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/opt/local/bin</div></pre></td></tr></table></figure>
+<blockquote>
+<p>加入新的路径的时候请务必带上之前的路径，<code>$PATH:&lt;new path&gt;</code>否则，很多默认的系统路径将被覆盖，导致很多命令失效。</p>
+</blockquote>
+<p>特别注意的是，<code>$PATH</code>变量中目录的顺序是很重要的，如果<code>shell</code>在前面的目录中找到了命令，则不会查找后面的目录。如果你想把某个重名的命令优先执行，就需要把它对应的目录放在<code>$PATH</code>的前面。</p>
+<h3 id="网络代理变量"><a href="#网络代理变量" class="headerlink" title="网络代理变量"></a>网络代理变量</h3><p>在Linux系统中，很多时候我们需要访问外部网络，比如使用<code>curl</code>命令下载文件等等。而有的时候，访问访问外部网络咱们需要设置代理，在Linux系统中，使用网络代理非常简单，只要配置几个变量即可：</p>
+<p>|————-+————————————————————————-|<br>| 变量        | 说明                                                                    |<br>|————-+————————————————————————-|<br>| http_proxy  | 设置访问<code>http</code>请求所需要的代理，如<code>http_proxy=http://10.10.10.100:80</code>   |<br>| https_proxy | 设置访问<code>https</code>请求所需要的代理，如<code>https_proxy=http://10.10.10.100:80</code> |<br>| ftp_proxy   | 设置访问<code>ftp</code>请求所需要的代理，如<code>ftp_proxy=http://10.10.10.100:80</code>     |<br>| no_proxy    | 设置哪些域名或者IP不需要走代理，如<code>no_proxy=localhost,127.0.0.1</code>        |<br>|————-+————————————————————————-|</p>
+<h3 id="PWD变量"><a href="#PWD变量" class="headerlink" title="$PWD变量"></a><code>$PWD</code>变量</h3><p><code>PWD</code>变量是一个由<code>shell</code>自动设置的变量，其值表示当前目录的绝对路径，与命令<code>pwd</code>输出相同。</p>
+<h1 id="shell嵌入与shell选项"><a href="#shell嵌入与shell选项" class="headerlink" title="shell嵌入与shell选项"></a><code>shell</code>嵌入与<code>shell</code>选项</h1><h2 id="shell嵌入（shell-embedding）"><a href="#shell嵌入（shell-embedding）" class="headerlink" title="shell嵌入（shell embedding）"></a><code>shell</code>嵌入（shell embedding）</h2><p><code>shell</code>可以嵌入在同一个命令行中，也就是<code>shell</code>在扫描解释命令行的时候，可能会从当前的<code>shell</code>进程中<code>fork</code>出一个新的<code>shell</code>进程，并将有关命令放在新进程中运行。如下例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># var1=hello</div><div class="line"># echo $(var1=world; echo $var1)</div><div class="line">world</div><div class="line"># echo $var1</div><div class="line">hello</div></pre></td></tr></table></figure>
+<p>如其中<code>$()</code>便开启了一个新的<code>shell</code>进程，或者成为子<code>shell</code>，并在此<code>shell</code>中运行命令<code>var1=world; echo $var1</code>，此时输出的是子<code>shell</code>中定义的<code>var1</code>。当命令结束后，子<code>shell</code>进程退出，并将输出的结果<code>world</code>返回给之前的<code>shell</code>（或者父<code>shell</code>）的<code>echo</code>命令，父<code>shell</code>最后输出<code>world</code>。而且，在子<code>shell</code>中定义相同的<code>var1</code>变量并不会改变父<code>shell</code>中的变量。</p>
+<p><strong><em>特别注意的是，因为子<code>shell</code>是<code>fork</code>出来的进程，根据Linux进程<code>fork</code>的特点，子进程将共享父进程的数据空间，而只在写的时候拷贝新的数据空间，因此，创建出来的子<code>shell</code>是会继承所有父<code>shell</code>的变量，不论该变量是否被<code>export</code>声明</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># var1=hello</div><div class="line"># var2=&quot;$(echo $var1 world)&quot;</div><div class="line"># echo $var2</div><div class="line">hello world</div></pre></td></tr></table></figure>
+<p>可见，虽然<code>var1</code>变量没有<code>export</code>声明，但是在子<code>shell</code>中还是可见的。这点与使用<code>bash -c</code>开启的<code>shell</code>是不同的。</p>
+<p>用<code>$()</code>可以将子<code>shell</code>嵌入到命令行中，当然，<code>$()</code>是可以嵌套使用的，这样可以用来在子<code>shell</code>中开启它的子<code>shell</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># A=shell</div><div class="line"># echo $C$B$A $(B=sub;echo $C$B$A; echo $(C=sub;echo $C$B$A))</div><div class="line">shell subshell subsubshell</div></pre></td></tr></table></figure>
+<h3 id="反引号（backticks）"><a href="#反引号（backticks）" class="headerlink" title="反引号（backticks）"></a>反引号（backticks）</h3><p>在上面我们可以通过<code>$()</code>将子<code>shell</code>嵌入命令行中，为了方便，我们同样可以用反引号<code>` </code>将子<code>shell</code>嵌入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># var1=hello</div><div class="line"># echo `var1=world; echo $var1`</div><div class="line">world</div><div class="line"># echo $var1</div><div class="line">hello</div></pre></td></tr></table></figure>
+<p>但是，使用反引号不能够嵌套子<code>shell</code>，因此如果需要嵌套子<code>shell</code>时，只能使用<code>$()</code>。</p>
+<blockquote>
+<p>反引号跟单引号是本质的不同的，单引号与双引号一样，用来将连续的字串作为整体引起来，只不过单引号中将不执行变量的引用解析，而反引号则是嵌入子<code>shell</code>。</p>
+</blockquote>
+<h2 id="shell选项"><a href="#shell选项" class="headerlink" title="shell选项"></a><code>shell</code>选项</h2><p>其实在前面咱们已经使用了不少<code>shell</code>的选项，如<code>set -u</code>在变量不存在是报错，<code>set -x</code>将<code>shell</code>展开的结果显示出来等。此外，可以才用<code>echo $-</code>将当期设置的<code>shell</code>选项打印出来。</p>
+<h1 id="shell历史记录"><a href="#shell历史记录" class="headerlink" title="shell历史记录"></a><code>shell</code>历史记录</h1><p>在<code>shell</code>中执行命令的时候，<code>shell</code>会将最近的命令使用历史记录下来，这样你可以很方便的查看最近做了什么操作。</p>
+<h2 id="查看历史记录"><a href="#查看历史记录" class="headerlink" title="查看历史记录"></a>查看历史记录</h2><p>命令<code>history</code>可以用来查看<code>shell</code>的历史记录，里面记录了你最近输入的所有命令。当然，很多时候你更加关心最近的几个命令，你可以使用<code>history 10</code>来显示最近的10个命令。另外，<code>shell</code>通常还会将最近的历史记录写在<code>~/.bash_history</code>文件中，因此查看该文件同样可以查看历史记录。</p>
+<h2 id="执行历史的命令"><a href="#执行历史的命令" class="headerlink" title="执行历史的命令"></a>执行历史的命令</h2><p><code>shell</code>提供了很多高级用法使得你可以很方便的执行以前执行过的命令。</p>
+<p>首先，咱们先显示一下过去的10个命令，可以看到每个命令前面都有其对应的序号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># history 10</div><div class="line"> 1000  history</div><div class="line"> 1001  history 10</div><div class="line"> 1002  echo &quot;hello world&quot;</div><div class="line"> 1003  ls -l</div><div class="line"> 1004  ps -ef | grep named</div><div class="line"> 1005  env | grep http</div><div class="line"> 1006  grep hello /var/log/messages</div><div class="line"> 1007  tmux ls</div><div class="line"> 1008  find . -name &quot;hello&quot;</div><div class="line"> 1009  history 10</div></pre></td></tr></table></figure>
+<p>下面列举比较常用的<code>shell</code>重复执行历史记录中命令的方法：</p>
+<p>|———–+——————————————————————————————————-|<br>| 命令      | 说明                                                                                                  |<br>|———–+——————————————————————————————————-|<br>| !!        | 在<code>shell</code>中输入两个感叹号会执行上一个命令                                                             |<br>| !keyword  | 输入一个感叹号后跟关键字，会搜索历史记录中最先以该关键字开始的命令。如<code>!find</code>会执行序号为1008的命令。 |<br>| !?keyword | 执行历史记录中第一个包括keyword关键字的命令                                                           |<br>| !n        | 其中n代表历史记录中的序号，表示执行序号为n的命令。                                                    |<br>| !-n       | 执行倒数第n个命令，如<code>!-1</code>其实就相当于<code>!!</code>                                                            |<br>| cmd!<em>     | 执行命令<code>cmd</code>，其中`!</em>`会以上一条命令的所有参数替代                                                   |<br>|———–+——————————————————————————————————-|</p>
+<p>另外，对于<code>!keyword</code>的用法，还有一个高级功能，你可以将符合该条件的命令进行改造后执行，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># echo &quot;test1&quot;</div><div class="line">test1</div><div class="line"># !ec:s/1/2/</div><div class="line">echo &quot;test2&quot;</div><div class="line">test2</div></pre></td></tr></table></figure>
+<p>其中，<code>:s/1/2/</code>将命令<code>echo &quot;test1&quot;</code>替换成<code>echo &quot;test2&quot;</code>然后执行了。对于<code>cmd!*</code>，示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># ctt /etc/passwd | cut -d: -f1</div><div class="line">-bash: ctt: command not found</div><div class="line"># cat !*</div><div class="line">cat /etc/passwd | cut -d: -f1</div><div class="line">root</div><div class="line">bin</div><div class="line">daemon</div><div class="line">adm</div><div class="line">...</div></pre></td></tr></table></figure>
+<h2 id="搜索历史记录"><a href="#搜索历史记录" class="headerlink" title="搜索历史记录"></a>搜索历史记录</h2><p>在<code>shell</code>终端中按Ctrl-r会打开<code>shell</code>的搜索模式，在改模式下输入关键字会显示最近包含改关键字的命令，再按一下Ctrl-r会继续显示前面一条符合条件的命令，找到你需要的命令后回车就可以执行改命令了。</p>
+<h2 id="修改历史记录的有关配置"><a href="#修改历史记录的有关配置" class="headerlink" title="修改历史记录的有关配置"></a>修改历史记录的有关配置</h2><p>有多个配置可以用来改变历史记录的有关信息，通常都是通过有关环境变量来配置：</p>
+<p>|—————+——————————————————————————————–|<br>| 环境变量      | 说明                                                                                       |<br>|—————+——————————————————————————————–|<br>| $HISTSIZE     | 这个变量用来配置<code>shell</code>应该保持多少行的历史记录，在很多发行版本中，默认值一般为500或者1000 |<br>| $HISTFILE     | 这个变量用来配置历史记录文件存放的位置，通常来讲，默认路径为<code>~/.bash_history</code>              |<br>| $HISTFILESIZE | 这个变量用来配置历史记录文件可以存放多少行的历史记录                                       |<br>|—————+——————————————————————————————–|</p>
+<h2 id="阻止记录某些命令"><a href="#阻止记录某些命令" class="headerlink" title="阻止记录某些命令"></a>阻止记录某些命令</h2><p>在有些时候，我们并不想把某些命令记录在历史记录中，比如有的命令里面包括了敏感信息如密码等。在新版本的<code>shell</code>中，通常我们可以在输入的命令前面加入空格，这样<code>shell</code>就不会记录这样的命令，当然，如果你的发行版本默认并不支持，你可以配置环境变量来打开这个功能：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> HISTIGNORE=<span class="string">"[ \t]*"</span></div></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"># history 5</div><div class="line"> 1023  ls -l</div><div class="line"> 1024  echo &quot;&quot;</div><div class="line"> 1025  history 5</div><div class="line"> 1026  ls</div><div class="line"> 1027  history 5</div><div class="line">#  echo &quot;password=123456&quot;</div><div class="line">password=123456</div><div class="line"># history 5</div><div class="line"> 1025  history 5</div><div class="line"> 1026  ls</div><div class="line"> 1027  history 5</div><div class="line"> 1028   echo &quot;password=123456&quot;</div><div class="line"> 1029  history 5</div><div class="line"># export HISTIGNORE=&quot;[ \t]*&quot;</div><div class="line"># history 5</div><div class="line"> 1027  history 5</div><div class="line"> 1028   echo &quot;password=123456&quot;</div><div class="line"> 1029  history 5</div><div class="line"> 1030  export HISTIGNORE=&quot;[ \t]*&quot;</div><div class="line"> 1031  history 5</div><div class="line">#  echo &quot;password=123456&quot;</div><div class="line">password=123456</div><div class="line"># history 5</div><div class="line"> 1027  history 5</div><div class="line"> 1028   echo &quot;password=123456&quot;</div><div class="line"> 1029  history 5</div><div class="line"> 1030  export HISTIGNORE=&quot;[ \t]*&quot;</div><div class="line"> 1031  history 5</div></pre></td></tr></table></figure>
+<p>可见，在设置<code>$HISTIGNORE</code>变量之后，在前面加了空格的命令将不再记录。这在保护敏感信息的时候非常有用。</p>
+<h1 id="文件匹配-File-Globbing"><a href="#文件匹配-File-Globbing" class="headerlink" title="文件匹配(File Globbing)"></a>文件匹配(File Globbing)</h1><p>文件匹配(File Globbing)又成为动态文件名生成，用它可以非常方便的在<code>shell</code>中输入文件名。</p>
+<h2 id="星号"><a href="#星号" class="headerlink" title="*星号"></a><code>*</code>星号</h2><p><code>*</code>星号在<code>shell</code>中用来匹配任意数量的字符，比如文件名<code>File*.mp4</code>，将匹配以<code>File</code>开头，<code>.mp4</code>结尾的任何文件名。<code>shell</code>在扫描解释命令的时候会自动去查找符合该匹配的所有文件或目录。当然，你也可以只用<code>*</code>来匹配所有的文件及目录，但请注意，只使用<code>*</code>跟不带<code>*</code>还是有所区别的，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ls</div><div class="line">definition.yaml  example  __init__.py  tags.yaml  test.py  test_sample.html  test_sample.py</div><div class="line"># ls *</div><div class="line">definition.yaml  __init__.py  tags.yaml  test.py  test_sample.html  test_sample.py</div><div class="line"></div><div class="line">example:</div><div class="line">testcase</div></pre></td></tr></table></figure>
+<p>可见，带上<code>*</code>后不仅把当前目录的所有文件及目录显示出来，而且还把目录下的内容显示出来了。</p>
+<h2 id="问号"><a href="#问号" class="headerlink" title="?问号"></a><code>?</code>问号</h2><p>问号用来匹配一个字符，如<code>File?.mp4</code>可以匹配<code>File1.mp4</code>。</p>
+<h2 id="方括号"><a href="#方括号" class="headerlink" title="[]方括号"></a><code>[]</code>方括号</h2><p><code>[]</code>方括号也用来匹配一个字符，但是在括号里面可以指定一个字符集用来限定匹配的字符必须在该字符集内，字符集里面的字符顺序没有关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># ls</div><div class="line">file1  file2  file3  File4  File55  FileA  fileab  Fileab  FileAB  fileabc</div><div class="line"># ls File[5A]</div><div class="line">FileA</div><div class="line"># ls File[A5]</div><div class="line">FileA</div><div class="line"># ls File[A5][5b]</div><div class="line">File55</div></pre></td></tr></table></figure>
+<p>如果需要匹配不在某个字符集里面的字符，可以在<code>[]</code>第一个字符加入<code>!</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># ls file[!5]*</div><div class="line">file1  file2  file3  fileab  fileabc</div></pre></td></tr></table></figure>
+<p>特别的，为了方便，<code>[]</code>中可以使用<code>-</code>来定义一些连续的字符集（Range匹配），常用的这类字符集包括：</p>
+<p>|——–+——————–|<br>| 字符集 | 说明               |<br>|——–+——————–|<br>| 0-9    | 表示数字字符集     |<br>| a-z    | 表示小写字母字符集 |<br>| A-Z    | 表示大写字母字符集 |<br>|——–+——————–|</p>
+<p>当然，你也不必要把所有范围都包括在内，如<code>[a-d]</code>可以用来限定从<code>a</code>到<code>d</code>的小写字母集。另外，用<code>-</code>连起来的字符集还可以跟其它字符集一起使用，如<code>[a-d_]</code>表示<code>a</code>到<code>d</code>的小写字母加上<code>_</code>所组成的字符集。</p>
+<ul>
+<li><p>Range匹配的大小写问题</p>
+<p>  对于<code>[]</code>的Range匹配，还有一点很重要。在很多发行版本中，默认情况下，<code>[]</code>的Range匹配是忽略大小写的</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># ls</div><div class="line">Test1  test2</div><div class="line"># ls [a-z]*</div><div class="line">Test1  test2</div><div class="line"># ls [A-Z]*</div><div class="line">Test1  test2</div><div class="line"># ls [t]*</div><div class="line">test2</div><div class="line"># ls [T]*</div><div class="line">Test1</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，是<code>[]</code>的Range匹配会忽略大小写，而如果不是Range匹配还是大小写敏感的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; # ls</div><div class="line">&gt; Test1  test2</div><div class="line">&gt; # ls [T]*</div><div class="line">&gt; Test1</div><div class="line">&gt; # ls [t]*</div><div class="line">&gt; test2</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>  如果需要大小写敏感，可以设置环境变量<code>LC_ALL</code>：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># LC_ALL=C</div><div class="line"># ls [a-z]*</div><div class="line">test2</div><div class="line"># ls [A-Z]*</div><div class="line">Test1</div></pre></td></tr></table></figure>
+<p>  当然，请务必注意，<code>LC_ALL</code>的会改变当前的语言环境，还请慎重使用，建议只在临时的子<code>shell</code>中使用。</p>
+</li>
+</ul>
+<h2 id="阻止文件匹配-File-Globbing"><a href="#阻止文件匹配-File-Globbing" class="headerlink" title="阻止文件匹配(File Globbing)"></a>阻止文件匹配(File Globbing)</h2><p>有时候我们就是需要输出<code>*</code>等匹配符号，这个时候就需要阻止<code>shell</code>做相应的匹配。可以使用转义符号<code>\</code>来做到这点，或者将匹配符号放在引号中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># echo *</div><div class="line">Test1 test2</div><div class="line"># echo \*</div><div class="line">*</div><div class="line"># echo &apos;*&apos;</div><div class="line">*</div><div class="line"># echo &quot;*&quot;</div><div class="line">*</div></pre></td></tr></table></figure>
+<h1 id="shell快捷键"><a href="#shell快捷键" class="headerlink" title="shell快捷键"></a>shell快捷键</h1><p><code>shell</code>中支持非常多的快捷键，可以非常方便我们输入命令：</p>
+<p>|——–+—————————————————————————|<br>| 快捷键 | 说明                                                                      |<br>|——–+—————————————————————————|<br>| Ctrl-d | 表示<code>EOF</code>的意思，在shell终端中输入该快捷键会退出该终端                    |<br>| Ctrl-z | 该快捷键用来暂停一个在shell终端中正在执行的进程，暂停后可以用<code>fg</code>命令恢复 |<br>| Ctrl-a | 输入命令时跳到行首                                                        |<br>| Ctrl-e | 跳到行尾                                                                  |<br>| Ctrl-k | 删除从光标到行尾的部分                                                    |<br>| Ctrl-y | 粘贴刚刚删除的部分                                                        |<br>| Ctrl-w | 删除从光标至其左边第一个空格处                                            |<br>|——–+—————————————————————————|</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/KingJamesYF/KingJamesYF.github.io/master/image/donate/AliPayQR.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY4NS8xMjIyMQ==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/14/Linux学习（四）IO重定向与管道/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Linux学习（四）IO重定向与管道
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/14/Linux学习（二）文件系统结构/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Linux学习（二）文件系统结构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell展开（Shell-Expansion）"><span class="nav-number">2.</span> <span class="nav-text">Shell展开（Shell Expansion）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令参数解析"><span class="nav-number">2.1.</span> <span class="nav-text">命令参数解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引号"><span class="nav-number">2.2.</span> <span class="nav-text">引号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">2.3.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#别名"><span class="nav-number">2.4.</span> <span class="nav-text">别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示shell展开的结果"><span class="nav-number">2.5.</span> <span class="nav-text">显示shell展开的结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell控制操作符-Control-Operators）"><span class="nav-number">3.</span> <span class="nav-text">shell控制操作符 (Control Operators）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作符"><span class="nav-number">3.1.</span> <span class="nav-text">$?操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分号"><span class="nav-number">3.2.</span> <span class="nav-text">分号;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#amp-符号"><span class="nav-number">3.3.</span> <span class="nav-text">&符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#amp-amp-操作符"><span class="nav-number">3.4.</span> <span class="nav-text">&&操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作符-1"><span class="nav-number">3.5.</span> <span class="nav-text">||操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#amp-amp-与-混合"><span class="nav-number">3.6.</span> <span class="nav-text">&&与||混合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号"><span class="nav-number">3.7.</span> <span class="nav-text">#符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转义符号"><span class="nav-number">3.8.</span> <span class="nav-text">\转义符号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell变量"><span class="nav-number">4.</span> <span class="nav-text">shell变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">4.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义跟引用"><span class="nav-number">4.1.1.</span> <span class="nav-text">定义跟引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找变量"><span class="nav-number">4.1.2.</span> <span class="nav-text">查找变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除变量"><span class="nav-number">4.1.3.</span> <span class="nav-text">删除变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export声明"><span class="nav-number">4.1.4.</span> <span class="nav-text">export声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#env命令"><span class="nav-number">4.1.5.</span> <span class="nav-text">env命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量解释"><span class="nav-number">4.1.6.</span> <span class="nav-text">变量解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非绑定（unbound）变量"><span class="nav-number">4.1.7.</span> <span class="nav-text">非绑定（unbound）变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊变量"><span class="nav-number">4.2.</span> <span class="nav-text">特殊变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PS1变量"><span class="nav-number">4.2.1.</span> <span class="nav-text">$PS1变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PATH变量"><span class="nav-number">4.2.2.</span> <span class="nav-text">$PATH变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络代理变量"><span class="nav-number">4.2.3.</span> <span class="nav-text">网络代理变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PWD变量"><span class="nav-number">4.2.4.</span> <span class="nav-text">$PWD变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell嵌入与shell选项"><span class="nav-number">5.</span> <span class="nav-text">shell嵌入与shell选项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#shell嵌入（shell-embedding）"><span class="nav-number">5.1.</span> <span class="nav-text">shell嵌入（shell embedding）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反引号（backticks）"><span class="nav-number">5.1.1.</span> <span class="nav-text">反引号（backticks）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell选项"><span class="nav-number">5.2.</span> <span class="nav-text">shell选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell历史记录"><span class="nav-number">6.</span> <span class="nav-text">shell历史记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看历史记录"><span class="nav-number">6.1.</span> <span class="nav-text">查看历史记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行历史的命令"><span class="nav-number">6.2.</span> <span class="nav-text">执行历史的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索历史记录"><span class="nav-number">6.3.</span> <span class="nav-text">搜索历史记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改历史记录的有关配置"><span class="nav-number">6.4.</span> <span class="nav-text">修改历史记录的有关配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻止记录某些命令"><span class="nav-number">6.5.</span> <span class="nav-text">阻止记录某些命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件匹配-File-Globbing"><span class="nav-number">7.</span> <span class="nav-text">文件匹配(File Globbing)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#星号"><span class="nav-number">7.1.</span> <span class="nav-text">*星号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问号"><span class="nav-number">7.2.</span> <span class="nav-text">?问号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方括号"><span class="nav-number">7.3.</span> <span class="nav-text">[]方括号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻止文件匹配-File-Globbing"><span class="nav-number">7.4.</span> <span class="nav-text">阻止文件匹配(File Globbing)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell快捷键"><span class="nav-number">8.</span> <span class="nav-text">shell快捷键</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2017 - 2018 King   James All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s22.cnzz.com/z_stat.php?id=1273428283&web_id=1273428283" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+	<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a936eb4d4dfc73dd81ea6d7860454bc8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            King   James
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 Mr.Yi All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

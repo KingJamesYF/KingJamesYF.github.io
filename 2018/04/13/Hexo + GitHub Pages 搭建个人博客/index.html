@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="google-site-verification" content="XlAf59rYjECq4vIVONrh_NcYxWH9CxNo7IyWC1erY2s" />
   
   <title>hexo + github pages 搭建个人博客 | King   James</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -207,17 +206,17 @@
 </li>
 </ul>
 <a id="more"></a>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-<span class="keyword">cli</span> -g</div></pre></td></tr></table></figure>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
 <p>使用 <code>hexo version</code> 检查是否安装成功。</p>
 <h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>选择一个目录，比如 D:\github，键入以下命令：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init username<span class="selector-class">.github</span><span class="selector-class">.io</span></div><div class="line">cd username<span class="selector-class">.github</span><span class="selector-class">.io</span></div><div class="line">npm install</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init username.github.io</div><div class="line">cd username.github.io</div><div class="line">npm install</div></pre></td></tr></table></figure>
 <p>这样就创建了一个名为 <code>username.github.io</code> 的 Hexo 工程（文件夹）。注意，<code>hexo init &lt;folder&gt;</code> 命令要求 folder 为空文件夹，否则会报错。</p>
-<h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo<span class="built_in"> server </span> (简写为 hexo s)</div></pre></td></tr></table></figure>
+<h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server  (简写为 hexo s)</div></pre></td></tr></table></figure>
 <p>默认情况下，访问网址为 <code>http://localhost:4000/</code>。打开网址，可以看到一篇 landscape 主题的 Hello World 博客。一般修改 Markdown 文件，不需要重启服务器，直接刷新浏览器即可，除非你修改配置文件。</p>
 <h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><h4 id="站点配置"><a href="#站点配置" class="headerlink" title="站点配置"></a>站点配置</h4><p>工程根目录下的 <strong>_config.yml</strong> 称为站点配置文件，可以配置一些个人信息等，具体可参考<a href="https://hexo.io/docs/configuration.html" target="_blank" rel="external">Configuration</a>。</p>
 <h4 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h4><p>每个主题的目录下也会有一个 <strong>_config.yml</strong> 文件，称为主题配置文件。Hexo 有丰富多彩的主题，这里以 <a href="https://github.com/iTimeTraveler/hexo-theme-hiker">hexo-theme-hiker</a> 为例，说明如何更换主题。</p>
 <p>安装主题：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd username<span class="selector-class">.github</span><span class="selector-class">.io</span></div><div class="line">git clone git@github<span class="selector-class">.com</span>:iTimeTraveler/hexo-theme-hiker<span class="selector-class">.git</span> themes/hiker</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd username.github.io</div><div class="line">git clone git@github.com:iTimeTraveler/hexo-theme-hiker.git themes/hiker</div></pre></td></tr></table></figure>
 <p>PS：这样安装主题并不能 push 到 GitHub 中去，可使用 <code>fork + subtree</code> 的方法解决，具体参考 <a href="http://w4lle.com/2016/06/06/Hexo-themes/" target="_blank" rel="external">Hexo 主题同步</a>。感谢 <a href="https://github.com/tyrionyu">@Tyrion Yu</a> 的帮助。</p>
 <p>修改站点配置文件，将 theme 修改为 hiker：</p>
 <pre><code># Extensions
@@ -225,10 +224,10 @@
 ## Themes: https://hexo.io/themes/
 theme: hiker
 </code></pre><p>重启服务器，即可查看效果。在某些情况（尤其是更换主题后），如果发现对站点的更改无论如何也不生效，可能需要 clean 一下。</p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo server</div></pre></td></tr></table></figure>
 <p>PS：如果不需要 landscape 主题，直接删除 themes 下的对应文件夹即可。</p>
 <h4 id="部署配置"><a href="#部署配置" class="headerlink" title="部署配置"></a>部署配置</h4><p>安装 <a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 <p>然后修改站点配置文件：</p>
 <pre><code># Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -239,15 +238,15 @@ deploy:
   message: message  # 默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}
 </code></pre><p>其中 branch 为静态文件所在的分支，<a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">必须为 master 分支</a>。message 表示自定义提交信息，一般不需要配置，删除该行即可。</p>
 <h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><h4 id="Git-初始化"><a href="#Git-初始化" class="headerlink" title="Git 初始化"></a>Git 初始化</h4><p>为工程创建 Git 仓库：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd username<span class="selector-class">.github</span><span class="selector-class">.io</span></div><div class="line">git init</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd username.github.io</div><div class="line">git init</div></pre></td></tr></table></figure>
 <h4 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h4><p>此时 Git 仓库为空，不能直接运行 <code>git branch hexo</code> 来创建新的分支，可通过以下命令创建：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -<span class="selector-tag">b</span> hexo</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -b hexo</div></pre></td></tr></table></figure>
 <h4 id="push-源文件"><a href="#push-源文件" class="headerlink" title="push 源文件"></a>push 源文件</h4><p>添加所有文件，提交到本地仓库：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">add</span><span class="bash"> .</span></div><div class="line"><span class="bash">git commit -m <span class="string">"first commit"</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m &quot;first commit&quot;</div></pre></td></tr></table></figure>
 <p>添加远程仓库，并push：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github<span class="selector-class">.com</span>:username<span class="selector-class">.github</span><span class="selector-class">.io</span><span class="selector-class">.git</span></div><div class="line">git push -u origin hexo</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:username.github.io.git</div><div class="line">git push -u origin hexo</div></pre></td></tr></table></figure>
 <h4 id="部署静态文件"><a href="#部署静态文件" class="headerlink" title="部署静态文件"></a>部署静态文件</h4><p>先生成静态文件，再部署：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo <span class="keyword">generate</span>  （简写为 hexo g）</div><div class="line">hexo delpoy  (简写为 hexo d)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate  （简写为 hexo g）</div><div class="line">hexo delpoy  (简写为 hexo d)</div></pre></td></tr></table></figure>
 <p>此时整个部署过程就结束啦，你可以通过 <code>https://username.github.io/</code> 访问自己的 Github Pages。</p>
 <h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
 <li><p><a href="https://gist.github.com/btfak/18938572f5df000ebe06fbd1872e4e39" target="_blank" rel="external">How to use Hexo and deploy to GitHub Pages</a></p>
@@ -317,6 +316,15 @@ var a = new Donate({
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/04/14/slim环境下设置gpu-option/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          slim环境下设置gpu_option
+        
+      </div>
+    </a>
   
   
     <a href="/2018/04/13/Git--命令(二)/" id="article-nav-older" class="article-nav-link-wrap">
